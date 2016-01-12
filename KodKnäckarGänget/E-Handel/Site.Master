@@ -20,9 +20,11 @@
         
         </asp:ContentPlaceHolder>
     </div>
-    </form>
     <footer>
 
+        <asp:Label ID="Label1" runat="server" Text="Detta är en fot, snacka om morbid programmering när kroppsdelar ligger här och var."></asp:Label>
+
     </footer>
-</body>
+    </form>
+    </body>
 </html>
