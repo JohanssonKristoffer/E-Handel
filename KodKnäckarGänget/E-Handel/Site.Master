@@ -17,6 +17,7 @@
 
         <nav>
             <asp:Button ID="Button1" runat="server" Text="Home" Height="43px" Width="95px" />
+            <asp:Button ID="Button2" runat="server" Text="Categories" Height="43px" Width="95px" />
         </nav>
     <div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
@@ -24,6 +25,9 @@
         </asp:ContentPlaceHolder>
     </div>
     <footer>
+        <asp:Label ID="Label1" runat="server" Text="Label">Legal Info</asp:Label>
+        <br />
+        <asp:Label ID="Label2" runat="server" Text="Label">Policy Info</asp:Label>
 
     </footer>
     </form>

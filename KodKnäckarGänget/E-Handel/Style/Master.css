@@ -1,5 +1,15 @@
 ﻿body {
 }
-#TextBox{
+#SearchBox{
     
+}
+#LegalInfo{
+    clear: both;
+    color: red;
+}
+#PolicyInfo{
+    clear:both;
+}
+label{
+    margin: 20px;
 }
