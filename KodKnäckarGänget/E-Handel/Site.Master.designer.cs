@@ -49,33 +49,6 @@ namespace E_Handel {
         protected global::System.Web.UI.WebControls.Button SearchButton;
         
         /// <summary>
-        /// button_home control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button_home;
-        
-        /// <summary>
-        /// button_categories control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button_categories;
-        
-        /// <summary>
-        /// button_cart_icon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button_cart_icon;
-        
-        /// <summary>
         /// ImageButton1 control.
         /// </summary>
         /// <remarks>
