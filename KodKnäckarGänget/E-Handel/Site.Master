@@ -7,22 +7,23 @@
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <link href="Style/Master.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
     <header>
-
-        <asp:Button ID="Button1" runat="server" Height="48px" Text="Peter är en fisk" Width="125px" />
-
+        <asp:TextBox ID="SearchBox" runat="server"></asp:TextBox>
     </header>
+
+        <nav>
+            <asp:Button ID="Button1" runat="server" Text="Home" Height="43px" Width="95px" />
+        </nav>
     <div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
         </asp:ContentPlaceHolder>
     </div>
     <footer>
-
-        <asp:Label ID="Label1" runat="server" Text="Detta är en fot, snacka om morbid programmering när kroppsdelar ligger här och var."></asp:Label>
 
     </footer>
     </form>
