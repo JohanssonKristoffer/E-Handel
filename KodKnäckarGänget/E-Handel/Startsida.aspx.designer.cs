@@ -10,7 +10,7 @@
 namespace E_Handel {
     
     
-    public partial class WebForm1 {
+    public partial class Startsida {
         
         /// <summary>
         /// Image5 control.

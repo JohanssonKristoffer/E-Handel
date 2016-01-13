@@ -10,7 +10,7 @@
 namespace E_Handel {
     
     
-    public partial class WebForm1 {
+    public partial class Result{
         
         /// <summary>
         /// Label1 control.
