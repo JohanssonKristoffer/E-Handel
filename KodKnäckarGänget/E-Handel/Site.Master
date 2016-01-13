@@ -7,6 +7,8 @@
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.min.js"></script>
     <link href="Style/Master.css" rel="stylesheet" />
 </head>
 <body>
@@ -14,10 +16,10 @@
         <header>
             <asp:TextBox ID="SearchBox" runat="server"></asp:TextBox>
         </header>
-        <div class="row">
-            <nav class="span">
-                <asp:Button ID="Button1" runat="server" Text="Home" Height="43px" Width="95px" class="sm-col-row-3"/>
-                <asp:Button ID="Button2" runat="server" Text="Categories" Height="43px" Width="95px" />
+        <div class="container">
+            <nav class="row">
+                <asp:Button ID="Button1" runat="server" Text="Home" Height="43px" Width="95px"/>
+                <asp:Button ID="Button2" runat="server" Text="Categories" Height="43px" Width="95px" class="col-sm-3"/>
                 <asp:ImageButton ID="VarukorgButton" runat="server" Height="42px" Width="73px" />
             </nav>
         </div>
