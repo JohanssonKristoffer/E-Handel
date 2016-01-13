@@ -1,8 +1,48 @@
 ﻿body {
+    background-color: #ffffff;
 }
+
+.SearchArea {
+    width: 500px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
 #SearchBox{
-    
+    display: inline;
+    height: 40px;  
 }
+
+#SearchButton{
+    height: 40px;
+    width: 80px;
+    text-align: center;  
+}
+
+#Navigation {
+    display: block;
+    width: 500px;
+    margin: 0 auto;
+}
+
+#button_home {
+    height: 40px;
+    width: 100px;
+    text-align: center;
+}
+
+#button_categories {
+    height: 40px;
+    width: 100px;
+    text-align: center;
+}
+
+#button_cart_icon {
+    height: 40px;
+    width: 50px;
+    text-align: center;
+}
+
 #LegalInfo{
     clear: both;
     color: red;
@@ -16,6 +56,9 @@ label{
 a{
     color: blue;
 }
-footer{
-    background-color: #808080;
+#ads{
+    background-color:aqua;
+    float:right;
+      
+
 }

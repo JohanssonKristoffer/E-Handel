@@ -14,25 +14,32 @@
 <body>
     <form id="form1" runat="server">
         <header>
+            <div class="SearchArea">
             <asp:TextBox ID="SearchBox" runat="server"></asp:TextBox>
-        </header>
-        <div class="container">
-            <nav class="row">
-                <asp:Button ID="Button1" runat="server" Text="Home" Height="43px" Width="95px"/>
-                <asp:Button ID="Button2" runat="server" Text="Categories" Height="43px" Width="95px" class="col-sm-3"/>
-                <asp:ImageButton ID="VarukorgButton" runat="server" Height="42px" Width="73px" />
+            <asp:Button ID="SearchButton" runat="server" Text="Search" />
+            </div>
+
+
+            <div class="container">
+                <nav class="row" id="Navigation">
+                    <asp:Button ID="button_home" runat="server" Text="Home" />
+                    <asp:Button ID="button_categories" runat="server" Text="Categories" />
+                    <asp:Button ID="button_cart_icon" runat="server" Text="Icon" />
+                    <!--<asp:ImageButton ID="ImageButton1" runat="server" Height="42px" Width="73px" />-->
+            </div>
             </nav>
-        </div>
+        </header>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
         <footer>
-            <asp:Label ID="Label1" runat="server" Text="Label">Legal Info</asp:Label><br />
-            <asp:HyperLink ID="HyperLink1" runat="server" source="http://www.konsumentverket.se/Global/Konsumentverket.se/Best%C3%A4lla%20och%20ladda%20ner/Broschyrer/Dokument/kis_svenska_06.pdf">Lagar och råd</asp:HyperLink>
-            <br />
-            <asp:Label ID="Label2" runat="server" Text="Label">Policy Info</asp:Label>
-
+            <div class="container">
+                <asp:Label ID="Label1" runat="server" Text="Label">Legal Info</asp:Label><br />
+                <asp:HyperLink ID="HyperLink1" runat="server" source="http://www.konsumentverket.se/Global/Konsumentverket.se/Best%C3%A4lla%20och%20ladda%20ner/Broschyrer/Dokument/kis_svenska_06.pdf">Lagar och råd</asp:HyperLink>
+                <br />
+                <asp:Label ID="Label2" runat="server" Text="Label">Policy Info</asp:Label>
+            </div>
 
         </footer>
     </form>

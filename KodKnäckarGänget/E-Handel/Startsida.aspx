@@ -8,7 +8,9 @@
     <asp:Image ID="Image1" runat="server" /><asp:Image ID="Image2" runat="server" /><asp:Image ID="Image3" runat="server" /><asp:Image ID="Image4" runat="server" />
 
     </div>
-    <aside id="ads" >Ads</aside>
+    <div id="ads">
+    <aside >Aside</aside>
+        </div>
 
 
 </asp:Content>
