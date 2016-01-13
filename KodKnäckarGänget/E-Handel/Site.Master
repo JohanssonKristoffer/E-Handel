@@ -11,25 +11,28 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <header>
-        <asp:TextBox ID="SearchBox" runat="server"></asp:TextBox>
-    </header>
+        <header>
+            <asp:TextBox ID="SearchBox" runat="server"></asp:TextBox>
+        </header>
+        <div class="row">
+            <nav class="span">
+                <asp:Button ID="Button1" runat="server" Text="Home" Height="43px" Width="95px" class="sm-col-row-3"/>
+                <asp:Button ID="Button2" runat="server" Text="Categories" Height="43px" Width="95px" />
+                <asp:ImageButton ID="VarukorgButton" runat="server" Height="42px" Width="73px" />
+            </nav>
+        </div>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <footer>
+            <asp:Label ID="Label1" runat="server" Text="Label">Legal Info</asp:Label><br />
+            <asp:HyperLink ID="HyperLink1" runat="server" source="http://www.konsumentverket.se/Global/Konsumentverket.se/Best%C3%A4lla%20och%20ladda%20ner/Broschyrer/Dokument/kis_svenska_06.pdf">Lagar och råd</asp:HyperLink>
+            <br />
+            <asp:Label ID="Label2" runat="server" Text="Label">Policy Info</asp:Label>
 
-        <nav>
-            <asp:Button ID="Button1" runat="server" Text="Home" Height="43px" Width="95px" />
-            <asp:Button ID="Button2" runat="server" Text="Categories" Height="43px" Width="95px" />
-        </nav>
-    <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        
-        </asp:ContentPlaceHolder>
-    </div>
-    <footer>
-        <asp:Label ID="Label1" runat="server" Text="Label">Legal Info</asp:Label>
-        <br />
-        <asp:Label ID="Label2" runat="server" Text="Label">Policy Info</asp:Label>
 
-    </footer>
+        </footer>
     </form>
-    </body>
+</body>
 </html>
