@@ -11,24 +11,34 @@
 
 #SearchBox{
     /*display: inline;*/
+<<<<<<< HEAD
     height: 20px;  
+=======
+    height: 40px;  
+>>>>>>> origin/master
     width: 160px;
 }
 
 #SearchButton{
+<<<<<<< HEAD
     height: 24px;
+=======
+    height: 40px;
+>>>>>>> origin/master
     width: 82px;
     text-align: center;  
 }
 
 #Navigation {
     margin-left: 0;
+<<<<<<< HEAD
 }
 
 #Navigation ul li {
     display:inline;
+=======
+>>>>>>> origin/master
 }
-
 #LegalInfo{
     clear: both;
     color: red;
@@ -42,11 +52,21 @@ label{
 a{
     color: blue;
 }
+<<<<<<< HEAD
 
 input{
 
 }
 
+=======
+#ads{
+    background-color:aqua;
+    float:right;
+}
+input{
+
+}
+>>>>>>> origin/master
 #button_home{
     height: 40px;
     width: 82px;
@@ -58,6 +78,7 @@ input{
 #button_cart_icon{
     height: 40px;
     width: 82px;
+<<<<<<< HEAD
 }
 
 body {
@@ -131,4 +152,6 @@ label {
         padding-left: 5px;
         padding-right: 5px;
     }
+=======
+>>>>>>> origin/master
 }
