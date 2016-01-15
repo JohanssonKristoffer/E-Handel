@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace E_Handel
 {
-    public partial class Startsida : System.Web.UI.Page
+    public partial class Product : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

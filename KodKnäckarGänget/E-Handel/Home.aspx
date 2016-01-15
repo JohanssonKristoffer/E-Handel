@@ -1,32 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="StartsidaBeta.aspx.cs" Inherits="E_Handel.StartsidaBeta" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="E_Handel.Home" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
-    <!-- A.J. Extra skapad css-->
-    <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" rel="stylesheet">
-       <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet">
-    <style type="text/css">
-        body {
-            padding-top: 60px;
-            padding-bottom: 40px;
-        }
-
-        .sidebar-nav {
-            padding: 9px 0;
-        }
-
-        @media (max-width: 980px) {
-            .navbar-text.pull-right {
-                float: none;
-                padding-left: 5px;
-                padding-right: 5px;
-            }
-        }
-    </style>
-    <!-- A.J. Extra skapad css-->
+<asp:Content ID="ContentHead" ContentPlaceHolderID="PlaceholderHead" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <div class="container-fluid">
+<asp:Content ID="ContentMain" ContentPlaceHolderID="PlaceholderMain" runat="server">
+    <div class="container-fluid">
         <div class="row-fluid">
             <div class="span9">
                 <div class="hero-unit">
@@ -67,9 +44,5 @@
                 </div>
             </div>
         </div>
-
-        <hr>
     </div>
-
-
 </asp:Content>
