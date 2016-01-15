@@ -1,0 +1,62 @@
+﻿body {
+    background-color: #ffffff;
+}
+
+.SearchArea {
+    /*width: 500px;*/
+    margin: 0 auto;
+    padding: 10px;
+    text-align: right;
+}
+
+#SearchBox{
+    /*display: inline;*/
+    height: 40px;  
+    width: 160px;
+}
+
+#SearchButton{
+    height: 40px;
+    width: 82px;
+    text-align: center;  
+}
+
+#Navigation {
+    margin-left: 0;
+}
+#LegalInfo{
+    clear: both;
+    color: red;
+}
+#PolicyInfo{
+    clear:both;
+}
+label{
+    margin: 20px;
+}
+a{
+    color: blue;
+}
+#ads{
+    background-color:aqua;
+    float:right;
+}
+input{
+
+}
+#button_home{
+    height: 40px;
+    width: 82px;
+}
+#button_categories{
+    height: 40px;
+    width: 82px;
+}
+#button_cart_icon{
+    height: 40px;
+    width: 82px;
+}
+
+nav ul{
+    display:inline-block;
+}
