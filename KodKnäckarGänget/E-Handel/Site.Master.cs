@@ -14,11 +14,9 @@ namespace E_Handel
 
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void SendSearch_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect($"Result.aspx?search={SearchBox.Text}");
         }
-
-       
     }
 }

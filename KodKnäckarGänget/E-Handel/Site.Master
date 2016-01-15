@@ -19,7 +19,7 @@
             <asp:SqlDataSource ID="DataSourceCategories" runat="server" ConnectionString="<%$ ConnectionStrings:KKG-EHandelConnectionString %>" SelectCommand="SELECT [ID], [Name] FROM [Categories] ORDER BY [Name]"></asp:SqlDataSource>
             <div class="row" id="SearchArea">
                 <asp:TextBox ID="SearchBox" runat="server"></asp:TextBox>
-                <asp:Button ID="SearchButton" runat="server" Text="Search" />
+                <asp:Button ID="SearchButton" runat="server" Text="Search" OnClick="SendSearch_Click" />
             </div>
             <nav class="row">
                 <ul>

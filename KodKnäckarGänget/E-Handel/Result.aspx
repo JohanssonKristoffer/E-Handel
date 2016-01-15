@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
-                <h1>Search result: </h1>
+                <h1 id="ResultTitle" runat="server">Search result: </h1>
                 <hr />
                 <div class="row-fluid">
                     <div class="span2">
