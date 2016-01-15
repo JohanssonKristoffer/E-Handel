@@ -8,29 +8,35 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link href="Content/bootstrap.css" rel="stylesheet" />
-    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
     <link href="Style/Master.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
         <header>
             <div class="SearchArea">
-            <asp:TextBox ID="SearchBox" runat="server"></asp:TextBox>
-            <asp:Button ID="SearchButton" runat="server" Text="Search" />
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:KKG-EHandelConnectionString %>" SelectCommand="SELECT [ID], [Name] FROM [Categories] ORDER BY [Name]"></asp:SqlDataSource>
+                <asp:TextBox ID="SearchBox" runat="server"></asp:TextBox>
+                <asp:Button ID="SearchButton" runat="server" Text="Search" />
             </div>
-
-
-            <div class="container">
+            <div class="container-wrapper" id="NavID">
                 <nav class="row" id="Navigation">
-                    <asp:Button ID="button_home" runat="server" Text="Home" />
-                    <asp:Button ID="button_categories" runat="server" Text="Categories" />
-                    <asp:Button ID="button_cart_icon" runat="server" Text="Icon" />
+                    <ul>
+                        <li id="HomeLi">Home
+                            <asp:DropDownList ID="DropDownList1" AppendDataBoundItems ="true" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="Name" DataValueField="ID">
+                            <asp:ListItem Text="Categories" Value="Categories" ></asp:ListItem>
+                            </asp:DropDownList>
+                        </li>
+
+                        <li id="BasketLi">Basket</li>
+                    </ul>
                     <!--<asp:ImageButton ID="ImageButton1" runat="server" Height="42px" Width="73px" />-->
+                </nav>
             </div>
-            </nav>
+
         </header>
         <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            <asp:ContentPlaceHolder ID="Home" runat="server">
             </asp:ContentPlaceHolder>
         </div>
         <footer>
