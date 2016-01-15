@@ -108,20 +108,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Product.aspx.cs">
       <DependentUpon>Product.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Product.aspx.designer.cs">
       <DependentUpon>Product.aspx</DependentUpon>
-=======
+    </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
->>>>>>> origin/master
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.aspx.cs">
