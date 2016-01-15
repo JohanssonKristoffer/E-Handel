@@ -18,5 +18,11 @@ namespace E_Handel
         {
 
         }
+
+<<<<<<< HEAD
+
+=======
+       
+>>>>>>> origin/master
     }
 }

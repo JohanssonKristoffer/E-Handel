@@ -1,5 +1,157 @@
 ﻿body {
+    background-color: #ffffff;
 }
-#TextBox{
-    
+
+.SearchArea {
+    /*width: 500px;*/
+    margin: 0 auto;
+    padding: 10px;
+    text-align: right;
+}
+
+#SearchBox{
+    /*display: inline;*/
+<<<<<<< HEAD
+    height: 20px;  
+=======
+    height: 40px;  
+>>>>>>> origin/master
+    width: 160px;
+}
+
+#SearchButton{
+<<<<<<< HEAD
+    height: 24px;
+=======
+    height: 40px;
+>>>>>>> origin/master
+    width: 82px;
+    text-align: center;  
+}
+
+#Navigation {
+    margin-left: 0;
+<<<<<<< HEAD
+}
+
+#Navigation ul li {
+    display:inline;
+=======
+>>>>>>> origin/master
+}
+#LegalInfo{
+    clear: both;
+    color: red;
+}
+#PolicyInfo{
+    clear:both;
+}
+label{
+    margin: 20px;
+}
+a{
+    color: blue;
+}
+<<<<<<< HEAD
+
+input{
+
+}
+
+=======
+#ads{
+    background-color:aqua;
+    float:right;
+}
+input{
+
+}
+>>>>>>> origin/master
+#button_home{
+    height: 40px;
+    width: 82px;
+}
+#button_categories{
+    height: 40px;
+    width: 82px;
+}
+#button_cart_icon{
+    height: 40px;
+    width: 82px;
+<<<<<<< HEAD
+}
+
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.sidebar-nav {
+    padding: 9px 0;
+}
+
+.image_placeholder {
+    min-height: 330px;
+    min-width: 150px;
+    background-color: #cccccc;
+    padding: 10px 0 0 10px;
+    display: block;
+}
+
+.price_tag {
+    background-color: #838689;
+    color: #ffffff;
+    width: 60px;
+    padding: 10px;
+}
+
+.image_thumbnail {
+    min-height: 180px;
+    min-width: 120px;
+    background-color: #cccccc;
+    padding: 10px 0 0 10px;
+    display: block;
+}
+
+.price_tag {
+    background-color: #838689;
+    color: #ffffff;
+    width: 60px;
+    padding: 10px;
+}
+
+.buy_button {
+    vertical-align: bottom;
+    background-color: #A8DBA8;
+}
+
+.buy_button:hover {
+    background-color: #3B8686;
+}
+
+/*Bootstrap Override */
+input[type="number"] {
+    display: inline-block;
+    height: 30px;
+    width: 50px;
+    padding: 2px 2px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #555555;
+    vertical-align: middle;
+}
+
+label {
+    margin: 0px;
+}
+
+@media (max-width: 980px) {
+    .navbar-text.pull-right {
+        float: none;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+=======
+>>>>>>> origin/master
 }
