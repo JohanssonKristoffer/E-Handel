@@ -26,17 +26,7 @@
     <!-- A.J. Extra skapad css-->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a class="brand" href="#">E-Handel</a>
-                
-                <!--/.nav-collapse -->
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid">
+        <div class="container-fluid">
         <div class="row-fluid">
             <div class="span9">
                 <div class="hero-unit">
@@ -67,7 +57,7 @@
             <div class="span3">
                 <div class="well sidebar-nav">
                     <ul class="nav nav-list">
-                        <li class="nav-header">Popular Products</li>
+                        <li class="nav-header">Ads</li>
                         <li><a href="#">Product 1</a></li>
                         <li><a href="#">Product 2</a></li>
                         <li><a href="#">Product 3</a></li>

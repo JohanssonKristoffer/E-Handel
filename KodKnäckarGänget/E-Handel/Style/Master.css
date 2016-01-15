@@ -24,6 +24,10 @@
 #Navigation {
     margin-left: 0;
 }
+
+#Navigation ul li {
+    display:inline;
+}
 #LegalInfo{
     clear: both;
     color: red;
