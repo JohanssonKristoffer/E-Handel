@@ -1,3 +1,39 @@
+- Datum 2016-1-15
+Johan:
+1. Populerat databasen.
+2. Ska Uppdatera aktivitetslistan och kravspec.
+3. Inga problem.
+
+Youness:
+1. Populerat databasen.
+2. Uppdatera aktivitetslistan och kravspec.
+3. Inga bekymmer alls.
+
+Kristoffer:
+1. Jobbat med kopplingen av databasen.
+2. Undersöka github problem.
+3. Inga problem.
+
+Timmy:
+1. Jobbat med databindning mot element på navigationen på Master.
+2. Skapa logik på resultpage och för search funktionen.
+3. Github har injicerats kod som behöver undersökas.
+
+Peter:
+1. Avslutat databas relationer och injicering av data.
+2. Skapa logik på resultpage och för search funktionen.
+3. Inga problem.
+
+A.J:
+1. Jag har blivit med wireframes för Home, Product, och Result page.
+2. Jobba med logiken på Product page samt informera Kristoffer om problemet.
+3. Stött på problem med syncning med github.
+
+Omar Jaab:
+1.
+2.
+3.
+
 - Datum 2016-1-14
 Peter:
 1. Aktivitetslista, databas och påbörjat injektion av data i SQL server.
