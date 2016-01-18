@@ -20,20 +20,34 @@ namespace E_Handel
         public void ProcessRequest(HttpContext context)
         {
             string productIdString = context.Request.QueryString["productId"];
+            string productIdThumbString = context.Request.QueryString["productIdThumb"];
+            string categoryIdString = context.Request.QueryString["categoryId"];
+
             if (productIdString != null)
             {
                 int productId;
                 if (int.TryParse(productIdString, out productId))
-                    GetProductImage(context, productId);
+                    GetImage(context, productId, "Image", "Products");
+            }
+            else if (productIdThumbString != null)
+            {
+                int productIdThumb;
+                if (int.TryParse(productIdThumbString, out productIdThumb))
+                    GetImage(context, productIdThumb, "Thumbnail", "Products");
+            }
+            else if (categoryIdString != null)
+            {
+                int categoryId;
+                if(int.TryParse(categoryIdString, out categoryId))
+                    GetImage(context, categoryId, "Image", "Categories");
             }
 
         }
-
-        private static void GetProductImage(HttpContext context, int productId)
+        private void GetImage(HttpContext context, int id, string columnName, string tableName)
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
-            SqlCommand command = new SqlCommand($"SELECT Image FROM Products WHERE ID = {productId}", connection);
+            SqlCommand command = new SqlCommand($"SELECT {columnName} FROM {tableName} WHERE ID = {id}", connection);
             SqlDataReader reader = null;
             byte[] buffer = null;
             try
@@ -43,7 +57,7 @@ namespace E_Handel
                 while (reader.Read())
                 {
                     string extensionName = "jpg";
-                    buffer = (byte[])reader["Image"];
+                    buffer = (byte[])reader[columnName];
                     context.Response.Clear();
                     context.Response.ContentType = "image/" + extensionName;
                     context.Response.BinaryWrite(buffer);

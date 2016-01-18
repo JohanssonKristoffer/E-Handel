@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Caching;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using E_Handel.BL;
@@ -67,6 +68,7 @@ namespace E_Handel
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             SqlCommand sqlGetCategory = new SqlCommand($"SELECT Name, Description FROM Categories WHERE ID = {categoryId}", sqlConnection);
             SqlCommand sqlGetProducts = new SqlCommand($"SELECT ID, Name, Price, Popularity, StockQuantity, VAT FROM Products WHERE CategoryID = {categoryId}", sqlConnection);
+            //SqlCommand sqlGetProducts = new SqlCommand($"SELECT ID, Name, Price, Popularity, StockQuantity, VAT FROM Products WHERE CategoryID = {categoryId} AND ID NOT IN (SELECT VariantID FROM ProductVariants)", sqlConnection);
             SqlDataReader sqlCategoryDataReader = null;
             SqlDataReader sqlProductDataReader = null;
             try
@@ -79,6 +81,9 @@ namespace E_Handel
                     categoryName = sqlCategoryDataReader["Name"].ToString();
                     categoryDescription = sqlCategoryDataReader["Description"].ToString();
                 }
+                sqlCategoryDataReader.Close();
+                sqlCategoryDataReader.Dispose();
+
                 sqlProductDataReader = sqlGetProducts.ExecuteReader();
                 while (sqlProductDataReader.Read())
                 {
@@ -114,8 +119,61 @@ namespace E_Handel
         }
         private void DisplayCategoryResult()
         {
-            //TBI
             ResultTitle.InnerHtml = categoryName;
+            ResultImage.Src = $"ImgHandler.ashx?categoryId={categoryId}";
+            ResultDescription.InnerHtml = categoryDescription;
+
+            Panel[] tempPanelArray = new Panel[4];
+            int currentColumn = 0;
+            const int MAX_COLUMNS = 3;
+            foreach (BLProduct product in resultBLProducts)
+            {
+                Panel productPanel = new Panel();
+                productPanel.CssClass = "span3 result_product_container";
+
+                Image productThumb = new Image();
+                productThumb.CssClass = "image_thumbnail";
+                productThumb.ImageUrl = $"ImgHandler.ashx?productIdThumb={product.Id}";
+                Label productNameLabel = new Label();
+                productNameLabel.CssClass = "result_product_name";
+                productNameLabel.Text = product.Name;
+                Label productPriceLabel = new Label();
+                productPriceLabel.CssClass = "result_product_price";
+                productPriceLabel.Text = product.Price + "£";
+                Button productInfoButton = new Button();
+                productInfoButton.CssClass = "result_product_infobutton";
+                productInfoButton.Text = "More info";
+                productInfoButton.PostBackUrl = $"Product.aspx?productId={product.Id}";
+
+                productPanel.Controls.Add(productThumb);
+                productPanel.Controls.Add(productNameLabel);
+                productPanel.Controls.Add(productPriceLabel);
+                productPanel.Controls.Add(productInfoButton);
+
+                tempPanelArray[currentColumn] = productPanel;
+                currentColumn++;
+                if (currentColumn > MAX_COLUMNS)
+                {
+                    Panel productRowPanel = new Panel();
+                    productRowPanel.CssClass = "span12";
+
+                    for (int i = 0; i < MAX_COLUMNS; i++)
+                        productRowPanel.Controls.Add(tempPanelArray[i]);
+
+                    ResultPanel.Controls.Add(productRowPanel);
+                    currentColumn = 0;
+                }
+            }
+            if (currentColumn > 0)
+            {
+                Panel productRowPanel = new Panel();
+                productRowPanel.CssClass = "span12";
+
+                for (int i = 0; i < currentColumn; i++)
+                    productRowPanel.Controls.Add(tempPanelArray[i]);
+
+                ResultPanel.Controls.Add(productRowPanel);
+            }
         }
     }
 }
