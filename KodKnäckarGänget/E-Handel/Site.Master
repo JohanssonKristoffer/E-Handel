@@ -25,8 +25,9 @@
                 <ul>
                     <li id="HomeLi"><a href="Home.aspx">Home</a></li>
                     <li>
-                        <asp:DropDownList ID="DropDownCategories" AppendDataBoundItems="true" runat="server" AutoPostBack="True" DataSourceID="DataSourceCategories" DataTextField="Name" DataValueField="ID">
-                            <asp:ListItem Text="Categories" Value="Categories"></asp:ListItem>
+                        <asp:DropDownList ID="DropDownCategories" AppendDataBoundItems="true" runat="server" AutoPostBack="True" DataSourceID="DataSourceCategories" DataTextField="Name" DataValueField="ID" OnSelectedIndexChanged="SendCategoryChoice_SelectChange">
+                            <asp:ListItem Text="Categories" Value="0"></asp:ListItem>
+                            <asp:ListItem Text=" ---" Value="0"></asp:ListItem>
                         </asp:DropDownList>
                     </li>
                     <li id="CartLi">Cart</li>

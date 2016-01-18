@@ -18,5 +18,11 @@ namespace E_Handel
         {
             Response.Redirect($"Result.aspx?search={SearchBox.Text}");
         }
+
+        protected void SendCategoryChoice_SelectChange(object sender, EventArgs e)
+        {
+            if(DropDownCategories.SelectedValue != "0")
+                Response.Redirect($"Result.aspx?categoryId={DropDownCategories.SelectedValue}");
+        }
     }
 }
