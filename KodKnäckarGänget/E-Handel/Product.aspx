@@ -6,15 +6,17 @@
 
     <div class="row-fluid">
         <div class="span4">
-            <div class="image_placeholder">Image placeholder</div>
+            <div class="image_placeholder" runat="server">
+                <img src="" alt="" runat="server" id="productImage" />
+            </div>
         </div>
 
         <div class="span8">
-            <h1>Product Title</h1>
-            <h3 class="price_tag">£7</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+            <h1 runat="server" id="productTitle"></h1>
+            <h3 class="price_tag" runat="server" id="productPrice"></h3>
+            <p id="productDescription" runat="server"></p>
             <p>
-                <label for="quantity">Quantity:</label><input id="quantity" type="number" min="1" max="100" />
+                <label for="prdouctQuantity">Quantity:</label><input id="prdouctQuantity" runat="server" type="number" min="1" max="100" />
                 <br />
                 <select>
                     <option>Standard Edition</option>

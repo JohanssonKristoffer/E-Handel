@@ -83,6 +83,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Product.aspx" />
     <Content Include="Result.aspx" />
+    <Content Include="ImgHandler.ashx" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -113,6 +114,9 @@
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ImgHandler.ashx.cs">
+      <DependentUpon>ImgHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Product.aspx.cs">
       <DependentUpon>Product.aspx</DependentUpon>
