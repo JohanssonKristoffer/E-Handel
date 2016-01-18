@@ -48,4 +48,12 @@ footer {
     color: green;
 }
 
+th{
+    display: inline-block;
+    /*margin: 25px;*/
+}
 
+/*#ProductTable{
+    background-color: red;
+    margin: 10px;
+}*/
