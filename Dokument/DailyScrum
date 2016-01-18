@@ -1,3 +1,36 @@
+- Datum 2016-1-18
+Johan:
+1. Uppdaterade samt skrev rent kravspeccen. Har även skrivit en inbjudan till Christian. Aktivitetslistan uppdaterades
+för den kommande sprinten.
+2.Tillsammans med A.J. fixa wireframes och forms.
+3. Inga problem.
+
+A.J.:
+1. Populerat produktsidan.
+2. Tillsammans med Johan fixa wireframes och forms.
+3. Problem med läsning av bilder från databas.
+
+Peter:
+1. Fixat resterande data i databasen. Fixat navigation till resultat via kategorier och sökning.
+2. Populera resultsidan och sökningslogik tillsammans med Timmy.
+3. Inga problem.
+
+Youness:
+1. Uppdaterat databasen, produktvarianter och rabatter. Kravspecen tillsammans med Johan. Wireframen för carten tillsammans med
+Kristoffer.
+2. Populate cartpage content.
+3. Inga problem.
+
+Timmy:
+1.Kollat upp hur man implementerar sökfunktioner (förundersökningar). 
+2. Resultpage tillsammans med Peter.
+3. Inga problem.
+
+Kristoffer:
+1. Wireframen för carten och lärt mig att använda GitHub.
+2. Gå igenom GitHub med gruppen.
+3. Inga problem.
+
 - Datum 2016-1-15
 Johan:
 1. Populerat databasen.
@@ -27,7 +60,7 @@ Peter:
 A.J:
 1. Jag har blivit med wireframes för Home, Product, och Result page.
 2. Jobba med logiken på Product page samt informera Kristoffer om problemet.
-3. Stött på problem med syncning med github.
+3. Stött på problem med syncning med github. Problem med läsning av bilder från databas
 
 Omar Jaab:
 1.
