@@ -1,12 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CartPage.aspx.cs" Inherits="E_Handel.WebForm1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CartPage.aspx.cs" Inherits="E_Handel.CartPage" %>
 
-<asp:Content ID="ContentHeade" ContentPlaceHolderID="PlaceholderHead" runat="server">
+<asp:Content ID="ContentHead" ContentPlaceHolderID="PlaceholderHead" runat="server">
 </asp:Content>
 <asp:Content ID="ContentMain" ContentPlaceHolderID="PlaceholderMain" runat="server">
     <div class="container-fluid">
         <div class="row-fluid">
-            <div id="ProductList">
-                <table class="span9" id="ProductTable">
+            <div id="ProductList"  class="span9">
+                <table id="ProductTable">
                     <tr>
                         <th class="span1">Image: </th>
                         <th class="span1">Productname</th>
