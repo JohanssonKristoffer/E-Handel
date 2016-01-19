@@ -18,11 +18,7 @@
             <p>
                 <label for="prdouctQuantity">Quantity:</label><input id="prdouctQuantity" runat="server" type="number" min="1" max="100" />
                 <br />
-                <select>
-                    <option>Standard Edition</option>
-                    <option>Blu-Ray Edition</option>
-                    <option>Steelbook Edition</option>
-                </select>
+                <asp:DropDownList ID="DropDownVariants" runat="server" AutoPostBack="True"/>
             </p>
             <p><a class="btn buy_button" href="#">Add to cart</a></p>
         </div>

@@ -14,30 +14,30 @@ namespace E_Handel
 
     public partial class Product : System.Web.UI.Page
     {
-        private readonly string connectionString =
-            ConfigurationManager.ConnectionStrings["KKG-EHandelConnectionString"].ConnectionString;
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["KKG-EHandelConnectionString"].ConnectionString;
+        int productId;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            productImage.Src = $"ImgHandler.ashx?productId={GetProductId()}";
-            LoadName();
-            LoadDescription();
-            LoadPrice();
-        }
-
-        public int GetProductId()
-        {
-            int productId;
-            int.TryParse(Request.QueryString["productId"], out productId);
-            return productId;
+            if (int.TryParse(Request.QueryString["productId"], out productId))
+            {
+                productImage.Src = $"ImgHandler.ashx?productId={productId}";
+                LoadName();
+                LoadDescription();
+                LoadPrice();
+                LoadVariant();
+            }
+            else
+            {
+                productTitle.InnerText = "Unable to retrieve product.";//error
+            }
         }
 
         public void LoadName()
         {
             SqlConnection con = new SqlConnection(connectionString);
-            // todo kolla connection string och validera querystring error page 
 
-            string sqlQueryName = $"SELECT Name FROM Products WHERE ID = {GetProductId()}";
+            string sqlQueryName = $"SELECT Name FROM Products WHERE ID = {productId}";
 
             SqlCommand cmd = new SqlCommand(sqlQueryName, con);
             SqlDataReader oreader = null;
@@ -52,8 +52,7 @@ namespace E_Handel
             }
             catch (Exception ex)
             {
-                productTitle.InnerText = ex.Message;
-                productTitle.Visible = true;
+                productTitle.InnerText = ex.Message; //error
             }
             finally
             {
@@ -72,10 +71,10 @@ namespace E_Handel
         {
             SqlConnection con = new SqlConnection(connectionString);
 
-            string sqlQueryPrice = $"SELECT Price FROM Products WHERE ID = {GetProductId()}";
+            string sqlQueryPrice = $"SELECT Price FROM Products WHERE ID = {productId}";
 
             SqlCommand cmd = new SqlCommand(sqlQueryPrice, con);
-            SqlDataReader oreader;
+            SqlDataReader oreader = null;
             try
             {
                 con.Open();
@@ -84,16 +83,18 @@ namespace E_Handel
                 {
                     productPrice.InnerText = "£" + oreader["Price"].ToString();
                 }
-                oreader.Close();
-                oreader.Dispose();
             }
             catch (Exception ex)
             {
-                productPrice.InnerText = ex.Message;
-                productPrice.Visible = true;
+                productPrice.InnerText = ex.Message; //error
             }
             finally
             {
+                if (oreader != null)
+                {
+                    oreader.Close();
+                    oreader.Dispose();
+                }
                 con.Close();
                 con.Dispose();
                 cmd.Dispose();
@@ -102,11 +103,11 @@ namespace E_Handel
 
         public void LoadDescription()
         {
-            SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=KKG-EHandel;User ID=Akwasi; Password=Root;Integrated Security = True");
+            SqlConnection con = new SqlConnection(connectionString);
 
-            string sqlQueryDescription = $"SELECT Description FROM Products WHERE ID = {GetProductId()}";
+            string sqlQueryDescription = $"SELECT Description FROM Products WHERE ID = {productId}";
             SqlCommand cmd = new SqlCommand(sqlQueryDescription, con);
-            SqlDataReader oreader;
+            SqlDataReader oreader = null;
             try
             {
                 con.Open();
@@ -115,22 +116,59 @@ namespace E_Handel
                 {
                     productDescription.InnerText = oreader["Description"].ToString();
                 }
-                oreader.Close();
-                oreader.Dispose();
             }
             catch (Exception ex)
             {
                 productDescription.InnerText = ex.Message;
-                productDescription.Visible = true;
             }
             finally
             {
+                if (oreader != null)
+                {
+                    oreader.Close();
+                    oreader.Dispose();
+                }
                 con.Close();
                 con.Dispose();
                 cmd.Dispose();
             }
-
         }
 
+        private void LoadVariant()
+        {
+            //SqlConnection con = new SqlConnection(connectionString);
+
+            //string sqlQueryDescription = $"SELECT Description FROM Products WHERE ID = {productId}";
+            //SqlCommand cmd = new SqlCommand(sqlQueryDescription, con);
+            //SqlDataReader oreader = null;
+            //try
+            //{
+            //    con.Open();
+            //    oreader = cmd.ExecuteReader();
+            //    DropDownVariants.Items.Clear();
+            //    ListItem standardItem = new ListItem { Text = productTitle.InnerText, Value = productId.ToString() };
+            //    DropDownVariants.Items.Add(standardItem);
+            //    while (oreader.Read())
+            //    {
+            //        ListItem item = new ListItem(oreader["Name"].ToString(), oreader["ProductCategoryID"].ToString());
+            //        DropDownVariants.Items.Add(item);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    productDescription.InnerText = ex.Message;
+            //}
+            //finally
+            //{
+            //    if (oreader != null)
+            //    {
+            //        oreader.Close();
+            //        oreader.Dispose();
+            //    }
+            //    con.Close();
+            //    con.Dispose();
+            //    cmd.Dispose();
+            //}
+        }
     }
 }

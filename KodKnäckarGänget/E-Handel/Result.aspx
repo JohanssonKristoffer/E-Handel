@@ -10,9 +10,9 @@
                 <img id="ResultImage" runat="server" />
                 <p id="ResultDescription" runat="server"></p>
                 <hr />
-                <asp:Panel ID="ResultPanel" runat="server">
-                </asp:Panel>
             </div>
         </div>
+        <asp:Panel ID="ResultPanel" runat="server">
+                </asp:Panel>
     </div>
 </asp:Content>
