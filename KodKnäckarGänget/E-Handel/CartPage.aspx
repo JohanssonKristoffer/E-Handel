@@ -6,18 +6,16 @@
 <asp:Content ID="ContentMain" ContentPlaceHolderID="PlaceholderMain" runat="server">
     <div class="container-fluid">
         <div class="row-fluid">
-            <div id="ProductList"  class="span9">
-                <table id="ProductTable">
+                <table  class="span9" id="ProductTable">
                     <tr>
-                        <th class="span1">Image: </th>
-                        <th class="span1">Productname</th>
-                        <th class="span1">Price</th>
-                        <th class="span1">Amount</th>
-                        <th class="span1">Total cost</th>
+                        <th>Image: </th>
+                        <th id="ProductName">Productname</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                        <th>Total cost</th>
 
                     </tr>
                 </table>
-            </div>
             <div class="span3">
                 <div class="well sidebar-nav">
                     <ul class="nav nav-list">
@@ -30,7 +28,7 @@
                     </ul>
                 </div>
             </div>
-            <div>
+            <div id="ChoiceButtons">
                 <input type="button" value="Go to Checkout"/>
                 <input type="button" value="Keep shopping"/>
             </div>
