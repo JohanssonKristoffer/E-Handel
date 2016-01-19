@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Style\CartPage.css" />
     <Content Include="Style\Master.css" />
     <Content Include="Web.config" />
   </ItemGroup>
