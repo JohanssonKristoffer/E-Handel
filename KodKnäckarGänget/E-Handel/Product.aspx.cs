@@ -16,16 +16,18 @@ namespace E_Handel
     {
         private readonly string connectionString = ConfigurationManager.ConnectionStrings["KKG-EHandelConnectionString"].ConnectionString;
         int productId;
+        List<int> variantIdList = new List<int>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (int.TryParse(Request.QueryString["productId"], out productId))
             {
                 productImage.Src = $"ImgHandler.ashx?productId={productId}";
-                LoadName();
+                productTitle.InnerText=LoadName(productId);
                 LoadDescription();
                 LoadPrice();
                 LoadVariant();
+                ShowVariants();
             }
             else
             {
@@ -33,11 +35,12 @@ namespace E_Handel
             }
         }
 
-        public void LoadName()
+
+        public string LoadName(int id)
         {
             SqlConnection con = new SqlConnection(connectionString);
 
-            string sqlQueryName = $"SELECT Name FROM Products WHERE ID = {productId}";
+            string sqlQueryName = $"SELECT Name FROM Products WHERE ID = {id}";
 
             SqlCommand cmd = new SqlCommand(sqlQueryName, con);
             SqlDataReader oreader = null;
@@ -47,12 +50,13 @@ namespace E_Handel
                 oreader = cmd.ExecuteReader();
                 while (oreader.Read())
                 {
-                    productTitle.InnerText = oreader["Name"].ToString();
+                     return oreader["Name"].ToString();
                 }
+                return "Name not found.";
             }
             catch (Exception ex)
-            {
-                productTitle.InnerText = ex.Message; //error
+            { 
+                return "ex.Message"; //error
             }
             finally
             {
@@ -136,39 +140,76 @@ namespace E_Handel
 
         private void LoadVariant()
         {
-            //SqlConnection con = new SqlConnection(connectionString);
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlDataReader oreader = null;
+            try
+            {
+                con.Open();
 
-            //string sqlQueryDescription = $"SELECT Description FROM Products WHERE ID = {productId}";
-            //SqlCommand cmd = new SqlCommand(sqlQueryDescription, con);
-            //SqlDataReader oreader = null;
-            //try
-            //{
-            //    con.Open();
-            //    oreader = cmd.ExecuteReader();
-            //    DropDownVariants.Items.Clear();
-            //    ListItem standardItem = new ListItem { Text = productTitle.InnerText, Value = productId.ToString() };
-            //    DropDownVariants.Items.Add(standardItem);
-            //    while (oreader.Read())
-            //    {
-            //        ListItem item = new ListItem(oreader["Name"].ToString(), oreader["ProductCategoryID"].ToString());
-            //        DropDownVariants.Items.Add(item);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    productDescription.InnerText = ex.Message;
-            //}
-            //finally
-            //{
-            //    if (oreader != null)
-            //    {
-            //        oreader.Close();
-            //        oreader.Dispose();
-            //    }
-            //    con.Close();
-            //    con.Dispose();
-            //    cmd.Dispose();
-            //}
+                SqlCommand sqlCheckForVariants = new SqlCommand($"SELECT VariantID FROM ProductVariants WHERE ProductID = {productId}", con);
+                oreader = sqlCheckForVariants.ExecuteReader();
+                while (oreader.Read())
+                {
+                    variantIdList.Add(int.Parse(oreader["VariantID"].ToString()));
+                }
+                oreader.Close();
+                oreader.Dispose();
+
+                SqlCommand sqlCheckForOriginal = new SqlCommand($"SELECT ProductID FROM ProductVariants WHERE VariantID = {productId}", con);
+                bool isNotOriginal = false;
+                oreader = sqlCheckForOriginal.ExecuteReader();
+                while (oreader.Read())
+                {
+                    variantIdList.Add(int.Parse(oreader["ProductID"].ToString()));
+                    isNotOriginal = true;
+                }
+                oreader.Close();
+                oreader.Dispose();
+
+                if (isNotOriginal)
+                {
+                    SqlCommand sqlCheckForOriginalVariants = new SqlCommand($"SELECT VariantID FROM ProductVariants WHERE ProductID = {variantIdList[0]}", con);
+                    oreader = sqlCheckForOriginalVariants.ExecuteReader();
+                    while (oreader.Read())
+                    {
+                        variantIdList.Add(int.Parse(oreader["ProductID"].ToString()));
+                    }
+                    sqlCheckForOriginalVariants.Dispose();
+                }
+                sqlCheckForVariants.Dispose();
+                sqlCheckForOriginal.Dispose();
+            }
+            catch (Exception ex)
+            {
+                //Error
+            }
+            finally
+            {
+                if (oreader != null)
+                {
+                    oreader.Close();
+                    oreader.Dispose();
+                }
+                con.Close();
+                con.Dispose();
+            }
+        }
+
+        private void ShowVariants()
+        {
+            DropDownVariants.Items.Clear();
+            ListItem selectedProduct = new ListItem(productTitle.InnerText,productId.ToString());
+            DropDownVariants.Items.Add(selectedProduct);
+            foreach (int variantId in variantIdList)
+            {
+                ListItem item = new ListItem(LoadName(variantId), variantId.ToString());
+                DropDownVariants.Items.Add(item);
+            }
+        }
+
+        protected void SendVariantChoice_SelectChange(object sender, EventArgs e)
+        {
+            Response.Redirect($"Product.aspx?productId={DropDownVariants.SelectedValue}");
         }
     }
 }

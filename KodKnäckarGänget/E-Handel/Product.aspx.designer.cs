@@ -49,13 +49,13 @@ namespace E_Handel {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl productDescription;
         
         /// <summary>
-        /// prdouctQuantity control.
+        /// productQuantity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl prdouctQuantity;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl productQuantity;
         
         /// <summary>
         /// DropDownVariants control.
