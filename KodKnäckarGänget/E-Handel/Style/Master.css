@@ -48,4 +48,30 @@ footer {
     color: green;
 }
 
+.price_tag {
+    background-color: #cccccc;
+    padding: 5px;
+    width: 15px;
+}
+
+.image_thumbnail {
+    display: block;
+}
+
+.result_product_name {
+    display: block;
+}
+
+.result_product_price {
+    display: block;
+}
+
+.result_product_infobutton {
+    display: block;
+}
+
+.result_product_container {
+    padding: 20px 20px 0 0;
+}
+
 

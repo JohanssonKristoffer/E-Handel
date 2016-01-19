@@ -7,124 +7,12 @@
         <div class="row-fluid">
             <div class="span12">
                 <h1 id="ResultTitle" runat="server">Search result: </h1>
+                <img id="ResultImage" runat="server" />
+                <p id="ResultDescription" runat="server"></p>
                 <hr />
-                <div class="row-fluid">
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 1</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 2</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 3</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 4</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-                  
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 5</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-                </div>
-
-                <hr />
-
-                <div class="row-fluid">
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 1</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 2</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 3</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 4</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-                
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 5</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-                </div>
-
-                <hr />
-
-                <div class="row-fluid">
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 1</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 2</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 3</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 4</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-                  
-                    <div class="span2">
-                        <div class="image_thumbnail">Thumbnail</div>
-                        <h3>Product 5</h3>
-                        <h4 class="price_tag">£7</h4>
-                        <p><a class="btn" href="#">More info</a></p>
-                    </div>
-                </div>
+                <asp:Panel ID="ResultPanel" runat="server">
+                </asp:Panel>
             </div>
         </div>
-
-        <hr />
     </div>
 </asp:Content>
