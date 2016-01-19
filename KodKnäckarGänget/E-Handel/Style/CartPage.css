@@ -1,0 +1,13 @@
+﻿body {
+    
+}
+th{
+    display: inline-block;
+    margin: 30px;
+}
+#ProductName{
+    margin-right: 50px;
+}
+#ChoiceButtons{
+    text-align: center;
+}

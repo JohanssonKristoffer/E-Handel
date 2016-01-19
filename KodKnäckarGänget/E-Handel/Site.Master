@@ -30,7 +30,7 @@
                             <asp:ListItem Text=" ---" Value="0"></asp:ListItem>
                         </asp:DropDownList>
                     </li>
-                    <li id="CartLi">Cart</li>
+                    <li id="CartLi"><a href="Cartpage.aspx">Cart</a></li>
                 </ul>
             </nav>
         </header>
