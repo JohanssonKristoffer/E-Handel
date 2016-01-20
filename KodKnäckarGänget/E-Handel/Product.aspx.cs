@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using E_Handel.BL;
 
 namespace E_Handel
 {
@@ -212,6 +213,38 @@ namespace E_Handel
         protected void SendVariantChoice_SelectChange(object sender, EventArgs e)
         {
             Response.Redirect($"Product.aspx?productId={DropDownVariants.SelectedValue}");
+        }
+
+        protected void AddToCart_Click(object sender, EventArgs e)
+        {
+            int cartCount = 0;
+            if (Session["cartCount"] != null)
+                cartCount = (int)Session["cartCount"];
+            cartCount += int.Parse(productQuantity.Value);
+
+            List<BLCartProduct> cartList;
+            if (Session["cartList"] != null)
+                cartList = (List<BLCartProduct>)Session["cartList"];
+            else
+                cartList = new List<BLCartProduct>();
+
+            bool alreadyInCart = false;
+            foreach (BLCartProduct cartProduct in cartList)
+            {
+                if (cartProduct.Id == productId)
+                {
+                    alreadyInCart = true;
+                    cartProduct.Quantity += int.Parse(productQuantity.Value);
+                    break;
+                }
+            }
+            if (!alreadyInCart)
+                cartList.Add(new BLCartProduct(id: productId, quantity: int.Parse(productQuantity.Value)));
+
+            Session["cartCount"] = cartCount;
+            Session["cartList"] = cartList;
+
+            Response.Redirect($"Product.aspx?productId={productId}");
         }
     }
 }

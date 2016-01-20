@@ -16,11 +16,11 @@
             <h3 class="price_tag" runat="server" id="productPrice"></h3>
             <p id="productDescription" runat="server"></p>
             <p>
-                <label for="productQuantity">Quantity:</label><input id="productQuantity" runat="server" type="number" min="1" max="100" />
+                <label for="productQuantity">Quantity:</label><input id="productQuantity" runat="server" type="number" min="1" max="100" value="1" />
                 <br />
                 <asp:DropDownList ID="DropDownVariants" runat="server" AutoPostBack="True" OnSelectedIndexChanged="SendVariantChoice_SelectChange"/>
             </p>
-            <p><a class="btn buy_button" href="#">Add to cart</a></p>
+            <p><asp:Button ID="ButtonAddToCart" runat="server" OnClick="AddToCart_Click" Text="Add To Cart"/></p>
         </div>
     </div>
     <hr />
