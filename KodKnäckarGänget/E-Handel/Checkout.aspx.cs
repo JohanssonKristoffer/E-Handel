@@ -15,10 +15,14 @@ namespace E_Handel
 
     public partial class Checkout : System.Web.UI.Page
     {
-        private readonly string connectionString =
-            ConfigurationManager.ConnectionStrings["KKG-EHandelConnectionString"].ConnectionString;
-
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["KKG-EHandelConnectionString"].ConnectionString;
         private List<BLCartProduct> cartList;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            LoadCartList();
+            InsertProductsIntoTable();
+        }
 
         private void InsertCustomerInformation()
         {
@@ -31,15 +35,32 @@ namespace E_Handel
             }
         }
         
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            LoadCartList();
-            InsertProductsIntoTable();
-        }
-
         private void InsertProductsIntoTable()
         {
-            throw new NotImplementedException();
+            foreach (var cartProduct in cartList)
+            {
+                BLProduct product = new BLProduct(connectionString, cartProduct.Id);
+
+                Image image = new Image();
+                image.ImageUrl = $"ImgHandler.ashx?productIdThumb={product.Id}";
+                TableCell cellImage = new TableCell();
+                cellImage.Controls.Add(image);
+                
+                Label nameLabel = new Label();
+                nameLabel.Text = product.Name;
+                TableCell cellName = new TableCell();
+                cellName.Controls.Add(nameLabel);
+
+
+                TableRow row = new TableRow();
+                row.Controls.Add(cellImage);
+                row.Controls.Add(cellName);
+
+                Checkout_table.Controls.Add(row);
+
+
+            }
+
         }
 
         private void LoadCartList()

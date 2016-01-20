@@ -41,22 +41,9 @@
         </div>
         <div class="row-fluid">
             <div class="span12">
-                <table class="checkout_table">
-                    <tr>
-                        <td class="checkout_product_data checkout_table_img_width">
-                            <div class="image_thumbnail" runat="server">
-                                <img src="http://www.dev15akwkar.se/titanic.jpg" alt="" style="width: 50px;" runat="server" id="productThumbnail" />
-                            </div>
-                        </td>
-                        <!--<td class="checkout_product_data" id="tableProductId" runat="server"></td>-->
-                        <td class="checkout_product_data" id="tableProductName">Titanic</td>
-                        <td class="checkout_product_data" id="tableProductQuantity">99</td>
-                        <td class="checkout_product_data" id="tableProductPrice">£7</td>
-                        <td class="checkout_product_data" id="tableProductSum">2</td>
-                        <td class="checkout_product_data" id="tableProductStock">24</td>
-                        <td class="checkout_product_data" id="tableProductTrash"></td>
-                    </tr>
-                </table>
+                <asp:Table class="checkout_table" ID="Checkout_table" runat="server">
+                    
+                </asp:Table>
             </div>
         </div>
         <div class="row-fluid">
