@@ -27,23 +27,15 @@ namespace E_Handel
             {
                 SqlCommand cmd = new SqlCommand();
 
-                cmd.CommandText = "INSERT INTO Orders (TotalPrice,Postage,Address,PostalCode,City,Country,Email,Telephone,Name,Surname) VALUES (" + customer_phone.Text + "," + customer_address.Text + "," + customer_postalcode.Text + "," + customer_city.Text + "," + customer_country.Text + "," + customer_email.Text + " + customer_phone.Text + "," + customer_name.Text + "," + customer_surname.Text + ");
+                cmd.CommandText = "INSERT INTO Orders (TotalPrice,Address,PostalCode,City,Country,Email,Telephone,Name,Surname) VALUES 
+                    (" + tableShippingPrice.Text + ", " + tableTotalPrice.Text + "," + customer_address.Text + "," + customer_postalcode.Text + "," + customer_city.Text + "," + customer_country.Text + "," + customer_email.Text + ","+ customer_phone.Text + "," + customer_name.Text + "," + customer_surname.Text + ");
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
 
                 connection.Open();
                 cmd.ExecuteNonQuery();
             }
+            Response.Redirect ("reciept.aspx");
         }
     }
 }
-
-/*<asp:TextBox ID="customer_name" runat="server"></asp:TextBox>
-            <asp:TextBox ID="customer_surname" runat="server"></asp:TextBox>
-
-            <asp:TextBox ID="customer_email" runat="server"></asp:TextBox>
-            <asp:TextBox ID="customer_phone" runat="server"></asp:TextBox>
-            <asp:TextBox ID="customer_address" runat="server"></asp:TextBox>
-            <asp:TextBox ID="customer_postalcode" runat="server"></asp:TextBox>
-            <asp:TextBox ID="customer_city" runat="server"></asp:TextBox>
-            <asp:TextBox ID="customer_country" runat="server"></asp:TextBox>*/
