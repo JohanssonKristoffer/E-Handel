@@ -15,7 +15,7 @@ namespace E_Handel
 
     public partial class Product : System.Web.UI.Page
     {
-        private readonly string connectionString = ConfigurationManager.ConnectionStrings["KKG-EHandelConnectionString"].ConnectionString;
+        private static readonly string connectionString = ConfigurationManager.ConnectionStrings["KKG-EHandelConnectionString"].ConnectionString;
         int productId;
         List<int> variantIdList = new List<int>();
 
@@ -38,7 +38,7 @@ namespace E_Handel
         }
 
 
-        public string LoadName(int id)
+        public static string LoadName(int id)
         {
             SqlConnection con = new SqlConnection(connectionString);
 
