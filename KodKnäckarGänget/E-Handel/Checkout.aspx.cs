@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using E_Handel.BL;
 
 namespace E_Handel
 {
@@ -17,30 +18,79 @@ namespace E_Handel
         private readonly string connectionString =
             ConfigurationManager.ConnectionStrings["KKG-EHandelConnectionString"].ConnectionString;
 
+        private List<BLCartProduct> cartList;
+
+        private void InsertCustomerInformation()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand($"INSERT INTO Orders (Postage,TotalPrice,Address,PostalCode,City,Country,Email,Telephone,Name,Surname)OUTPUT INSERTED.ID VALUES                     ('{tableShippingPrice}','{tableTotalPrice}','{customer_address.Text}','{customer_postalcode.Text}','{customer_city.Text}','{customer_country.Text}','{customer_email.Text}','{customer_phone.Text}','{customer_name.Text}','{customer_surname.Text}')", connection);
+                connection.Open();
+
+                Session["orderId"] = (int) cmd.ExecuteScalar();
+            }
+        }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
+            LoadCartList();
+            InsertProductsIntoTable();
+        }
+
+        private void InsertProductsIntoTable()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void LoadCartList()
+        {
+            if(Session["cartList"] != null)
+                cartList = (List<BLCartProduct>)Session["cartList"];
+            else
+            {
+                //error
+            }
         }
 
         protected void customer_submit_order_Click(object sender, EventArgs e)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = $"INSERT INTO Orders (Postage,TotalPrice,Address,PostalCode,City,Country,Email,Telephone,Name,Surname) VALUES                     ({customer_address.Text}','{customer_postalcode.Text}','{customer_city.Text}','{customer_country.Text}','{customer_email.Text}','{customer_phone.Text}','{customer_name.Text}','{customer_surname.Text}'";
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = connection;
+            InsertCustomerInformation();
+            InsertOrderProducts();
+            Response.Redirect("Receipt.aspx");
+        }
 
-                connection.Open();
-                cmd.ExecuteNonQuery();
+        private void InsertOrderProducts()
+        {
+            SqlConnection con = new SqlConnection(connectionString);
+
+            int orderId = (int) Session["orderId"];
+            try
+            {
+                con.Open();
+                foreach (BLCartProduct product in cartList)
+                {
+                    SqlCommand insertProductInOrderProducts = new SqlCommand($"INSERT INTO OrderProducts (OrderID,ProductID,Quantity) VALUES ('{orderId}','{product.Id}', '{product.Quantity}')", con);
+                    if (insertProductInOrderProducts.ExecuteNonQuery() < 1)
+                    {
+                        //error
+                    }
+                    insertProductInOrderProducts.Dispose();
+                }
+
             }
-            Response.Redirect ("reciept.aspx");
+            catch (Exception ex)
+            {
+                //error
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+
+
+
         }
     }
 }
-
-// Post
-// DHL
-
-    // Cash
-    // Card
-    // Paypal
