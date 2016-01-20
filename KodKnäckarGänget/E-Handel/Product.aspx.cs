@@ -23,10 +23,7 @@ namespace E_Handel
         {
             if (int.TryParse(Request.QueryString["productId"], out productId))
             {
-                productImage.Src = $"ImgHandler.ashx?productId={productId}";
-                productTitle.InnerText = LoadName(productId);
-                LoadDescription();
-                LoadPrice();
+                LoadProduct();
                 LoadVariant();
                 if (!Page.IsPostBack)
                     ShowVariants();
@@ -37,107 +34,13 @@ namespace E_Handel
             }
         }
 
-
-        public string LoadName(int id)
+        private void LoadProduct()
         {
-            SqlConnection con = new SqlConnection(connectionString);
-
-            string sqlQueryName = $"SELECT Name FROM Products WHERE ID = {id}";
-
-            SqlCommand cmd = new SqlCommand(sqlQueryName, con);
-            SqlDataReader oreader = null;
-            try
-            {
-                con.Open();
-                oreader = cmd.ExecuteReader();
-                while (oreader.Read())
-                {
-                    return oreader["Name"].ToString();
-                }
-                return "Name not found.";
-            }
-            catch (Exception ex)
-            {
-                return "ex.Message"; //error
-            }
-            finally
-            {
-                if (oreader != null)
-                {
-                    oreader.Close();
-                    oreader.Dispose();
-                }
-                con.Close();
-                con.Dispose();
-                cmd.Dispose();
-            }
-        }
-
-        public void LoadPrice()
-        {
-            SqlConnection con = new SqlConnection(connectionString);
-
-            string sqlQueryPrice = $"SELECT Price FROM Products WHERE ID = {productId}";
-
-            SqlCommand cmd = new SqlCommand(sqlQueryPrice, con);
-            SqlDataReader oreader = null;
-            try
-            {
-                con.Open();
-                oreader = cmd.ExecuteReader();
-                while (oreader.Read())
-                {
-                    productPrice.InnerText = "£" + oreader["Price"].ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                productPrice.InnerText = ex.Message; //error
-            }
-            finally
-            {
-                if (oreader != null)
-                {
-                    oreader.Close();
-                    oreader.Dispose();
-                }
-                con.Close();
-                con.Dispose();
-                cmd.Dispose();
-            }
-        }
-
-        public void LoadDescription()
-        {
-            SqlConnection con = new SqlConnection(connectionString);
-
-            string sqlQueryDescription = $"SELECT Description FROM Products WHERE ID = {productId}";
-            SqlCommand cmd = new SqlCommand(sqlQueryDescription, con);
-            SqlDataReader oreader = null;
-            try
-            {
-                con.Open();
-                oreader = cmd.ExecuteReader();
-                while (oreader.Read())
-                {
-                    productDescription.InnerText = oreader["Description"].ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                productDescription.InnerText = ex.Message;
-            }
-            finally
-            {
-                if (oreader != null)
-                {
-                    oreader.Close();
-                    oreader.Dispose();
-                }
-                con.Close();
-                con.Dispose();
-                cmd.Dispose();
-            }
+            BLProduct product = new BLProduct(connectionString, productId);
+            productImage.Src = $"ImgHandler.ashx?productId={productId}";
+            productTitle.InnerText = product.Name;
+            productPrice.InnerText = "£" + product.Price;
+            productDescription.InnerText = product.Description;
         }
 
         private void LoadVariant()
@@ -205,7 +108,8 @@ namespace E_Handel
             DropDownVariants.Items.Add(selectedProduct);
             foreach (int variantId in variantIdList)
             {
-                ListItem item = new ListItem(LoadName(variantId), variantId.ToString());
+                BLProduct variant = new BLProduct(connectionString, variantId);
+                ListItem item = new ListItem(variant.Name, variantId.ToString());
                 DropDownVariants.Items.Add(item);
             }
         }

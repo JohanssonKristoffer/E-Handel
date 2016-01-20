@@ -66,7 +66,7 @@ namespace E_Handel
             for (int i = 0; i < searchWords.Length; i++)
                 sqlSearchString += searchWords[i]+"%";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlGetSearch = new SqlCommand($"SELECT ID, Name, Price, Popularity, StockQuantity, VAT FROM Products WHERE Name LIKE '{sqlSearchString}'", sqlConnection);
+            SqlCommand sqlGetSearch = new SqlCommand($"SELECT ID, Name, Description, Price, Popularity, StockQuantity, VAT FROM Products WHERE Name LIKE '{sqlSearchString}'", sqlConnection);
             SqlDataReader sqlProductDataReader = null;
             try
             {
@@ -77,11 +77,12 @@ namespace E_Handel
                 {
                     int id = int.Parse(sqlProductDataReader["ID"].ToString());
                     string name = sqlProductDataReader["Name"].ToString();
+                    string description = sqlProductDataReader["Description"].ToString();
                     double price = double.Parse(sqlProductDataReader["Price"].ToString());
                     int popularity = int.Parse(sqlProductDataReader["Popularity"].ToString());
                     int stockQuantity = int.Parse(sqlProductDataReader["StockQuantity"].ToString());
                     double VAT = double.Parse(sqlProductDataReader["VAT"].ToString());
-                    resultBLProducts.Add(new BLProduct(id, categoryId, name, price, popularity, stockQuantity, VAT));
+                    resultBLProducts.Add(new BLProduct(id, categoryId, name, description, price, popularity, stockQuantity, VAT));
                 }
             }
             catch (Exception ex)
@@ -110,7 +111,7 @@ namespace E_Handel
         {
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             SqlCommand sqlGetCategory = new SqlCommand($"SELECT Name, Description FROM Categories WHERE ID = {categoryId}", sqlConnection);
-            SqlCommand sqlGetProducts = new SqlCommand($"SELECT ID, Name, Price, Popularity, StockQuantity, VAT FROM Products WHERE CategoryID = {categoryId} AND ID NOT IN (SELECT VariantID FROM ProductVariants)", sqlConnection);
+            SqlCommand sqlGetProducts = new SqlCommand($"SELECT ID, Name, Description, Price, Popularity, StockQuantity, VAT FROM Products WHERE CategoryID = {categoryId} AND ID NOT IN (SELECT VariantID FROM ProductVariants)", sqlConnection);
             SqlDataReader sqlCategoryDataReader = null;
             SqlDataReader sqlProductDataReader = null;
             try
@@ -131,11 +132,12 @@ namespace E_Handel
                 {
                     int id = int.Parse(sqlProductDataReader["ID"].ToString());
                     string name = sqlProductDataReader["Name"].ToString();
+                    string description = sqlProductDataReader["Description"].ToString();
                     double price = double.Parse(sqlProductDataReader["Price"].ToString());
                     int popularity = int.Parse(sqlProductDataReader["Popularity"].ToString());
                     int stockQuantity = int.Parse(sqlProductDataReader["StockQuantity"].ToString());
                     double VAT = double.Parse(sqlProductDataReader["VAT"].ToString());
-                    resultBLProducts.Add(new BLProduct(id, categoryId, name, price, popularity, stockQuantity, VAT));
+                    resultBLProducts.Add(new BLProduct(id, categoryId, name, description, price, popularity, stockQuantity, VAT));
                 }
             }
             catch (Exception ex)

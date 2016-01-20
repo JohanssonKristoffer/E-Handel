@@ -30,9 +30,14 @@
                             <asp:ListItem Text=" ---" Value="0"></asp:ListItem>
                         </asp:DropDownList>
                     </li>
-                    <li id="CartLi"><a href="Cartpage.aspx">Cart</a> <asp:Label runat="server" ID="CartCountLabel"></asp:Label></li>
+                    <li id="CartLi" runat="server"><asp:Button runat="server" ID="ShowCartButton" Text="Cart" OnClick="ShowCart_Click"/> <asp:Label runat="server" ID="CartCountLabel"></asp:Label></li>
                 </ul>
             </nav>
+            <asp:Panel ID="CartPanel" runat="server" CssClass="cartPanel" Visible="False">
+                <hr/>
+                <asp:Table runat="server" ID="CartListTable"></asp:Table>
+                <asp:Button runat="server" ID="CheckoutButton" Text="Proceed To Checkout" PostBackUrl="Checkout.aspx"/>
+            </asp:Panel>
         </header>
         <hr />
         <div class="container">
