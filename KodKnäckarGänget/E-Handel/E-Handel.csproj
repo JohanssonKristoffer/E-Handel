@@ -102,8 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Style\CartPage.css" />
+    <Content Include="Style\Checkout.css" />
+    <Content Include="Style\Home.css" />
     <Content Include="Style\Master.css" />
+    <Content Include="Style\Product.css" />
+    <Content Include="Style\Receipt.css" />
+    <Content Include="Style\Result.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

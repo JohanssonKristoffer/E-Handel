@@ -1,0 +1,19 @@
+﻿.image_thumbnail {
+    display: block;
+}
+
+.result_product_name {
+    display: block;
+}
+
+.result_product_price {
+    display: block;
+}
+
+.result_product_infobutton {
+    display: block;
+}
+
+.result_product_container {
+    padding: 20px 20px 0 0;
+}
