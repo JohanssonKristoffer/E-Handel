@@ -31,6 +31,24 @@ namespace E_Handel {
         protected global::System.Web.UI.HtmlControls.HtmlTableCell tableProductId;
         
         /// <summary>
+        /// tableShippingPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tableShippingPrice;
+        
+        /// <summary>
+        /// tableTotalPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tableTotalPrice;
+        
+        /// <summary>
         /// DropDownList1 control.
         /// </summary>
         /// <remarks>

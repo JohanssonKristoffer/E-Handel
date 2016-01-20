@@ -64,11 +64,11 @@
                 <table class="checkout_table">
                     <tr>
                         <td>Shipping:</td>
-                        <td><p id="tableShippingPrice"></p></td>
+                        <td><span id="tableShippingPrice" runat="server"></span></td>
                     </tr>
                     <tr>
-                        <td >Total Price:</td>
-                        <td id="tableTotalPrice"></td>
+                        <td>Total Price inc shipping:</td>
+                        <td><span id="tableTotalPrice" runat="server"></span></td>
                     </tr>
                 </table>
             </div>
@@ -79,8 +79,8 @@
         <div class="span12">
             Shippment Alternative:&nbsp;&nbsp;
             <asp:DropDownList ID="DropDownList1" runat="server">
-                <asp:ListItem>Dhl</asp:ListItem>
                 <asp:ListItem>Posten</asp:ListItem>
+                <asp:ListItem>DHL</asp:ListItem>
                 <asp:ListItem>FedEx</asp:ListItem>
             </asp:DropDownList>
             <asp:Label ID="customer_name_label" AssociatedControlID="customer_name" Text="Name" runat="server"></asp:Label>

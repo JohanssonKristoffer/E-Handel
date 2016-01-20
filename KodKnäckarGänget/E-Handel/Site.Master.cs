@@ -11,7 +11,14 @@ namespace E_Handel
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            HideCartOnCheckout();
             RetrieveCartCount();
+        }
+
+        private void HideCartOnCheckout()
+        {
+            if (Request.Url.ToString().Contains("Checkout.aspx"))
+                CartLi.Visible = false;
         }
 
         private void RetrieveCartCount()
@@ -29,6 +36,14 @@ namespace E_Handel
         {
             if(DropDownCategories.SelectedValue != "0")
                 Response.Redirect($"Result.aspx?categoryId={DropDownCategories.SelectedValue}");
+        }
+
+        protected void ShowCart_Click(object sender, EventArgs e)
+        {
+            if (!CartPanel.Visible)
+                CartPanel.Visible = true;
+            else
+                CartPanel.Visible = false;
         }
     }
 }
