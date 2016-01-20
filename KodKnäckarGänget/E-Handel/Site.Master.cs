@@ -11,7 +11,13 @@ namespace E_Handel
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            RetrieveCartCount();
+        }
 
+        private void RetrieveCartCount()
+        {
+            if (Session["cartCount"] != null)
+                CartCountLabel.Text = ((int) Session["cartCount"]).ToString();
         }
 
         protected void SendSearch_Click(object sender, EventArgs e)

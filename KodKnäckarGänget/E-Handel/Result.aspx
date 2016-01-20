@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Result.aspx.cs" Inherits="E_Handel.Result" %>
 
 <asp:Content ID="ContentHead" ContentPlaceHolderID="PlaceholderHead" runat="server">
+    <link href="Style/Result.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="ContentMain" ContentPlaceHolderID="PlaceholderMain" runat="server">
     <div class="container-fluid">

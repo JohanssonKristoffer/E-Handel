@@ -83,10 +83,9 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Product.aspx" />
-    <Content Include="ReceiptPage.aspx" />
     <Content Include="Result.aspx" />
     <Content Include="ImgHandler.ashx" />
-    <Content Include="CartPage.aspx" />
+    <Content Include="Checkout.aspx" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -103,12 +102,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Style\CartPage.css" />
+    <Content Include="Style\Checkout.css" />
+    <Content Include="Style\Home.css" />
     <Content Include="Style\Master.css" />
-    <Content Include="Style\ReceiptPage.css" />
+    <Content Include="Style\Product.css" />
+    <Content Include="Style\Receipt.css" />
+    <Content Include="Style\Result.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\BLCartProduct.cs" />
     <Compile Include="BL\BLProduct.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -131,13 +134,6 @@
       <DependentUpon>Product.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReceiptPage.aspx.cs">
-      <DependentUpon>ReceiptPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ReceiptPage.aspx.designer.cs">
-      <DependentUpon>ReceiptPage.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Result.aspx.cs">
       <DependentUpon>Result.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -152,12 +148,12 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
-    <Compile Include="CartPage.aspx.cs">
-      <DependentUpon>CartPage.aspx</DependentUpon>
+    <Compile Include="Checkout.aspx.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CartPage.aspx.designer.cs">
-      <DependentUpon>CartPage.aspx</DependentUpon>
+    <Compile Include="Checkout.aspx.designer.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
