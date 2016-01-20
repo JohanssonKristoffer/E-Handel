@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Checkout.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -85,7 +86,6 @@
     <Content Include="Product.aspx" />
     <Content Include="Result.aspx" />
     <Content Include="ImgHandler.ashx" />
-    <Content Include="CartPage.aspx" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -108,6 +108,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\BLProduct.cs" />
+    <Compile Include="Checkout.aspx.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -142,13 +146,6 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="CartPage.aspx.cs">
-      <DependentUpon>CartPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CartPage.aspx.designer.cs">
-      <DependentUpon>CartPage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

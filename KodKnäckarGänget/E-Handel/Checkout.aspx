@@ -50,7 +50,7 @@
                         </td>
                         <!--<td class="checkout_product_data" id="tableProductId" runat="server"></td>-->
                         <td class="checkout_product_data" id="tableProductName">Titanic</td>
-                        <td class="checkout_product_data" id="tableProductQuantity">1</td>
+                        <td class="checkout_product_data" id="tableProductQuantity">99</td>
                         <td class="checkout_product_data" id="tableProductPrice">£7</td>
                         <td class="checkout_product_data" id="tableProductSum">2</td>
                         <td class="checkout_product_data" id="tableProductStock">24</td>
@@ -79,18 +79,20 @@
         <div class="span12">
             <asp:Label ID="customer_name_label" AssociatedControlID="customer_name" Text="Name" runat="server"></asp:Label>
             <asp:TextBox ID="customer_name" runat="server"></asp:TextBox>
+            <asp:Label ID="customer_surname_label" AssociatedControlID="customer_surname" Text="Surname" runat="server"></asp:Label>
+            <asp:TextBox ID="customer_surname" runat="server"></asp:TextBox>
             <asp:Label ID="customer_email_label" AssociatedControlID="customer_email" Text="Email" runat="server"></asp:Label>
             <asp:TextBox ID="customer_email" runat="server"></asp:TextBox>
             <asp:Label ID="customer_phone_label" AssociatedControlID="customer_phone" Text="Phone" runat="server"></asp:Label>
             <asp:TextBox ID="customer_phone" runat="server"></asp:TextBox>
             <asp:Label ID="customer_address_label" AssociatedControlID="customer_address" Text="Address" runat="server"></asp:Label>
             <asp:TextBox ID="customer_address" runat="server"></asp:TextBox>
-            <asp:Label ID="customer_zipcode_label" AssociatedControlID="customer_zipcode" Text="Zip Code" runat="server"></asp:Label>
-            <asp:TextBox ID="customer_zipcode" runat="server"></asp:TextBox>
+            <asp:Label ID="customer_postalcode_label" AssociatedControlID="customer_postalcode" Text="Zip Code" runat="server"></asp:Label>
+            <asp:TextBox ID" runat="server"></asp:TextBox>
             <asp:Label ID="customer_city_label" AssociatedControlID="customer_city" Text="City" runat="server"></asp:Label>
             <asp:TextBox ID="customer_city" runat="server"></asp:TextBox>
             <asp:Label ID="customer_country" AssociatedControlID="customer_country" Text="Country" runat="server"></asp:Label>
-            <asp:TextBox ID="Country" runat="server"></asp:TextBox>
+            <asp:TextBox ID="customer_country" runat="server"></asp:TextBox>
             <asp:Button ID="customer_submit_order" Text="Submit order" runat="server" OnClick="customer_submit_order_Click" />
         </div>
     </div>
