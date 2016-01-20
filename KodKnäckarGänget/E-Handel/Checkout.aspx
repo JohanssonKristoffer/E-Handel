@@ -67,8 +67,8 @@
                         <td id="tableShippingPrice">£5</td>
                     </tr>
                     <tr>
-                        <td>Total sum:</td>
-                        <td id="tableTotalSum">£19</td>
+                        <td>Total Price:</td>
+                        <td id="tableTotalPrice">£19</td>
                     </tr>
                 </table>
             </div>
@@ -88,11 +88,10 @@
             <asp:Label ID="customer_address_label" AssociatedControlID="customer_address" Text="Address" runat="server"></asp:Label>
             <asp:TextBox ID="customer_address" runat="server"></asp:TextBox>
             <asp:Label ID="customer_postalcode_label" AssociatedControlID="customer_postalcode" Text="Zip Code" runat="server"></asp:Label>
-            <asp:TextBox ID" runat="server"></asp:TextBox>
             <asp:Label ID="customer_city_label" AssociatedControlID="customer_city" Text="City" runat="server"></asp:Label>
             <asp:TextBox ID="customer_city" runat="server"></asp:TextBox>
             <asp:Label ID="customer_country" AssociatedControlID="customer_country" Text="Country" runat="server"></asp:Label>
-            <asp:TextBox ID="customer_country" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
             <asp:Button ID="customer_submit_order" Text="Submit order" runat="server" OnClick="customer_submit_order_Click" />
         </div>
     </div>
