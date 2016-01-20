@@ -23,11 +23,12 @@ namespace E_Handel
             if (int.TryParse(Request.QueryString["productId"], out productId))
             {
                 productImage.Src = $"ImgHandler.ashx?productId={productId}";
-                productTitle.InnerText=LoadName(productId);
+                productTitle.InnerText = LoadName(productId);
                 LoadDescription();
                 LoadPrice();
                 LoadVariant();
-                ShowVariants();
+                if (!Page.IsPostBack)
+                    ShowVariants();
             }
             else
             {
@@ -50,12 +51,12 @@ namespace E_Handel
                 oreader = cmd.ExecuteReader();
                 while (oreader.Read())
                 {
-                     return oreader["Name"].ToString();
+                    return oreader["Name"].ToString();
                 }
                 return "Name not found.";
             }
             catch (Exception ex)
-            { 
+            {
                 return "ex.Message"; //error
             }
             finally
@@ -172,7 +173,8 @@ namespace E_Handel
                     oreader = sqlCheckForOriginalVariants.ExecuteReader();
                     while (oreader.Read())
                     {
-                        variantIdList.Add(int.Parse(oreader["ProductID"].ToString()));
+                        if (int.Parse(oreader["VariantID"].ToString()) != productId)
+                            variantIdList.Add(int.Parse(oreader["VariantID"].ToString()));
                     }
                     sqlCheckForOriginalVariants.Dispose();
                 }
@@ -198,7 +200,7 @@ namespace E_Handel
         private void ShowVariants()
         {
             DropDownVariants.Items.Clear();
-            ListItem selectedProduct = new ListItem(productTitle.InnerText,productId.ToString());
+            ListItem selectedProduct = new ListItem(productTitle.InnerText, productId.ToString());
             DropDownVariants.Items.Add(selectedProduct);
             foreach (int variantId in variantIdList)
             {
