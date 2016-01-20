@@ -17,15 +17,14 @@ a {
 footer {
     text-align: center;
 }
+
 #SearchArea {
-    /*width: 500px;*/
     margin: 0 auto;
     padding: 10px;
     text-align: right;
 }
 
 #SearchBox {
-    /*display: inline;*/
     height: 40px;
     width: 160px;
 }
@@ -47,31 +46,3 @@ footer {
 #LinkPolicy {
     color: green;
 }
-
-.price_tag {
-    background-color: #cccccc;
-    padding: 5px;
-    width: 15px;
-}
-
-.image_thumbnail {
-    display: block;
-}
-
-.result_product_name {
-    display: block;
-}
-
-.result_product_price {
-    display: block;
-}
-
-.result_product_infobutton {
-    display: block;
-}
-
-.result_product_container {
-    padding: 20px 20px 0 0;
-}
-
-
