@@ -64,11 +64,11 @@
                 <table class="checkout_table">
                     <tr>
                         <td>Shipping:</td>
-                        <td id="tableShippingPrice">£5</td>
+                        <td><p id="tableShippingPrice"></p></td>
                     </tr>
                     <tr>
-                        <td>Total Price:</td>
-                        <td id="tableTotalPrice">£19</td>
+                        <td >Total Price:</td>
+                        <td id="tableTotalPrice"></td>
                     </tr>
                 </table>
             </div>
@@ -77,6 +77,12 @@
 
     <div class="row-fluid">
         <div class="span12">
+            Shippment Alternative:&nbsp;&nbsp;
+            <asp:DropDownList ID="DropDownList1" runat="server">
+                <asp:ListItem>Dhl</asp:ListItem>
+                <asp:ListItem>Posten</asp:ListItem>
+                <asp:ListItem>FedEx</asp:ListItem>
+            </asp:DropDownList>
             <asp:Label ID="customer_name_label" AssociatedControlID="customer_name" Text="Name" runat="server"></asp:Label>
             <asp:TextBox ID="customer_name" runat="server"></asp:TextBox>
             <asp:Label ID="customer_surname_label" AssociatedControlID="customer_surname" Text="Surname" runat="server"></asp:Label>
@@ -88,6 +94,8 @@
             <asp:Label ID="customer_address_label" AssociatedControlID="customer_address" Text="Address" runat="server"></asp:Label>
             <asp:TextBox ID="customer_address" runat="server"></asp:TextBox>
             <asp:Label ID="customer_postalcode_label" AssociatedControlID="customer_postalcode" Text="Zip Code" runat="server"></asp:Label>
+            <asp:TextBox ID="customer_postalcode" runat="server"></asp:TextBox>
+
             <asp:Label ID="customer_city_label" AssociatedControlID="customer_city" Text="City" runat="server"></asp:Label>
             <asp:TextBox ID="customer_city" runat="server"></asp:TextBox>
             <asp:Label ID="customer_country" AssociatedControlID="customer_country" Text="Country" runat="server"></asp:Label>

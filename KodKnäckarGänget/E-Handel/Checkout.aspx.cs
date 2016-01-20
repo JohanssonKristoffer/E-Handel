@@ -26,9 +26,7 @@ namespace E_Handel
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-
-                cmd.CommandText = "INSERT INTO Orders (TotalPrice,Address,PostalCode,City,Country,Email,Telephone,Name,Surname) VALUES 
-                    (" + tableShippingPrice.Text + ", " + tableTotalPrice.Text + "," + customer_address.Text + "," + customer_postalcode.Text + "," + customer_city.Text + "," + customer_country.Text + "," + customer_email.Text + ","+ customer_phone.Text + "," + customer_name.Text + "," + customer_surname.Text + ");
+                cmd.CommandText = $"INSERT INTO Orders (Postage,TotalPrice,Address,PostalCode,City,Country,Email,Telephone,Name,Surname) VALUES                     ({customer_address.Text}','{customer_postalcode.Text}','{customer_city.Text}','{customer_country.Text}','{customer_email.Text}','{customer_phone.Text}','{customer_name.Text}','{customer_surname.Text}'";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
 
@@ -39,3 +37,10 @@ namespace E_Handel
         }
     }
 }
+
+// Post
+// DHL
+
+    // Cash
+    // Card
+    // Paypal
