@@ -41,23 +41,70 @@ namespace E_Handel
             {
                 BLProduct product = new BLProduct(connectionString, cartProduct.Id);
 
-                Image image = new Image();
-                image.ImageUrl = $"ImgHandler.ashx?productIdThumb={product.Id}";
+                Image productImage = new Image();
+                productImage.ImageUrl = $"ImgHandler.ashx?productIdThumb={product.Id}";
+                productImage.AlternateText = product.Name;
+                productImage.CssClass = "productImage";
                 TableCell cellImage = new TableCell();
-                cellImage.Controls.Add(image);
+                cellImage.CssClass = "td";
+                cellImage.Controls.Add(productImage);
                 
                 Label nameLabel = new Label();
                 nameLabel.Text = product.Name;
                 TableCell cellName = new TableCell();
+                cellName.CssClass = "td";
                 cellName.Controls.Add(nameLabel);
 
+                TextBox quantityTextBox = new TextBox();
+                quantityTextBox.Text = cartProduct.Quantity.ToString(); 
+                TableCell cellQuantity = new TableCell();
+                cellQuantity.CssClass = "QuantityTextbox td";
+                cellQuantity.Controls.Add(quantityTextBox);
+
+                Label priceLabel = new Label();
+                priceLabel.Text = product.Price.ToString();
+                TableCell cellPrice = new TableCell();
+                cellPrice.CssClass = "td";
+                cellPrice.Controls.Add(priceLabel);
+
+                Label stockLabel = new Label();
+                stockLabel.Text = product.StockQuantity.ToString();
+                TableCell cellStock = new TableCell();
+                cellStock.CssClass = "td";
+                cellStock.Controls.Add(stockLabel);
+
+                Label totalPriceLabel = new Label();
+                double totalPriceSum = cartProduct.Quantity * product.Price;
+                totalPriceLabel.Text = totalPriceSum.ToString();
+                TableCell celltotalPrice = new TableCell();
+                celltotalPrice.CssClass = "td";
+                celltotalPrice.Controls.Add(totalPriceLabel);
+
+                Image updateCartImage = new Image();
+                updateCartImage.ImageUrl = "/Images/updateCart.png";
+                updateCartImage.AlternateText = "Update quantity";
+                updateCartImage.ID = "updateCart";
+                TableCell cellUpdateCart = new TableCell();
+                cellUpdateCart.Controls.Add(updateCartImage);
+
+                Image removeImage = new Image();
+                removeImage.ImageUrl = "/Images/removeProduct.png";
+                removeImage.AlternateText = "Delete this product";
+                removeImage.ID = $"removeCart + {product.Id}";
+                TableCell cellRemoveImage = new TableCell();
+                cellRemoveImage.Controls.Add(removeImage);
 
                 TableRow row = new TableRow();
                 row.Controls.Add(cellImage);
                 row.Controls.Add(cellName);
+                row.Controls.Add(cellQuantity);
+                row.Controls.Add(cellPrice);
+                row.Controls.Add(cellStock);
+                row.Controls.Add(celltotalPrice);
+                row.Controls.Add(cellUpdateCart);
+                row.Controls.Add(cellRemoveImage);
 
                 Checkout_table.Controls.Add(row);
-
 
             }
 
@@ -112,6 +159,17 @@ namespace E_Handel
 
 
 
+        }
+
+        private void CalculateSum()
+        {
+            //BLCartProduct allBlCartProduct = new BLCartProduct();
+            //int allCartProducts = allBlCartProduct.Quantity; 
+            //tableTotalPrice.InnerText = $"";
+        }
+
+        private void ShippingDrowdown()
+        {
         }
     }
 }

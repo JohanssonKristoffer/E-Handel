@@ -30,7 +30,7 @@ namespace E_Handel
             foreach (var product in productList)
             {
                 Label nameLabel = new Label();
-                nameLabel.Text = Product.LoadName(product.Id);
+                //nameLabel.Text = Product.LoadName(product.Id);
                 ReceiptPanel.Controls.Add(nameLabel);
             }
         }

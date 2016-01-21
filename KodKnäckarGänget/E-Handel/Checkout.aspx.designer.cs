@@ -13,6 +13,15 @@ namespace E_Handel {
     public partial class Checkout {
         
         /// <summary>
+        /// Table1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table Table1;
+        
+        /// <summary>
         /// Checkout_table control.
         /// </summary>
         /// <remarks>
@@ -40,13 +49,13 @@ namespace E_Handel {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tableTotalPrice;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// shipping_dropdown control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList shipping_dropdown;
         
         /// <summary>
         /// customer_name_label control.

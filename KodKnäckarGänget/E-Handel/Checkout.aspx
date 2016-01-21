@@ -1,30 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Checkout.aspx.cs" Inherits="E_Handel.Checkout" %>
 
 <asp:Content ID="ContentHead" ContentPlaceHolderID="PlaceholderHead" runat="server">
-    <style>
-        .checkout_table {
-            border: 1px solid #cccccc;
-            padding: 10px;
-            width: 800px;
-        }
-
-        td, th {
-            padding: 10px;
-            width: 90px;
-            text-align: left;
-        }
-
-        .checkout_product_data {
-            vertical-align: top;
-        }
-
-        .checkout_table_img_width {
-            width: 60px;
-        }
-    </style>
+    <link href="Style/Checkout.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="ContentMain" ContentPlaceHolderID="PlaceholderMain" runat="server">
-
     <div class="row-fluid">
         <div class="span12">
             <table class="checkout_table">
@@ -38,12 +17,12 @@
                     <th></th>
                 </tr>
             </table>
+            <asp:Table class="checkout_table" ID="Table1" runat="server"></asp:Table>
+
         </div>
         <div class="row-fluid">
             <div class="span12">
-                <asp:Table class="checkout_table" ID="Checkout_table" runat="server">
-                    
-                </asp:Table>
+                <asp:Table class="checkout_table" ID="Checkout_table" runat="server"></asp:Table>
             </div>
         </div>
         <div class="row-fluid">
@@ -64,13 +43,14 @@
 
     <div class="row-fluid">
         <div class="span12">
-            Shippment Alternative:&nbsp;&nbsp;
-            <asp:DropDownList ID="DropDownList1" runat="server">
-                <asp:ListItem>Posten</asp:ListItem>
-                <asp:ListItem>DHL</asp:ListItem>
-                <asp:ListItem>FedEx</asp:ListItem>
+            Choose shipping method:&nbsp;&nbsp;
+            <asp:DropDownList ID="shipping_dropdown" runat="server">
+                <asp:ListItem Value="1" runat="server">Posten</asp:ListItem>
+                <asp:ListItem Value="2" runat="server">DHL</asp:ListItem>
+                <asp:ListItem Value="3" runat="server">FedEx</asp:ListItem>
             </asp:DropDownList>
-            <asp:Label ID="customer_name_label" AssociatedControlID="customer_name" Text="Name" runat="server"></asp:Label>
+
+            <asp:Label ID="customer_name_label" CssClass="checkout_label" AssociatedControlID="customer_name" Text="Name" runat="server"></asp:Label>
             <asp:TextBox ID="customer_name" runat="server"></asp:TextBox>
             <asp:Label ID="customer_surname_label" AssociatedControlID="customer_surname" Text="Surname" runat="server"></asp:Label>
             <asp:TextBox ID="customer_surname" runat="server"></asp:TextBox>
