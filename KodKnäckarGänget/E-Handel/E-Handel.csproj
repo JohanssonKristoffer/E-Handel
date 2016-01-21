@@ -73,6 +73,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Home.aspx" />
     <Content Include="Images\fullHeart.png" />
+    <Content Include="Images\removeProduct.png" />
+    <Content Include="Images\updateCart.png" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
