@@ -1,5 +1,6 @@
 ﻿body {
-    background-color: #ffffff;
+    background-color: ghostwhite;
+    color:black;
 }
 
 header nav ul li {
@@ -36,7 +37,7 @@ footer {
 }
 
 #ads {
-    background-color: aqua;
+    float:right;
 }
 
 #LinkLegal {
