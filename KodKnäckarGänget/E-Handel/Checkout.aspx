@@ -6,38 +6,28 @@
 <asp:Content ID="ContentMain" ContentPlaceHolderID="PlaceholderMain" runat="server">
     <div class="row-fluid">
         <div class="span12">
+            <asp:Table class="checkout_table" ID="checkout_product_table" runat="server">
+                <asp:TableHeaderRow>
+                    <asp:TableCell ></asp:TableCell>
+                    <asp:TableCell >Title</asp:TableCell>
+                    <asp:TableCell >Price per item</asp:TableCell>
+                    <asp:TableCell >Quantity</asp:TableCell>
+                    <asp:TableCell >Total amount</asp:TableCell>
+                    <asp:TableCell >Stock status</asp:TableCell>
+                </asp:TableHeaderRow>
+            </asp:Table>
+        </div>
+        <div class="span12">
             <table class="checkout_table">
                 <tr>
-                    <th class="checkout_table_img_width"></th>
-                    <th>Title</th>
-                    <th>Quantity</th>
-                    <th>Price per item</th>
-                    <th>Total amount</th>
-                    <th>Stock status</th>
-                    <th></th>
+                    <td>Shipping:</td>
+                    <td><span id="tableShippingPrice" runat="server"></span></td>
+                </tr>
+                <tr>
+                    <td>Total Price inc shipping:</td>
+                    <td><span id="tableTotalPrice" runat="server"></span></td>
                 </tr>
             </table>
-            <asp:Table class="checkout_table" ID="Table1" runat="server"></asp:Table>
-
-        </div>
-        <div class="row-fluid">
-            <div class="span12">
-                <asp:Table class="checkout_table" ID="Checkout_table" runat="server"></asp:Table>
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div class="span12">
-                <table class="checkout_table">
-                    <tr>
-                        <td>Shipping:</td>
-                        <td><span id="tableShippingPrice" runat="server"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Total Price inc shipping:</td>
-                        <td><span id="tableTotalPrice" runat="server"></span></td>
-                    </tr>
-                </table>
-            </div>
         </div>
     </div>
 

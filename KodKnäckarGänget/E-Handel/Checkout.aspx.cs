@@ -20,8 +20,23 @@ namespace E_Handel
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //GenerateDummyData();
             LoadCartList();
             InsertProductsIntoTable();
+        }
+
+        private void GenerateDummyData()
+        {
+            List<BLCartProduct> cartList = new List<BLCartProduct>();
+            BLCartProduct cartProductOne = new BLCartProduct(10, 5);
+            BLCartProduct cartProductTwo = new BLCartProduct(11, 2);
+            BLCartProduct cartProductThree = new BLCartProduct(41, 5);
+
+            cartList.Add(cartProductOne);
+            cartList.Add(cartProductTwo);
+            cartList.Add(cartProductThree);
+
+            Session["cartList"] = cartList;
         }
 
         private void InsertCustomerInformation()
@@ -31,10 +46,10 @@ namespace E_Handel
                 SqlCommand cmd = new SqlCommand($"INSERT INTO Orders (Postage,TotalPrice,Address,PostalCode,City,Country,Email,Telephone,Name,Surname)OUTPUT INSERTED.ID VALUES                     ('{tableShippingPrice}','{tableTotalPrice}','{customer_address.Text}','{customer_postalcode.Text}','{customer_city.Text}','{customer_country.Text}','{customer_email.Text}','{customer_phone.Text}','{customer_name.Text}','{customer_surname.Text}')", connection);
                 connection.Open();
 
-                Session["orderId"] = (int) cmd.ExecuteScalar();
+                Session["orderId"] = (int)cmd.ExecuteScalar();
             }
         }
-        
+
         private void InsertProductsIntoTable()
         {
             foreach (var cartProduct in cartList)
@@ -46,65 +61,70 @@ namespace E_Handel
                 productImage.AlternateText = product.Name;
                 productImage.CssClass = "productImage";
                 TableCell cellImage = new TableCell();
-                cellImage.CssClass = "td";
                 cellImage.Controls.Add(productImage);
-                
+
                 Label nameLabel = new Label();
                 nameLabel.Text = product.Name;
                 TableCell cellName = new TableCell();
-                cellName.CssClass = "td";
                 cellName.Controls.Add(nameLabel);
 
-                TextBox quantityTextBox = new TextBox();
-                quantityTextBox.Text = cartProduct.Quantity.ToString(); 
+                Panel quantityPanel = new Panel();
+                Label quantityLabel = new Label() { Enabled = false };
+                quantityLabel.Text = cartProduct.Quantity.ToString();
                 TableCell cellQuantity = new TableCell();
                 cellQuantity.CssClass = "QuantityTextbox td";
-                cellQuantity.Controls.Add(quantityTextBox);
+                Button increaseEditCartButton = new Button();
+                Button decreaseEditCartButton = new Button();
+                increaseEditCartButton.Text = "+";
+                decreaseEditCartButton.Text = "-";
+
+                quantityPanel.Controls.Add(decreaseEditCartButton);
+                quantityPanel.Controls.Add(quantityLabel);
+                quantityPanel.Controls.Add(increaseEditCartButton);
+                cellQuantity.Controls.Add(quantityPanel);
+                // TODO: HÄR ÄR JAG
 
                 Label priceLabel = new Label();
                 priceLabel.Text = product.Price.ToString();
                 TableCell cellPrice = new TableCell();
-                cellPrice.CssClass = "td";
                 cellPrice.Controls.Add(priceLabel);
-
-                Label stockLabel = new Label();
-                stockLabel.Text = product.StockQuantity.ToString();
-                TableCell cellStock = new TableCell();
-                cellStock.CssClass = "td";
-                cellStock.Controls.Add(stockLabel);
 
                 Label totalPriceLabel = new Label();
                 double totalPriceSum = cartProduct.Quantity * product.Price;
                 totalPriceLabel.Text = totalPriceSum.ToString();
                 TableCell celltotalPrice = new TableCell();
-                celltotalPrice.CssClass = "td";
                 celltotalPrice.Controls.Add(totalPriceLabel);
 
-                Image updateCartImage = new Image();
-                updateCartImage.ImageUrl = "/Images/updateCart.png";
-                updateCartImage.AlternateText = "Update quantity";
-                updateCartImage.ID = "updateCart";
-                TableCell cellUpdateCart = new TableCell();
-                cellUpdateCart.Controls.Add(updateCartImage);
+                Label stockLabel = new Label();
+                stockLabel.Text = product.StockQuantity.ToString();
+                TableCell cellStock = new TableCell();
+                cellStock.Controls.Add(stockLabel);
 
-                Image removeImage = new Image();
-                removeImage.ImageUrl = "/Images/removeProduct.png";
-                removeImage.AlternateText = "Delete this product";
-                removeImage.ID = $"removeCart + {product.Id}";
-                TableCell cellRemoveImage = new TableCell();
-                cellRemoveImage.Controls.Add(removeImage);
+                Button editCartButton = new Button();
+                editCartButton.Text = "Edit quantity";
+                TableCell CellEditCartButton = new TableCell();
+                CellEditCartButton.Controls.Add(editCartButton);
+
+                Button removeProductButton = new Button()
+                {
+                    Text = "Remove from cart",
+                    ID = $"removeButton_{product.Id}"
+                };
+                removeProductButton.Click += RemoveButton_Click;
+                TableCell CellRemoveProductButton = new TableCell();
+                CellRemoveProductButton.Controls.Add(removeProductButton);
 
                 TableRow row = new TableRow();
                 row.Controls.Add(cellImage);
                 row.Controls.Add(cellName);
-                row.Controls.Add(cellQuantity);
                 row.Controls.Add(cellPrice);
+                row.Controls.Add(cellQuantity);
                 row.Controls.Add(cellStock);
                 row.Controls.Add(celltotalPrice);
-                row.Controls.Add(cellUpdateCart);
-                row.Controls.Add(cellRemoveImage);
+                row.Controls.Add(CellEditCartButton);
+                row.Controls.Add(CellRemoveProductButton);
 
-                Checkout_table.Controls.Add(row);
+                checkout_product_table.Controls.Add(row);
 
             }
 
@@ -112,12 +132,38 @@ namespace E_Handel
 
         private void LoadCartList()
         {
-            if(Session["cartList"] != null)
+            if (Session["cartList"] != null)
                 cartList = (List<BLCartProduct>)Session["cartList"];
             else
             {
                 //error
             }
+        }
+
+        private void RemoveButton_Click(object sender, EventArgs e)
+        {
+            Button buttonClicked = (Button)sender;
+            int productId = int.Parse(buttonClicked.ID.Split('_')[1]);
+
+            foreach (BLCartProduct cartProduct in cartList)
+            {
+                if (cartProduct.Id == productId)
+                {
+                    int cartCount = (int)Session["cartCount"];
+                    cartCount -= cartProduct.Quantity;
+                    Session["cartCount"] = cartCount;
+                    cartList.Remove(cartProduct);
+                    break;
+                }
+            }
+            if ((int) Session["cartCount"] == 0)
+            {
+                Session["cartList"] = null;
+                Session["cartCount"] = null;
+            Response.Redirect("Home.aspx");
+            }
+            Session["cartList"] = cartList;
+            Response.Redirect("Checkout.aspx");
         }
 
         protected void customer_submit_order_Click(object sender, EventArgs e)
@@ -131,7 +177,7 @@ namespace E_Handel
         {
             SqlConnection con = new SqlConnection(connectionString);
 
-            int orderId = (int) Session["orderId"];
+            int orderId = (int)Session["orderId"];
             try
             {
                 con.Open();

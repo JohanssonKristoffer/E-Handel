@@ -13,22 +13,13 @@ namespace E_Handel {
     public partial class Checkout {
         
         /// <summary>
-        /// Table1 control.
+        /// checkout_product_table control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Table1;
-        
-        /// <summary>
-        /// Checkout_table control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Checkout_table;
+        protected global::System.Web.UI.WebControls.Table checkout_product_table;
         
         /// <summary>
         /// tableShippingPrice control.
