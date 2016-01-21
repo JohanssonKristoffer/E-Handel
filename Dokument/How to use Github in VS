@@ -1,0 +1,7 @@
+Commit --> Sync
+Fetch
+Pull
+Check conflicts
+Merge (if needed)--> Commit --> Sync
+Push
+Profit
