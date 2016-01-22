@@ -5,11 +5,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <script src="Scripts/jquery-1.9.1.js"></script>
     <script src="Scripts/bootstrap.js"></script>
-    <%--<link href="Content/bootstrap.css" rel="stylesheet" />--%>
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" rel="stylesheet" />
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet" />
     <link href="Style/Master.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+    function ShowButton() {
+        var buttonID = '<%= Label.CartPanel %>';
+        var button = document.getElementById(buttonID);
+        if(button) { button.style.display = 'inherit'; }
+    }
+</script>
+
     <asp:ContentPlaceHolder ID="PlaceholderHead" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -31,11 +42,15 @@
                         </asp:DropDownList>
                     </li>
                     <li id="CartLi" runat="server">
-                        <asp:Button runat="server" ID="ShowCartButton" Text="Cart" OnClick="ShowCart_Click" />
-                        <asp:Label runat="server" ID="CartCountLabel"></asp:Label></li>
+                        <button id="hide">Hide</button>
+                        <button id="show">Show</button>
+
+                        <asp:Button runat="server" ID="ShowCartButton" Text="Cart" />
+                        <asp:Label runat="server" ID="CartCountLabel"></asp:Label>
+                    </li>
                 </ul>
             </nav>
-            <asp:Panel ID="CartPanel" runat="server" CssClass="cartPanel" Visible="False">
+            <asp:Panel ID="CartPanel" runat="server" CssClass="cartPanel">
                 <hr />
                 <asp:Table runat="server" ID="CartListTable">
                     <asp:TableHeaderRow runat="server">

@@ -36,8 +36,9 @@ footer {
     text-align: center;
 }
 
-.cartPanel {
-}
+     cartPanel {
+         display: none;
+      }
 
     .cartPanel .th {
         min-width: 80px;

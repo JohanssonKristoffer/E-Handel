@@ -97,18 +97,18 @@ namespace E_Handel
                 Response.Redirect($"Result.aspx?categoryId={DropDownCategories.SelectedValue}");
         }
 
-        protected void ShowCart_Click(object sender, EventArgs e)
-        {
-            if (!CartPanel.Visible)
-            {
-                if (TryRetrieveCartList())
-                {
-                    GenerateCartContent();
-                    CartPanel.Visible = true;
-                }
-            }
-            else
-                CartPanel.Visible = false;
-        }
+        //protected void ShowCart_Click(object sender, EventArgs e)
+        //{
+        //    if (!CartPanel.Visible)
+        //    {
+        //        if (TryRetrieveCartList())
+        //        {
+        //            GenerateCartContent();
+        //            CartPanel.Visible = true;
+        //        }
+        //    }
+        //    else
+        //        CartPanel.Visible = false;
+        //}
     }
 }
