@@ -14,6 +14,7 @@
 
         <div class="span8">
             <h1 runat="server" id="productTitle"></h1>
+            <h3 class="original_price_tag" runat="server" id="originalProductPrice" Visible="False"></h3>
             <h3 class="price_tag" runat="server" id="productPrice"></h3>
             <p id="productDescription" runat="server"></p>
             <p>

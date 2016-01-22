@@ -16,8 +16,9 @@ namespace E_Handel.BL
         public int Popularity { get; set; }
         public int StockQuantity { get; set; }
         public double VAT { get; set; }
+        public double Discount { get; set; }
 
-        public BLProduct(int id, int categoryId, string name, string description, double price, int popularity, int stockQuantity, double VAT)
+        public BLProduct(int id, int categoryId, string name, string description, double price, int popularity, int stockQuantity, double VAT, double discount = 0)
         {
             Id = id;
             CategoryId = categoryId;
@@ -27,6 +28,7 @@ namespace E_Handel.BL
             Popularity = popularity;
             StockQuantity = stockQuantity;
             this.VAT = VAT;
+            Discount = discount;
         }
         public BLProduct(string databaseConnectionString, int id)
         {
@@ -48,6 +50,7 @@ namespace E_Handel.BL
                     StockQuantity = int.Parse(sqlReader["StockQuantity"].ToString());
                     VAT = double.Parse(sqlReader["VAT"].ToString());
                 }
+                GetDiscountFromDB(databaseConnectionString);
             }
             finally
             {
@@ -62,6 +65,34 @@ namespace E_Handel.BL
             }
         }
 
-        public override string ToString() => $"Id = {Id}, CategoryId = {CategoryId}, Name = {Name}, Description = {Description}, Price = {Price}, Popularity = {Popularity}, StockQuantity = {StockQuantity}, VAT = {VAT}";
+        public void GetDiscountFromDB(string databaseConnectionString)
+        {
+            SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
+            SqlCommand sqlGetProduct = new SqlCommand($"SELECT DiscountPercentage FROM DiscountedProducts WHERE ProductID = {Id}", sqlConnection);
+            SqlDataReader sqlReader = null;
+            Discount = 0;
+            try
+            {
+                sqlConnection.Open();
+                sqlReader = sqlGetProduct.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                    Discount = double.Parse(sqlReader["DiscountPercentage"].ToString());
+                }
+            }
+            finally
+            {
+                if (sqlReader != null)
+                {
+                    sqlReader.Close();
+                    sqlReader.Dispose();
+                }
+                sqlConnection.Close();
+                sqlConnection.Dispose();
+                sqlGetProduct.Dispose();
+            }
+        }
+
+        public override string ToString() => $"Id = {Id}, CategoryId = {CategoryId}, Name = {Name}, Description = {Description}, Price = {Price}, Popularity = {Popularity}, StockQuantity = {StockQuantity}, VAT = {VAT}, Description = {Description}";
     }
 }
