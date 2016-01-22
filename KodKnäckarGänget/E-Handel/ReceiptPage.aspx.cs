@@ -49,7 +49,7 @@ namespace E_Handel
                 while (oreader.Read())
                 {
                     TotalPricelbl.InnerText = oreader["TotalPrice"].ToString();
-                    VATlbl.InnerText = oreader["VAT"].ToString();
+                    //VATlbl.InnerText = oreader["VAT"].ToString();
                     Postagelbl.InnerText = oreader["Postage"].ToString();
                     Addresslbl.InnerText = oreader["Address"].ToString();
                     PostalCodelbl.InnerText = oreader["PostalCode"].ToString();

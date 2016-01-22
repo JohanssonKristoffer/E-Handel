@@ -17,12 +17,33 @@ namespace E_Handel
     {
         private readonly string connectionString = ConfigurationManager.ConnectionStrings["KKG-EHandelConnectionString"].ConnectionString;
         private List<BLCartProduct> cartList;
+        private double totalPrice = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            GenerateDummyData();
-            LoadCartList();
-            InsertProductsIntoTable();
+            if (TryLoadCartList())
+            {
+                //GenerateDummyData();
+                CreateTableCellsFromCartList();
+            }
+            else
+            {
+                // error
+                Response.Redirect("Home.aspx");
+            }
+        }
+
+        private bool TryLoadCartList()
+        {
+            if (Session["cartList"] != null)
+            {
+                cartList = (List<BLCartProduct>)Session["cartList"];
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void GenerateDummyData()
@@ -39,57 +60,37 @@ namespace E_Handel
             Session["cartList"] = cartList;
         }
 
-        private float ShippingDrowdown()
+        private string ShippingDrowdown(out double shippingCost)
         {
-            string shippingValue = shipping_dropdown.SelectedItem.Value;
-            float tableShippingPrice;
-
-            if (shippingValue == "1")
+            switch (shipping_dropdown.SelectedValue)
             {
-                tableShippingPrice = 0;
-            }
-            else if (shippingValue == "2")
-            {
-                tableShippingPrice = 49;
-            }
-            else
-            {
-                tableShippingPrice = 129;
-            }
+                case "1":
+                    shippingCost = 0;
+                    return "Pickup at store";
+                case "2":
+                    shippingCost = 2;
+                    return "Standard Mail";
 
-            return tableShippingPrice;
-        }
-
-        private double ConvertTotalPriceToFloat()
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                string totalPrice = "INSERT into tbl_staff (staffName,userID,idDepartment) VALUES (@staffName,@userID,@idDepartment)";
-
-                using (SqlCommand querySaveStaff = new SqlCommand(saveStaff))
-                {
-                    querySaveStaff.Connection = openCon;
-                    querySaveStaff.Parameters.Add("@staffName", SqlDbType.VarChar, 30).Value = name;
-                    connection.Open();
-                    connection.Close();
-                }
-            }
-            return totalPrice;
-
-        }
-
-        private void InsertCustomerInformation()
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand($"INSERT INTO Orders (Postage,TotalPrice,Address,PostalCode,City,Country,Email,Telephone,Name,Surname)OUTPUT INSERTED.ID VALUES                     ({ShippingDrowdown()},'{ConvertTotalPriceToFloat()}','{customer_address.Text}','{customer_postalcode.Text}','{customer_city.Text}','{customer_country.Text}','{customer_email.Text}','{customer_phone.Text}','{customer_name.Text}','{customer_surname.Text}')", connection);
-                connection.Open();
-
-                Session["orderId"] = (int)cmd.ExecuteScalar();
+                default:
+                    shippingCost = 8;
+                    return "DHL";
             }
         }
 
-        private void InsertProductsIntoTable()
+        private string PaymentDropdown()
+        {
+            switch (payment_dropdown.SelectedValue)
+            {
+                case "1":
+                    return "Cash at pickup";
+                case "2":
+                    return "Invoice";
+                default:
+                    return "Debit card";
+            }
+        }
+
+        private void CreateTableCellsFromCartList()
         {
             foreach (var cartProduct in cartList)
             {
@@ -173,9 +174,7 @@ namespace E_Handel
                 row.Controls.Add(CellRemoveProductButton);
 
                 checkout_product_table.Controls.Add(row);
-
             }
-
         }
 
         private void DecreaseEditCartButton_Click(object sender, EventArgs e)
@@ -233,16 +232,6 @@ namespace E_Handel
             Response.Redirect("Checkout.aspx");
         }
 
-        private void LoadCartList()
-        {
-            if (Session["cartList"] != null)
-                cartList = (List<BLCartProduct>)Session["cartList"];
-            else
-            {
-                //error
-            }
-        }
-
         private void RemoveButton_Click(object sender, EventArgs e)
         {
             Button buttonClicked = (Button)sender;
@@ -269,11 +258,38 @@ namespace E_Handel
             Response.Redirect("Checkout.aspx");
         }
 
-        protected void customer_submit_order_Click(object sender, EventArgs e)
+        protected void SubmitOrder_Click(object sender, EventArgs e)
         {
             InsertCustomerInformation();
             InsertOrderProducts();
-            Response.Redirect("Receipt.aspx");
+            Response.Redirect("ReceiptPage.aspx");
+        }
+
+        private void InsertCustomerInformation()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand($"INSERT INTO Orders (Postage,TotalPrice,Address,PostalCode,City,Country,Email,Telephone,PaymentOptions,DeliveryOptions,Name,Surname)OUTPUT INSERTED.ID VALUES (@postage, @totalPrice, @address, @postalCode, @city, @country, @email,@telephone, @paymentoptions, @deliveryoptions, @name, @surname)", connection);
+                connection.Open();
+
+                double shippingCost;
+                string shippingMethod = ShippingDrowdown(out shippingCost);
+
+                cmd.Parameters.Add("@postage", SqlDbType.Float).Value = shippingCost;
+                cmd.Parameters.Add("@totalPrice", SqlDbType.Float).Value = totalPrice;
+                cmd.Parameters.Add("@address", SqlDbType.NVarChar, 255).Value = customer_address.Text;
+                cmd.Parameters.Add("@postalCode", SqlDbType.NVarChar, 50).Value = customer_postalcode.Text;
+                cmd.Parameters.Add("@city", SqlDbType.NVarChar, 50).Value = customer_city.Text;
+                cmd.Parameters.Add("@country", SqlDbType.NVarChar, 50).Value = customer_country.Text;
+                cmd.Parameters.Add("@email", SqlDbType.NVarChar, 50).Value = customer_email.Text;
+                cmd.Parameters.Add("@telephone", SqlDbType.NVarChar, 50).Value = customer_phone.Text;
+                cmd.Parameters.Add("@paymentoptions", SqlDbType.NVarChar, 50).Value = PaymentDropdown();
+                cmd.Parameters.Add("@deliveryoptions", SqlDbType.NVarChar, 50).Value = shippingMethod;
+                cmd.Parameters.Add("@name", SqlDbType.NVarChar, 50).Value = customer_name.Text;
+                cmd.Parameters.Add("@surname", SqlDbType.NVarChar, 50).Value = customer_surname.Text;
+
+                Session["orderId"] = (int)cmd.ExecuteScalar();
+            }
         }
 
         private void InsertOrderProducts()
@@ -305,17 +321,6 @@ namespace E_Handel
                 con.Dispose();
             }
 
-
-
-
         }
-
-        private void CalculateSum()
-        {
-            //BLCartProduct allBlCartProduct = new BLCartProduct();
-            //int allCartProducts = allBlCartProduct.Quantity; 
-            //tableTotalPrice.InnerText = $"";
-        }
-
     }
 }
