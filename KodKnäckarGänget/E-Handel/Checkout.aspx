@@ -6,38 +6,28 @@
 <asp:Content ID="ContentMain" ContentPlaceHolderID="PlaceholderMain" runat="server">
     <div class="row-fluid">
         <div class="span12">
+            <asp:Table class="checkout_table" ID="checkout_product_table" runat="server">
+                <asp:TableHeaderRow>
+                    <asp:TableCell ></asp:TableCell>
+                    <asp:TableCell >Title</asp:TableCell>
+                    <asp:TableCell >Price per item</asp:TableCell>
+                    <asp:TableCell >Quantity</asp:TableCell>
+                    <asp:TableCell >Total amount</asp:TableCell>
+                    <asp:TableCell >Stock status</asp:TableCell>
+                </asp:TableHeaderRow>
+            </asp:Table>
+        </div>
+        <div class="span12">
             <table class="checkout_table">
                 <tr>
-                    <th class="checkout_table_img_width"></th>
-                    <th>Title</th>
-                    <th>Quantity</th>
-                    <th>Price per item</th>
-                    <th>Total amount</th>
-                    <th>Stock status</th>
-                    <th></th>
+                    <td>Shipping:</td>
+                    <td><span id="tableShippingPrice" runat="server"></span></td>
+                </tr>
+                <tr>
+                    <td>Total Price inc shipping:</td>
+                    <td><span id="tableTotalPrice" runat="server"></span></td>
                 </tr>
             </table>
-            <asp:Table class="checkout_table" ID="Table1" runat="server"></asp:Table>
-
-        </div>
-        <div class="row-fluid">
-            <div class="span12">
-                <asp:Table class="checkout_table" ID="Checkout_table" runat="server"></asp:Table>
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div class="span12">
-                <table class="checkout_table">
-                    <tr>
-                        <td>Shipping:</td>
-                        <td><span id="tableShippingPrice" runat="server"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Total Price inc shipping:</td>
-                        <td><span id="tableTotalPrice" runat="server"></span></td>
-                    </tr>
-                </table>
-            </div>
         </div>
     </div>
 
@@ -45,9 +35,16 @@
         <div class="span12">
             Choose shipping method:&nbsp;&nbsp;
             <asp:DropDownList ID="shipping_dropdown" runat="server">
-                <asp:ListItem Value="1" runat="server">Posten</asp:ListItem>
-                <asp:ListItem Value="2" runat="server">DHL</asp:ListItem>
-                <asp:ListItem Value="3" runat="server">FedEx</asp:ListItem>
+                <asp:ListItem Value="1">Pickup at store</asp:ListItem>
+                <asp:ListItem Value="2">Stvatandard Mail</asp:ListItem>
+                <asp:ListItem Value="3">DHL</asp:ListItem>
+            </asp:DropDownList>
+            
+            Choose payment method:&nbsp;&nbsp;
+            <asp:DropDownList ID="payment_dropdown" runat="server">
+                <asp:ListItem Value="1">Cash at pickup</asp:ListItem>
+                <asp:ListItem Value="2">Invoice</asp:ListItem>
+                <asp:ListItem Value="3">Debit card</asp:ListItem>
             </asp:DropDownList>
 
             <asp:Label ID="customer_name_label" CssClass="checkout_label" AssociatedControlID="customer_name" Text="Name" runat="server"></asp:Label>
@@ -62,12 +59,11 @@
             <asp:TextBox ID="customer_address" runat="server"></asp:TextBox>
             <asp:Label ID="customer_postalcode_label" AssociatedControlID="customer_postalcode" Text="Zip Code" runat="server"></asp:Label>
             <asp:TextBox ID="customer_postalcode" runat="server"></asp:TextBox>
-
             <asp:Label ID="customer_city_label" AssociatedControlID="customer_city" Text="City" runat="server"></asp:Label>
             <asp:TextBox ID="customer_city" runat="server"></asp:TextBox>
-            <asp:Label ID="customer_country" AssociatedControlID="customer_country" Text="Country" runat="server"></asp:Label>
-            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-            <asp:Button ID="customer_submit_order" Text="Submit order" runat="server" OnClick="customer_submit_order_Click" />
+            <asp:Label ID="customer_country_label" AssociatedControlID="customer_country" Text="Country" runat="server"></asp:Label>
+            <asp:TextBox ID="customer_country" runat="server"></asp:TextBox>
+            <asp:Button ID="customer_submit_order" Text="Submit order" runat="server" OnClick="SubmitOrder_Click" />
         </div>
     </div>
 </asp:Content>
