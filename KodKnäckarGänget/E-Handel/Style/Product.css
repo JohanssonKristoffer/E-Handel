@@ -1,5 +1,8 @@
 ﻿.price_tag {
     background-color: #cccccc;
     padding: 5px;
-    width: 15px;
+    width: 50px;
+}
+.original_price_tag {
+    text-decoration: line-through;
 }

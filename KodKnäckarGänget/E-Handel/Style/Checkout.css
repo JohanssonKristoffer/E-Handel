@@ -5,28 +5,17 @@
         }
 
         .productImage {
-            width: 60px;
+            width: 120px;
         }
 
-        th {
-            min-width: 80px;
+        td {
+            width: 80px;
             vertical-align: top;
             text-align: left;
             padding: 5px;
         }
 
-        .td {
-            min-width: 80px;
-            vertical-align: top;
-            text-align: left;
-            padding: 5px;
-        }
-
-        #PlaceholderMain_updateCart img {
-            width: 30px;
-        }
-
-        #PlaceholderMain_removeCart img {
+        .table_icons {
             width: 30px;
         }
 
@@ -39,16 +28,4 @@
             height: 20px;
             width: 40px;
             background-color: white;
-        }
-
-        .checkout_label {
-            display: inline;
-        }
-
-        .checkout_product_data {
-            vertical-align: top;
-        }
-
-        .checkout_table_img_width {
-            width: 50px;
         }

@@ -37,9 +37,21 @@ footer {
 }
 
 .cartPanel {
-    width: 100%;
-    height: 200px;
 }
+
+    .cartPanel .th {
+        min-width: 80px;
+        vertical-align: top;
+        text-align: left;
+        padding: 5px;
+    }
+
+    .cartPanel .td {
+        min-width: 80px;
+        vertical-align: top;
+        text-align: left;
+        padding: 5px;
+    }
 
 #ads {
     float:right;
@@ -52,4 +64,3 @@ footer {
 #LinkPolicy {
     color: green;
 }
-

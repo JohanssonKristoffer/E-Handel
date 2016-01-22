@@ -13,22 +13,13 @@ namespace E_Handel {
     public partial class Checkout {
         
         /// <summary>
-        /// Table1 control.
+        /// checkout_product_table control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Table1;
-        
-        /// <summary>
-        /// Checkout_table control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Checkout_table;
+        protected global::System.Web.UI.WebControls.Table checkout_product_table;
         
         /// <summary>
         /// tableShippingPrice control.
@@ -56,6 +47,15 @@ namespace E_Handel {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList shipping_dropdown;
+        
+        /// <summary>
+        /// payment_dropdown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList payment_dropdown;
         
         /// <summary>
         /// customer_name_label control.
@@ -184,22 +184,22 @@ namespace E_Handel {
         protected global::System.Web.UI.WebControls.TextBox customer_city;
         
         /// <summary>
+        /// customer_country_label control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label customer_country_label;
+        
+        /// <summary>
         /// customer_country control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label customer_country;
-        
-        /// <summary>
-        /// TextBox2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox customer_country;
         
         /// <summary>
         /// customer_submit_order control.
