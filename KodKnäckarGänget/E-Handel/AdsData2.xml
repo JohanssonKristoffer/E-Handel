@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Advertisements xmlns="http://schemas.microsoft.com/AspNet/AdRotator-Schedule-File">
+  <Ad>
+    <ImageUrl>ImgHandler.ashx?productId=25</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>20</Impressions>
+  </Ad>
+  <Ad>
+    <ImageUrl>ImgHandler.ashx?productId=30</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>50</Impressions>
+  </Ad>
+  <Ad>
+    <ImageUrl>ImgHandler.ashx?productId=32</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>40</Impressions>
+  </Ad>
+  <Ad>
+    <ImageUrl>ImgHandler.ashx?productId=38</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>10</Impressions>
+  </Ad>
+  <Ad>
+    <ImageUrl>ImgHandler.ashx?productId=41</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>30</Impressions>
+  </Ad>
+</Advertisements>
