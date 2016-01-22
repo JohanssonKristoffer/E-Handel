@@ -25,7 +25,7 @@
                 </tr>
                 <tr>
                     <td>Total Price inc shipping:</td>
-                    <td><span id="tableTotalPrice" runat="server"></span></td>
+                    <td><span id="tableTotalPrice" runat="server">10.00</span></td>
                 </tr>
             </table>
         </div>
@@ -35,9 +35,9 @@
         <div class="span12">
             Choose shipping method:&nbsp;&nbsp;
             <asp:DropDownList ID="shipping_dropdown" runat="server">
-                <asp:ListItem Value="1" runat="server">Posten</asp:ListItem>
-                <asp:ListItem Value="2" runat="server">DHL</asp:ListItem>
-                <asp:ListItem Value="3" runat="server">FedEx</asp:ListItem>
+                <asp:ListItem Value="1" runat="server">Pickup at store</asp:ListItem>
+                <asp:ListItem Value="2" runat="server">Standard Mail</asp:ListItem>
+                <asp:ListItem Value="3" runat="server">DHL</asp:ListItem>
             </asp:DropDownList>
 
             <asp:Label ID="customer_name_label" CssClass="checkout_label" AssociatedControlID="customer_name" Text="Name" runat="server"></asp:Label>

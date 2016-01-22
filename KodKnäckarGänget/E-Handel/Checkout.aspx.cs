@@ -20,7 +20,7 @@ namespace E_Handel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //GenerateDummyData();
+            GenerateDummyData();
             LoadCartList();
             InsertProductsIntoTable();
         }
@@ -39,11 +39,50 @@ namespace E_Handel
             Session["cartList"] = cartList;
         }
 
+        private float ShippingDrowdown()
+        {
+            string shippingValue = shipping_dropdown.SelectedItem.Value;
+            float tableShippingPrice;
+
+            if (shippingValue == "1")
+            {
+                tableShippingPrice = 0;
+            }
+            else if (shippingValue == "2")
+            {
+                tableShippingPrice = 49;
+            }
+            else
+            {
+                tableShippingPrice = 129;
+            }
+
+            return tableShippingPrice;
+        }
+
+        private double ConvertTotalPriceToFloat()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string totalPrice = "INSERT into tbl_staff (staffName,userID,idDepartment) VALUES (@staffName,@userID,@idDepartment)";
+
+                using (SqlCommand querySaveStaff = new SqlCommand(saveStaff))
+                {
+                    querySaveStaff.Connection = openCon;
+                    querySaveStaff.Parameters.Add("@staffName", SqlDbType.VarChar, 30).Value = name;
+                    connection.Open();
+                    connection.Close();
+                }
+            }
+            return totalPrice;
+
+        }
+
         private void InsertCustomerInformation()
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand($"INSERT INTO Orders (Postage,TotalPrice,Address,PostalCode,City,Country,Email,Telephone,Name,Surname)OUTPUT INSERTED.ID VALUES                     ('{tableShippingPrice}','{tableTotalPrice}','{customer_address.Text}','{customer_postalcode.Text}','{customer_city.Text}','{customer_country.Text}','{customer_email.Text}','{customer_phone.Text}','{customer_name.Text}','{customer_surname.Text}')", connection);
+                SqlCommand cmd = new SqlCommand($"INSERT INTO Orders (Postage,TotalPrice,Address,PostalCode,City,Country,Email,Telephone,Name,Surname)OUTPUT INSERTED.ID VALUES                     ({ShippingDrowdown()},'{ConvertTotalPriceToFloat()}','{customer_address.Text}','{customer_postalcode.Text}','{customer_city.Text}','{customer_country.Text}','{customer_email.Text}','{customer_phone.Text}','{customer_name.Text}','{customer_surname.Text}')", connection);
                 connection.Open();
 
                 Session["orderId"] = (int)cmd.ExecuteScalar();
@@ -73,16 +112,25 @@ namespace E_Handel
                 quantityLabel.Text = cartProduct.Quantity.ToString();
                 TableCell cellQuantity = new TableCell();
                 cellQuantity.CssClass = "QuantityTextbox td";
-                Button increaseEditCartButton = new Button();
-                Button decreaseEditCartButton = new Button();
-                increaseEditCartButton.Text = "+";
-                decreaseEditCartButton.Text = "-";
+
+                Button increaseEditCartButton = new Button()
+                {
+                    Text = "+",
+                    ID = $"increaseEditCartButton_{product.Id}"
+                };
+                increaseEditCartButton.Click += IncreaseEditCartButton_Click;
+
+                Button decreaseEditCartButton = new Button()
+                {
+                    Text = "-",
+                    ID = $"decreaseEditCartButton{product.Id}"
+                };
+                decreaseEditCartButton.Click += DecreaseEditCartButton_Click;
 
                 quantityPanel.Controls.Add(decreaseEditCartButton);
                 quantityPanel.Controls.Add(quantityLabel);
                 quantityPanel.Controls.Add(increaseEditCartButton);
                 cellQuantity.Controls.Add(quantityPanel);
-                // TODO: HÄR ÄR JAG
 
                 Label priceLabel = new Label();
                 priceLabel.Text = product.Price.ToString();
@@ -130,6 +178,61 @@ namespace E_Handel
 
         }
 
+        private void DecreaseEditCartButton_Click(object sender, EventArgs e)
+        {
+            Button buttonClickedDecrease = (Button)sender;
+            int productId = int.Parse(buttonClickedDecrease.ID.Split('_')[1]);
+            //BLCartProduct newProduct = new BLCartProduct(productId);
+
+
+            foreach (BLCartProduct cartProduct in cartList)
+            {
+                if (cartProduct.Quantity >= 1)
+                {
+                    int cartCount = (int)Session["cartCount"];
+                    cartCount -= cartProduct.Quantity;
+                    Session["cartCount"] = cartCount;
+                    cartProduct.Quantity--;
+                    break;
+                }
+            }
+            if ((int)Session["cartCount"] == 0)
+            {
+                Session["cartList"] = null;
+                Session["cartCount"] = null;
+                Response.Redirect("Home.aspx");
+            }
+
+            Session["cartList"] = cartList;
+            Response.Redirect("Checkout.aspx");
+        }
+
+        private void IncreaseEditCartButton_Click(object sender, EventArgs e)
+        {
+            Button buttonClickedIncrease = (Button)sender;
+            int productId = int.Parse(buttonClickedIncrease.ID.Split('_')[1]);
+
+            foreach (BLCartProduct cartProduct in cartList)
+            {
+                if (cartProduct.Quantity >= 1)
+                {
+                    int cartCount = (int)Session["cartCount"];
+                    cartCount += cartProduct.Quantity;
+                    Session["cartCount"] = cartCount;
+                    cartProduct.Quantity++;
+                    break;
+                }
+            }
+            if ((int)Session["cartCount"] == 0)
+            {
+                Session["cartList"] = null;
+                Session["cartCount"] = null;
+                Response.Redirect("Home.aspx");
+            }
+            Session["cartList"] = cartList;
+            Response.Redirect("Checkout.aspx");
+        }
+
         private void LoadCartList()
         {
             if (Session["cartList"] != null)
@@ -156,11 +259,11 @@ namespace E_Handel
                     break;
                 }
             }
-            if ((int) Session["cartCount"] == 0)
+            if ((int)Session["cartCount"] == 0)
             {
                 Session["cartList"] = null;
                 Session["cartCount"] = null;
-            Response.Redirect("Home.aspx");
+                Response.Redirect("Home.aspx");
             }
             Session["cartList"] = cartList;
             Response.Redirect("Checkout.aspx");
@@ -214,8 +317,5 @@ namespace E_Handel
             //tableTotalPrice.InnerText = $"";
         }
 
-        private void ShippingDrowdown()
-        {
-        }
     }
 }
