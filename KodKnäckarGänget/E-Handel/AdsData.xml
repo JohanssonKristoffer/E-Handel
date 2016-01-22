@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Advertisements xmlns="http://schemas.microsoft.com/AspNet/AdRotator-Schedule-File">
+ <!-- <Ad>
+    <ImageUrl>~/Images/Addams_Family_blu_ray.jpg</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>20</Impressions>
+  </Ad>
+  <Ad>
+    <ImageUrl>~/Images/Die_hard_blu_ray.jpg</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>50</Impressions>
+  </Ad>
+ <Ad>
+    <ImageUrl>~/Images/Dogma.jpg</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>40</Impressions>
+  </Ad>
+ <Ad>
+    <ImageUrl>~/Images/Ghost_in_the_shell_blu_ray.jpg</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>10</Impressions>
+  </Ad>
+<Ad>
+    <ImageUrl>~/Images/Interview_with_the_vampire.jpg</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>30</Impressions>
+  </Ad>-->
+<Ad>
+    <ImageUrl>ImgHandler.ashx?productId=3</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>100</Impressions>
+  <Caption>Discount</Caption>
+  <PercentOff>30</PercentOff>
+  </Ad>
+<Ad>
+    <ImageUrl>ImgHandler.ashx?productId=8</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>90</Impressions>
+  <Caption>Discount</Caption>
+  <PercentOff>30</PercentOff>
+  </Ad>
+<Ad>
+    <ImageUrl>ImgHandler.ashx?productId=10</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>70</Impressions>
+  <Caption>Discount</Caption>
+  <PercentOff>30</PercentOff>
+  </Ad>
+<Ad>
+    <ImageUrl>ImgHandler.ashx?productId=15</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>80</Impressions>
+  <Caption>Discount</Caption>
+  <PercentOff>30</PercentOff>
+  </Ad>
+<Ad>
+    <ImageUrl>ImgHandler.ashx?productId=21</ImageUrl>
+    <NavigateUrl>Product.aspx</NavigateUrl>
+    <AlternateText>Click here</AlternateText>
+    <Impressions>60</Impressions>
+  <Caption>Discount</Caption>
+  <PercentOff>30</PercentOff>
+  </Ad>
+</Advertisements>

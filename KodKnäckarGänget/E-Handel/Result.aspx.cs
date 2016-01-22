@@ -61,10 +61,10 @@ namespace E_Handel
         }
         private void LoadSearchResult()
         {
-            string[] searchWords = searchString.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+            string[] searchWords = searchString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             string sqlSearchString = "%";
             for (int i = 0; i < searchWords.Length; i++)
-                sqlSearchString += searchWords[i]+"%";
+                sqlSearchString += searchWords[i] + "%";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             SqlCommand sqlGetSearch = new SqlCommand($"SELECT ID, Name, Description, Price, Popularity, StockQuantity, VAT FROM Products WHERE Name LIKE '{sqlSearchString}'", sqlConnection);
             SqlDataReader sqlProductDataReader = null;
@@ -82,7 +82,9 @@ namespace E_Handel
                     int popularity = int.Parse(sqlProductDataReader["Popularity"].ToString());
                     int stockQuantity = int.Parse(sqlProductDataReader["StockQuantity"].ToString());
                     double VAT = double.Parse(sqlProductDataReader["VAT"].ToString());
-                    resultBLProducts.Add(new BLProduct(id, categoryId, name, description, price, popularity, stockQuantity, VAT));
+                    BLProduct product = new BLProduct(id, categoryId, name, description, price, popularity, stockQuantity, VAT);
+                    product.GetDiscountFromDB(connectionString);
+                    resultBLProducts.Add(product);
                 }
             }
             catch (Exception ex)
@@ -137,7 +139,9 @@ namespace E_Handel
                     int popularity = int.Parse(sqlProductDataReader["Popularity"].ToString());
                     int stockQuantity = int.Parse(sqlProductDataReader["StockQuantity"].ToString());
                     double VAT = double.Parse(sqlProductDataReader["VAT"].ToString());
-                    resultBLProducts.Add(new BLProduct(id, categoryId, name, description, price, popularity, stockQuantity, VAT));
+                    BLProduct product = new BLProduct(id, categoryId, name, description, price, popularity, stockQuantity, VAT);
+                    product.GetDiscountFromDB(connectionString);
+                    resultBLProducts.Add(product);
                 }
             }
             catch (Exception ex)
@@ -178,26 +182,53 @@ namespace E_Handel
 
             foreach (BLProduct product in resultBLProducts)
             {
-                Panel productPanel = new Panel();
-                productPanel.CssClass = "span3 result_product_container";
+                Panel productPanel = new Panel { CssClass = "span3 result_product_container" };
 
-                Image productThumb = new Image();
-                productThumb.CssClass = "image_thumbnail";
-                productThumb.ImageUrl = $"ImgHandler.ashx?productIdThumb={product.Id}";
-                Label productNameLabel = new Label();
-                productNameLabel.CssClass = "result_product_name";
-                productNameLabel.Text = product.Name;
-                Label productPriceLabel = new Label();
-                productPriceLabel.CssClass = "result_product_price";
-                productPriceLabel.Text = "£"+product.Price;
-                Button productInfoButton = new Button();
-                productInfoButton.CssClass = "result_product_infobutton";
-                productInfoButton.Text = "More info";
-                productInfoButton.PostBackUrl = $"Product.aspx?productId={product.Id}";
-
+                Image productThumb = new Image
+                {
+                    CssClass = "image_thumbnail",
+                    ImageUrl = $"ImgHandler.ashx?productIdThumb={product.Id}"
+                };
+                Label productNameLabel = new Label
+                {
+                    CssClass = "result_product_name",
+                    Text = product.Name
+                };
                 productPanel.Controls.Add(productThumb);
                 productPanel.Controls.Add(productNameLabel);
-                productPanel.Controls.Add(productPriceLabel);
+
+                if (product.Discount > 0)
+                {
+                    Label productOriginalPriceLabel = new Label
+                    {
+                        CssClass = "result_product_original_price",
+                        Text = "£" + product.Price
+                    };
+                    productPanel.Controls.Add(productOriginalPriceLabel);
+                    double newPrice = product.Price - product.Price * product.Discount / 100;
+                    Label productNewPriceLabel = new Label
+                    {
+                        CssClass = "result_product_discount_price",
+                        Text = "£" + newPrice
+                    };
+                    productPanel.Controls.Add(productNewPriceLabel);
+                }
+                else
+                {
+                    Label productPriceLabel = new Label
+                    {
+                        CssClass = "result_product_price",
+                        Text = "£" + product.Price
+                    };
+                    productPanel.Controls.Add(productPriceLabel);
+                }
+
+                Button productInfoButton = new Button
+                {
+                    CssClass = "result_product_infobutton",
+                    Text = "More info",
+                    PostBackUrl = $"Product.aspx?productId={product.Id}"
+                };
                 productPanel.Controls.Add(productInfoButton);
 
                 tempPanelArray[currentColumn] = productPanel;
