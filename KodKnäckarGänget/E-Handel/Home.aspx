@@ -106,7 +106,7 @@
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 <asp:Button ID="Button1" runat="server" Text="Add to Cart" class="btn btn-primary btn-large" />
+                 <asp:Button ID="AddToCartAd1" runat="server" Text="Add to Cart" class="btn btn-primary btn-large" OnClick="AddToCartAd1_Click"/>
                 <br />
                 <br />
                 <asp:Panel ID="PanelAd2" runat="server">
@@ -120,7 +120,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <p style="color:red">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:Button ID="Button2"  class="btn btn-primary btn-large" runat="server" Text="Add to Cart"/>
+                    <asp:Button ID="AddToCartAd2"  class="btn btn-primary btn-large" runat="server" Text="Add to Cart" OnClick="AddToCartAd2_Click"/>
                 &nbsp;
                 </p>
             </div>

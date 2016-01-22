@@ -16,14 +16,15 @@ namespace E_Handel
     public partial class Product : System.Web.UI.Page
     {
         private readonly string connectionString = ConfigurationManager.ConnectionStrings["KKG-EHandelConnectionString"].ConnectionString;
-        int productId;
-        List<int> variantIdList = new List<int>();
+        private BLProduct product;
+        private List<int> variantIdList = new List<int>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            int productId;
             if (int.TryParse(Request.QueryString["productId"], out productId))
             {
-                LoadProduct();
+                LoadProduct(productId);
                 LoadVariant();
                 if (!Page.IsPostBack)
                     ShowVariants();
@@ -34,9 +35,9 @@ namespace E_Handel
             }
         }
 
-        private void LoadProduct()
+        private void LoadProduct(int productId)
         {
-            BLProduct product = new BLProduct(connectionString, productId);
+            product = new BLProduct(connectionString, productId);
             productImage.Src = $"ImgHandler.ashx?productId={productId}";
             productTitle.InnerText = product.Name;
             if (product.Discount > 0)
@@ -59,7 +60,7 @@ namespace E_Handel
             {
                 con.Open();
 
-                SqlCommand sqlCheckForVariants = new SqlCommand($"SELECT VariantID FROM ProductVariants WHERE ProductID = {productId}", con);
+                SqlCommand sqlCheckForVariants = new SqlCommand($"SELECT VariantID FROM ProductVariants WHERE ProductID = {product.Id}", con);
                 oreader = sqlCheckForVariants.ExecuteReader();
                 while (oreader.Read())
                 {
@@ -68,7 +69,7 @@ namespace E_Handel
                 oreader.Close();
                 oreader.Dispose();
 
-                SqlCommand sqlCheckForOriginal = new SqlCommand($"SELECT ProductID FROM ProductVariants WHERE VariantID = {productId}", con);
+                SqlCommand sqlCheckForOriginal = new SqlCommand($"SELECT ProductID FROM ProductVariants WHERE VariantID = {product.Id}", con);
                 bool isNotOriginal = false;
                 oreader = sqlCheckForOriginal.ExecuteReader();
                 while (oreader.Read())
@@ -85,7 +86,7 @@ namespace E_Handel
                     oreader = sqlCheckForOriginalVariants.ExecuteReader();
                     while (oreader.Read())
                     {
-                        if (int.Parse(oreader["VariantID"].ToString()) != productId)
+                        if (int.Parse(oreader["VariantID"].ToString()) != product.Id)
                             variantIdList.Add(int.Parse(oreader["VariantID"].ToString()));
                     }
                     sqlCheckForOriginalVariants.Dispose();
@@ -112,7 +113,7 @@ namespace E_Handel
         private void ShowVariants()
         {
             DropDownVariants.Items.Clear();
-            ListItem selectedProduct = new ListItem(productTitle.InnerText, productId.ToString());
+            ListItem selectedProduct = new ListItem(productTitle.InnerText, product.Id.ToString());
             DropDownVariants.Items.Add(selectedProduct);
             foreach (int variantId in variantIdList)
             {
@@ -129,10 +130,7 @@ namespace E_Handel
 
         protected void AddToCart_Click(object sender, EventArgs e)
         {
-            int cartCount = 0;
-            if (Session["cartCount"] != null)
-                cartCount = (int)Session["cartCount"];
-            cartCount += int.Parse(productQuantity.Value);
+            int quantityAdded = int.Parse(productQuantity.Value);
 
             List<BLCartProduct> cartList;
             if (Session["cartList"] != null)
@@ -143,20 +141,27 @@ namespace E_Handel
             bool alreadyInCart = false;
             foreach (BLCartProduct cartProduct in cartList)
             {
-                if (cartProduct.Id == productId)
+                if (cartProduct.Id == product.Id)
                 {
                     alreadyInCart = true;
-                    cartProduct.Quantity += int.Parse(productQuantity.Value);
+                    if ((quantityAdded + cartProduct.Quantity) > product.StockQuantity)
+                        quantityAdded = product.StockQuantity - cartProduct.Quantity;
+                    cartProduct.Quantity += quantityAdded;
                     break;
                 }
             }
             if (!alreadyInCart)
-                cartList.Add(new BLCartProduct(id: productId, quantity: int.Parse(productQuantity.Value)));
+                cartList.Add(new BLCartProduct(id: product.Id, quantity: quantityAdded));
+
+            int cartCount = 0;
+            if (Session["cartCount"] != null)
+                cartCount = (int)Session["cartCount"];
+            cartCount += quantityAdded;
 
             Session["cartCount"] = cartCount;
             Session["cartList"] = cartList;
 
-            Response.Redirect($"Product.aspx?productId={productId}");
+            Response.Redirect($"Product.aspx?productId={product.Id}");
         }
     }
 }

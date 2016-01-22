@@ -120,13 +120,19 @@ namespace E_Handel
                     ID = $"increaseEditCartButton_{product.Id}"
                 };
                 increaseEditCartButton.Click += IncreaseEditCartButton_Click;
+                if (cartProduct.Quantity >= product.StockQuantity)
+                    increaseEditCartButton.Enabled = false;
 
                 Button decreaseEditCartButton = new Button()
                 {
                     Text = "-",
-                    ID = $"decreaseEditCartButton{product.Id}"
+                    ID = $"decreaseEditCartButton_{product.Id}"
                 };
                 decreaseEditCartButton.Click += DecreaseEditCartButton_Click;
+                if (cartProduct.Quantity <= 1)
+                    decreaseEditCartButton.Enabled = false;
+
+
 
                 quantityPanel.Controls.Add(decreaseEditCartButton);
                 quantityPanel.Controls.Add(quantityLabel);
@@ -149,11 +155,6 @@ namespace E_Handel
                 TableCell cellStock = new TableCell();
                 cellStock.Controls.Add(stockLabel);
 
-                Button editCartButton = new Button();
-                editCartButton.Text = "Edit quantity";
-                TableCell CellEditCartButton = new TableCell();
-                CellEditCartButton.Controls.Add(editCartButton);
-
                 Button removeProductButton = new Button()
                 {
                     Text = "Remove from cart",
@@ -168,9 +169,8 @@ namespace E_Handel
                 row.Controls.Add(cellName);
                 row.Controls.Add(cellPrice);
                 row.Controls.Add(cellQuantity);
-                row.Controls.Add(cellStock);
                 row.Controls.Add(celltotalPrice);
-                row.Controls.Add(CellEditCartButton);
+                row.Controls.Add(cellStock);
                 row.Controls.Add(CellRemoveProductButton);
 
                 checkout_product_table.Controls.Add(row);
@@ -179,27 +179,18 @@ namespace E_Handel
 
         private void DecreaseEditCartButton_Click(object sender, EventArgs e)
         {
-            Button buttonClickedDecrease = (Button)sender;
-            int productId = int.Parse(buttonClickedDecrease.ID.Split('_')[1]);
-            //BLCartProduct newProduct = new BLCartProduct(productId);
-
+            int productId = int.Parse(((Button)sender).ID.Split('_')[1]);
 
             foreach (BLCartProduct cartProduct in cartList)
             {
-                if (cartProduct.Quantity >= 1)
+                if (cartProduct.Id == productId)
                 {
                     int cartCount = (int)Session["cartCount"];
-                    cartCount -= cartProduct.Quantity;
+                    cartCount--;
                     Session["cartCount"] = cartCount;
                     cartProduct.Quantity--;
                     break;
                 }
-            }
-            if ((int)Session["cartCount"] == 0)
-            {
-                Session["cartList"] = null;
-                Session["cartCount"] = null;
-                Response.Redirect("Home.aspx");
             }
 
             Session["cartList"] = cartList;
@@ -208,25 +199,18 @@ namespace E_Handel
 
         private void IncreaseEditCartButton_Click(object sender, EventArgs e)
         {
-            Button buttonClickedIncrease = (Button)sender;
-            int productId = int.Parse(buttonClickedIncrease.ID.Split('_')[1]);
+            int productId = int.Parse(((Button)sender).ID.Split('_')[1]);
 
             foreach (BLCartProduct cartProduct in cartList)
             {
-                if (cartProduct.Quantity >= 1)
+                if (cartProduct.Id == productId)
                 {
                     int cartCount = (int)Session["cartCount"];
-                    cartCount += cartProduct.Quantity;
+                    cartCount++;
                     Session["cartCount"] = cartCount;
                     cartProduct.Quantity++;
                     break;
                 }
-            }
-            if ((int)Session["cartCount"] == 0)
-            {
-                Session["cartList"] = null;
-                Session["cartCount"] = null;
-                Response.Redirect("Home.aspx");
             }
             Session["cartList"] = cartList;
             Response.Redirect("Checkout.aspx");
