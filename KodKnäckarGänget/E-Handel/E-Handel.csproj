@@ -72,8 +72,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Home.aspx" />
-    <Content Include="Images\fullHeart.png" />
+    <Content Include="Images\media-pawn.png" />
     <Content Include="Images\removeProduct.png" />
+    <Content Include="Images\sale2016.png" />
+    <Content Include="Images\ShrekDisplay.jpg" />
     <Content Include="Images\updateCart.png" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -115,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\BLCartProduct.cs" />
+    <Compile Include="BL\BLDiscountProduct.cs" />
     <Compile Include="BL\BLProduct.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
