@@ -71,10 +71,12 @@ namespace E_Handel
 
         private void ShowAds()
         {
+            LinkAd1.NavigateUrl = "Product.aspx?productId=" + adProduct1.Id;
             ImageAd1.ImageUrl = "ImgHandler.ashx?productId=" + adProduct1.Id;
             OriginalPriceAd1.Text = "Original Price: " + "<strike>" + "£" + adProduct1.Price + "</strike>";
             DiscountPriceAd1.Text = "Discount Price:" + "£" + (adProduct1.Price - (adProduct1.Price * adProduct1.Discount / 100));
 
+            LinkAd2.NavigateUrl = "Product.aspx?productId=" + adProduct2.Id;
             ImageAd2.ImageUrl = "ImgHandler.ashx?productId=" + adProduct2.Id;
             OriginalPriceAd2.Text = "Original Price: " + "<strike>" + "£" + adProduct2.Price + "£" + "</strike>";
             DiscountPriceAd2.Text = "Discount Price:" + "£" + (adProduct2.Price - (adProduct2.Price * adProduct2.Discount / 100));

@@ -26,37 +26,39 @@ namespace E_Handel
             {
                 BLProduct product = new BLProduct(connectionString, cartProduct.Id);
 
+                HyperLink productLink = new HyperLink { NavigateUrl = $"Product.aspx?productId={product.Id}" };
                 Image productImage = new Image
                 {
                     ImageUrl = $"ImgHandler.ashx?productIdThumb={product.Id}",
                     AlternateText = product.Name,
                     CssClass = "productImage"
                 };
+                productLink.Controls.Add(productImage);
                 TableCell cellImage = new TableCell { CssClass = "td" };
-                cellImage.Controls.Add(productImage);
+                cellImage.Controls.Add(productLink);
 
                 Label nameLabel = new Label { Text = product.Name };
                 TableCell cellName = new TableCell { CssClass = "td" };
                 cellName.Controls.Add(nameLabel);
 
+                Label priceLabel = new Label { Text = "£" + (product.Price * (1 - product.Discount / 100)) };
+                TableCell cellPrice = new TableCell { CssClass = "td" };
+                cellPrice.Controls.Add(priceLabel);
+
                 Label quantityLabel = new Label { Text = cartProduct.Quantity.ToString(), ID = $"quantity{product.Id}", Enabled = false };
                 TableCell cellQuantity = new TableCell { CssClass = "td" };
                 cellQuantity.Controls.Add(quantityLabel);
 
-                Label priceLabel = new Label { Text = product.Price.ToString() };
-                TableCell cellPrice = new TableCell { CssClass = "td" };
-                cellPrice.Controls.Add(priceLabel);
-
-                double totalPriceSum = cartProduct.Quantity * product.Price;
-                Label totalPriceLabel = new Label { Text = totalPriceSum.ToString() };
+                double totalPriceSum = cartProduct.Quantity * product.Price * (1 - product.Discount / 100);
+                Label totalPriceLabel = new Label { Text = "£" + totalPriceSum };
                 TableCell celltotalPrice = new TableCell { CssClass = "td" };
                 celltotalPrice.Controls.Add(totalPriceLabel);
 
                 TableRow row = new TableRow();
                 row.Controls.Add(cellImage);
                 row.Controls.Add(cellName);
-                row.Controls.Add(cellQuantity);
                 row.Controls.Add(cellPrice);
+                row.Controls.Add(cellQuantity);
                 row.Controls.Add(celltotalPrice);
 
                 CartListTable.Controls.Add(row);

@@ -41,9 +41,9 @@
                     <asp:TableHeaderRow runat="server">
                         <asp:TableHeaderCell></asp:TableHeaderCell>
                         <asp:TableHeaderCell>Title</asp:TableHeaderCell>
+                        <asp:TableHeaderCell>Price</asp:TableHeaderCell>
                         <asp:TableHeaderCell>Quantity</asp:TableHeaderCell>
-                        <asp:TableHeaderCell>Price per item</asp:TableHeaderCell>
-                        <asp:TableHeaderCell>Total amount</asp:TableHeaderCell>
+                        <asp:TableHeaderCell>Total</asp:TableHeaderCell>
                     </asp:TableHeaderRow>
                 </asp:Table>
                 <asp:Button runat="server" ID="CheckoutButton" Text="Proceed To Checkout" PostBackUrl="Checkout.aspx" />

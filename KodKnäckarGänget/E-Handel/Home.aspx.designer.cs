@@ -22,6 +22,15 @@ namespace E_Handel {
         protected global::System.Web.UI.WebControls.Panel PanelAd1;
         
         /// <summary>
+        /// LinkAd1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink LinkAd1;
+        
+        /// <summary>
         /// ImageAd1 control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace E_Handel {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelAd2;
+        
+        /// <summary>
+        /// LinkAd2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink LinkAd2;
         
         /// <summary>
         /// ImageAd2 control.
