@@ -10,6 +10,15 @@
     display: block;
 }
 
+.result_product_original_price {
+    display: block;
+    text-decoration: line-through;
+}
+
+.result_product_discount_price {
+    display: block;
+}
+
 .result_product_infobutton {
     display: block;
 }

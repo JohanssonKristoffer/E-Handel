@@ -39,7 +39,15 @@ namespace E_Handel
             BLProduct product = new BLProduct(connectionString, productId);
             productImage.Src = $"ImgHandler.ashx?productId={productId}";
             productTitle.InnerText = product.Name;
-            productPrice.InnerText = "£" + product.Price;
+            if (product.Discount > 0)
+            {
+                originalProductPrice.InnerText = "£" + product.Price;
+                originalProductPrice.Visible = true;
+                double newPrice = product.Price - product.Price * product.Discount / 100;
+                productPrice.InnerText = "£" + newPrice;
+            }
+            else
+                productPrice.InnerText = "£" + product.Price;
             productDescription.InnerText = product.Description;
         }
 
