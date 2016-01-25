@@ -17,7 +17,7 @@ namespace E_Handel
     {
         private readonly string connectionString = ConfigurationManager.ConnectionStrings["KKG-EHandelConnectionString"].ConnectionString;
         private List<BLCartProduct> cartList;
-        private double totalCartPrice = 0;
+        private double totalCartPrice;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,10 +40,7 @@ namespace E_Handel
                 cartList = (List<BLCartProduct>)Session["cartList"];
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         private void GenerateDummyData()
@@ -70,7 +67,6 @@ namespace E_Handel
                 case "2":
                     shippingCost = 2;
                     return "Standard Mail";
-
                 default:
                     shippingCost = 8;
                     return "DHL";
@@ -92,7 +88,6 @@ namespace E_Handel
 
         private void CreateTableCellsFromCartList()
         {
-
             foreach (var cartProduct in cartList)
             {
                 BLProduct product = new BLProduct(connectionString, cartProduct.Id);
@@ -255,9 +250,12 @@ namespace E_Handel
 
         protected void SubmitOrder_Click(object sender, EventArgs e)
         {
-            InsertCustomerInformation();
-            InsertOrderProducts();
-            Response.Redirect("ReceiptPage.aspx");
+            if (Page.IsValid && cartList != null)
+            {
+                InsertCustomerInformation();
+                InsertOrderProducts();
+                Response.Redirect("ReceiptPage.aspx");
+            }
         }
 
         private void InsertCustomerInformation()
@@ -304,7 +302,6 @@ namespace E_Handel
                     }
                     insertProductInOrderProducts.Dispose();
                 }
-
             }
             catch (Exception ex)
             {
@@ -315,7 +312,6 @@ namespace E_Handel
                 con.Close();
                 con.Dispose();
             }
-
         }
-    }
+        }
 }

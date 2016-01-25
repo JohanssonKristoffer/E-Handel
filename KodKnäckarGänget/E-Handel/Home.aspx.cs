@@ -33,7 +33,7 @@ namespace E_Handel
             List<int> discountIdList = new List<int>();
 
             SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlGetDiscountedProducts = new SqlCommand($"SELECT ProductID FROM DiscountedProducts", sqlConnection);
+            SqlCommand sqlGetDiscountedProducts = new SqlCommand("SELECT ProductID FROM DiscountedProducts", sqlConnection);
             SqlDataReader sqlReader = null;
             try
             {
