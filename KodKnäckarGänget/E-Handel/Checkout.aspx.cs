@@ -252,66 +252,13 @@ namespace E_Handel
         {
             if (Page.IsValid && cartList != null)
             {
-                InsertCustomerInformation();
-                InsertOrderProducts();
+                double shippingCost;
+                string shippingMethod = ShippingDrowdown(out shippingCost);
+                BLOrder order = new BLOrder(postage: shippingCost, totalPrice: totalCartPrice, address: customer_address.Text, postalCode: customer_postalcode.Text, city: customer_city.Text, country: customer_country.Text, email: customer_email.Text, telephone: customer_phone.Text, paymentOptions: PaymentDropdown(), deliveryOptions: shippingMethod, name: customer_name.Text, surname: customer_surname.Text, cartProducts: cartList);
+                order.InsertIntoDB(connectionString);
+                Session["orderId"] = order.Id;
                 Response.Redirect("ReceiptPage.aspx");
             }
         }
-
-        private void InsertCustomerInformation()
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand($"INSERT INTO Orders (Postage,TotalPrice,Address,PostalCode,City,Country,Email,Telephone,PaymentOptions,DeliveryOptions,Name,Surname)OUTPUT INSERTED.ID VALUES (@postage, @totalPrice, @address, @postalCode, @city, @country, @email,@telephone, @paymentoptions, @deliveryoptions, @name, @surname)", connection);
-                connection.Open();
-
-                double shippingCost;
-                string shippingMethod = ShippingDrowdown(out shippingCost);
-
-                cmd.Parameters.Add("@postage", SqlDbType.Float).Value = shippingCost;
-                cmd.Parameters.Add("@totalPrice", SqlDbType.Float).Value = totalCartPrice;
-                cmd.Parameters.Add("@address", SqlDbType.NVarChar, 255).Value = customer_address.Text;
-                cmd.Parameters.Add("@postalCode", SqlDbType.NVarChar, 50).Value = customer_postalcode.Text;
-                cmd.Parameters.Add("@city", SqlDbType.NVarChar, 50).Value = customer_city.Text;
-                cmd.Parameters.Add("@country", SqlDbType.NVarChar, 50).Value = customer_country.Text;
-                cmd.Parameters.Add("@email", SqlDbType.NVarChar, 50).Value = customer_email.Text;
-                cmd.Parameters.Add("@telephone", SqlDbType.NVarChar, 50).Value = customer_phone.Text;
-                cmd.Parameters.Add("@paymentoptions", SqlDbType.NVarChar, 50).Value = PaymentDropdown();
-                cmd.Parameters.Add("@deliveryoptions", SqlDbType.NVarChar, 50).Value = shippingMethod;
-                cmd.Parameters.Add("@name", SqlDbType.NVarChar, 50).Value = customer_name.Text;
-                cmd.Parameters.Add("@surname", SqlDbType.NVarChar, 50).Value = customer_surname.Text;
-
-                Session["orderId"] = (int)cmd.ExecuteScalar();
-            }
-        }
-
-        private void InsertOrderProducts()
-        {
-            SqlConnection con = new SqlConnection(connectionString);
-
-            int orderId = (int)Session["orderId"];
-            try
-            {
-                con.Open();
-                foreach (BLCartProduct product in cartList)
-                {
-                    SqlCommand insertProductInOrderProducts = new SqlCommand($"INSERT INTO OrderProducts (OrderID,ProductID,Quantity) VALUES ('{orderId}','{product.Id}', '{product.Quantity}')", con);
-                    if (insertProductInOrderProducts.ExecuteNonQuery() < 1)
-                    {
-                        //error
-                    }
-                    insertProductInOrderProducts.Dispose();
-                }
-            }
-            catch (Exception ex)
-            {
-                //error
-            }
-            finally
-            {
-                con.Close();
-                con.Dispose();
-            }
-        }
-        }
+    }
 }

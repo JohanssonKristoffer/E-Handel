@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\BLCartProduct.cs" />
+    <Compile Include="BL\BLOrder.cs" />
     <Compile Include="BL\BLProduct.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

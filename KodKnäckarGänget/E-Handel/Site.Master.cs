@@ -82,8 +82,7 @@ namespace E_Handel
                 cartList = (List<BLCartProduct>)Session["cartList"];
                 return true;
             }
-            else
-                return false;
+            return false;
         }
 
         private void HideCartOnCheckout()
