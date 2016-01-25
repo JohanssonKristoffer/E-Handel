@@ -23,8 +23,9 @@ namespace E_Handel.BL
         public string Name { get; set; }
         public string Surname { get; set; }
         public List<BLCartProduct> CartProducts { get; set; }
+        public int AccountId { get; set; }
 
-        public BLOrder(double postage, double totalPrice, string address, string postalCode, string city, string country, string email, string telephone, string paymentOptions, string deliveryOptions, string name, string surname, List<BLCartProduct> cartProducts)
+        public BLOrder(double postage, double totalPrice, string address, string postalCode, string city, string country, string email, string telephone, string paymentOptions, string deliveryOptions, string name, string surname, List<BLCartProduct> cartProducts, int accountId = -1)
         {
             Id = -1; //Not assigned until inserted into the database
             Postage = postage;
@@ -40,17 +41,71 @@ namespace E_Handel.BL
             Name = name;
             Surname = surname;
             CartProducts = cartProducts;
+            AccountId = accountId;
+        }
+        public BLOrder(string databaseConnectionString, int id)
+        {
+            SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
+            SqlCommand sqlGetOrder = new SqlCommand($"SELECT AccountID, TotalPrice, Postage, Address, PostalCode, City, Country, Email, Telephone, PaymentOptions, DeliveryOptions, Name, Surname FROM Orders WHERE ID = {id}", sqlConnection);
+            SqlDataReader sqlReader = null;
+            try
+            {
+                sqlConnection.Open();
+                sqlReader = sqlGetOrder.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                    AccountId = -1;
+                    if (sqlReader["AccountID"] != null)
+                        AccountId = int.Parse(sqlReader["AccountID"].ToString());
+                    Id = id;
+                    Postage = double.Parse(sqlReader["Postage"].ToString());
+                    TotalPrice = double.Parse(sqlReader["TotalPrice"].ToString());
+                    Address = sqlReader["Address"].ToString();
+                    PostalCode = sqlReader["PostalCode"].ToString();
+                    City = sqlReader["City"].ToString(); ;
+                    Country = sqlReader["Country"].ToString(); ;
+                    Email = sqlReader["Email"].ToString(); ;
+                    Telephone = sqlReader["Telephone"].ToString(); ;
+                    PaymentOptions = sqlReader["PaymentOptions"].ToString(); ;
+                    DeliveryOptions = sqlReader["DeliveryOptions"].ToString(); ;
+                    Name = sqlReader["Name"].ToString(); ;
+                    Surname = sqlReader["Surname"].ToString(); ;
+                }
+            }
+            finally
+            {
+                if (sqlReader != null)
+                {
+                    sqlReader.Close();
+                    sqlReader.Dispose();
+                }
+                sqlConnection.Close();
+                sqlConnection.Dispose();
+                sqlGetOrder.Dispose();
+            }
         }
 
         public void InsertIntoDB(string databaseConnectionString)
         {
             SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
-            SqlCommand sqlInsertOrder = new SqlCommand("INSERT INTO Orders (Postage,TotalPrice,Address,PostalCode,City,Country,Email,Telephone,PaymentOptions,DeliveryOptions,Name,Surname)OUTPUT INSERTED.ID VALUES (@postage, @totalPrice, @address, @postalCode, @city, @country, @email,@telephone, @paymentoptions, @deliveryoptions, @name, @surname)", sqlConnection);
+            SqlCommand sqlInsertOrder = null;
             SqlCommand sqlInsertOrderProduct = null;
+            if (AccountId < 0)
+                sqlInsertOrder =
+                    new SqlCommand(
+                        "INSERT INTO Orders (Postage,TotalPrice,Address,PostalCode,City,Country,Email,Telephone,PaymentOptions,DeliveryOptions,Name,Surname)OUTPUT INSERTED.ID VALUES (@postage, @totalPrice, @address, @postalCode, @city, @country, @email,@telephone, @paymentoptions, @deliveryoptions, @name, @surname)",
+                        sqlConnection);
+            else
+                sqlInsertOrder =
+                    new SqlCommand(
+                        "INSERT INTO Orders (AccountID,Postage,TotalPrice,Address,PostalCode,City,Country,Email,Telephone,PaymentOptions,DeliveryOptions,Name,Surname)OUTPUT INSERTED.ID VALUES (@accountID,@postage, @totalPrice, @address, @postalCode, @city, @country, @email,@telephone, @paymentoptions, @deliveryoptions, @name, @surname)",
+                        sqlConnection);
             try
             {
                 sqlConnection.Open();
 
+                if (AccountId >= 0)
+                    sqlInsertOrder.Parameters.Add("@accountID", SqlDbType.Int).Value = AccountId;
                 sqlInsertOrder.Parameters.Add("@postage", SqlDbType.Float).Value = Postage;
                 sqlInsertOrder.Parameters.Add("@totalPrice", SqlDbType.Float).Value = TotalPrice;
                 sqlInsertOrder.Parameters.Add("@address", SqlDbType.NVarChar, 255).Value = Address;
@@ -82,5 +137,7 @@ namespace E_Handel.BL
                     sqlInsertOrderProduct.Dispose();
             }
         }
+
+        public override string ToString() => $"Id = {Id}, Postage = {Postage}, TotalPrice = {TotalPrice}, Address = {Address}, PostalCode = {PostalCode}, City = {City}, Country = {Country}, Email = {Email}, Telephone = {Telephone}, PaymentOptions = {PaymentOptions}, DeliveryOptions = {DeliveryOptions}, Name = {Name}, Surname = {Surname}";
     }
 }
