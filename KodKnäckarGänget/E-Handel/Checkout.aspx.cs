@@ -17,7 +17,7 @@ namespace E_Handel
     {
         private readonly string connectionString = ConfigurationManager.ConnectionStrings["KKG-EHandelConnectionString"].ConnectionString;
         private List<BLCartProduct> cartList;
-        private double totalPrice = 0;
+        private double totalCartPrice;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,10 +40,7 @@ namespace E_Handel
                 cartList = (List<BLCartProduct>)Session["cartList"];
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         private void GenerateDummyData()
@@ -70,7 +67,6 @@ namespace E_Handel
                 case "2":
                     shippingCost = 2;
                     return "Standard Mail";
-
                 default:
                     shippingCost = 8;
                     return "DHL";
@@ -96,63 +92,67 @@ namespace E_Handel
             {
                 BLProduct product = new BLProduct(connectionString, cartProduct.Id);
 
-                Image productImage = new Image();
-                productImage.ImageUrl = $"ImgHandler.ashx?productIdThumb={product.Id}";
-                productImage.AlternateText = product.Name;
-                productImage.CssClass = "productImage";
+                HyperLink linkProduct = new HyperLink { NavigateUrl = $"Product.aspx?productId={product.Id}" };
+                Image productImage = new Image
+                {
+                    ImageUrl = $"ImgHandler.ashx?productIdThumb={product.Id}",
+                    AlternateText = product.Name,
+                    CssClass = "productImage"
+                };
+                linkProduct.Controls.Add(productImage);
                 TableCell cellImage = new TableCell();
-                cellImage.Controls.Add(productImage);
+                cellImage.Controls.Add(linkProduct);
 
-                Label nameLabel = new Label();
-                nameLabel.Text = product.Name;
+                Label nameLabel = new Label { Text = product.Name };
                 TableCell cellName = new TableCell();
                 cellName.Controls.Add(nameLabel);
 
-                Panel quantityPanel = new Panel();
-                Label quantityLabel = new Label() { Enabled = false };
-                quantityLabel.Text = cartProduct.Quantity.ToString();
-                TableCell cellQuantity = new TableCell();
-                cellQuantity.CssClass = "QuantityTextbox td";
+                Label priceLabel = new Label { Text = "£" + (product.Price * (1 - product.Discount / 100)) };
+                TableCell cellPrice = new TableCell();
+                cellPrice.Controls.Add(priceLabel);
 
+                Panel quantityPanel = new Panel();
+                Label quantityLabel = new Label
+                {
+                    Enabled = false,
+                    Text = cartProduct.Quantity.ToString()
+                };
                 Button increaseEditCartButton = new Button()
                 {
                     Text = "+",
                     ID = $"increaseEditCartButton_{product.Id}"
                 };
                 increaseEditCartButton.Click += IncreaseEditCartButton_Click;
-
+                if (cartProduct.Quantity >= product.StockQuantity)
+                    increaseEditCartButton.Enabled = false;
                 Button decreaseEditCartButton = new Button()
                 {
                     Text = "-",
-                    ID = $"decreaseEditCartButton{product.Id}"
+                    ID = $"decreaseEditCartButton_{product.Id}"
                 };
                 decreaseEditCartButton.Click += DecreaseEditCartButton_Click;
+                if (cartProduct.Quantity <= 1)
+                    decreaseEditCartButton.Enabled = false;
 
+                TableCell cellQuantity = new TableCell { CssClass = "QuantityTextbox td" };
                 quantityPanel.Controls.Add(decreaseEditCartButton);
                 quantityPanel.Controls.Add(quantityLabel);
                 quantityPanel.Controls.Add(increaseEditCartButton);
                 cellQuantity.Controls.Add(quantityPanel);
 
-                Label priceLabel = new Label();
-                priceLabel.Text = product.Price.ToString();
-                TableCell cellPrice = new TableCell();
-                cellPrice.Controls.Add(priceLabel);
-
-                Label totalPriceLabel = new Label();
-                double totalPriceSum = cartProduct.Quantity * product.Price;
-                totalPriceLabel.Text = totalPriceSum.ToString();
-                TableCell celltotalPrice = new TableCell();
-                celltotalPrice.Controls.Add(totalPriceLabel);
-
-                Label stockLabel = new Label();
-                stockLabel.Text = product.StockQuantity.ToString();
+                Label stockLabel = new Label { Text = product.StockQuantity.ToString() };
                 TableCell cellStock = new TableCell();
                 cellStock.Controls.Add(stockLabel);
 
-                Button editCartButton = new Button();
-                editCartButton.Text = "Edit quantity";
-                TableCell CellEditCartButton = new TableCell();
-                CellEditCartButton.Controls.Add(editCartButton);
+                Label vatLabel = new Label { Text = product.VAT + "%" };
+                TableCell cellVAT = new TableCell();
+                cellVAT.Controls.Add(vatLabel);
+
+                double totalPriceSum = cartProduct.Quantity * product.Price * (1 - product.Discount / 100);
+                totalCartPrice += totalPriceSum;
+                Label totalPriceLabel = new Label { Text = "£" + totalPriceSum };
+                TableCell celltotalPrice = new TableCell();
+                celltotalPrice.Controls.Add(totalPriceLabel);
 
                 Button removeProductButton = new Button()
                 {
@@ -160,8 +160,8 @@ namespace E_Handel
                     ID = $"removeButton_{product.Id}"
                 };
                 removeProductButton.Click += RemoveButton_Click;
-                TableCell CellRemoveProductButton = new TableCell();
-                CellRemoveProductButton.Controls.Add(removeProductButton);
+                TableCell cellRemoveProductButton = new TableCell();
+                cellRemoveProductButton.Controls.Add(removeProductButton);
 
                 TableRow row = new TableRow();
                 row.Controls.Add(cellImage);
@@ -169,37 +169,34 @@ namespace E_Handel
                 row.Controls.Add(cellPrice);
                 row.Controls.Add(cellQuantity);
                 row.Controls.Add(cellStock);
+                row.Controls.Add(cellVAT);
                 row.Controls.Add(celltotalPrice);
-                row.Controls.Add(CellEditCartButton);
-                row.Controls.Add(CellRemoveProductButton);
+                row.Controls.Add(cellRemoveProductButton);
 
                 checkout_product_table.Controls.Add(row);
             }
+
+            double shippingCost;
+            ShippingDrowdown(out shippingCost);
+            tableShippingPrice.InnerText = "£" + shippingCost;
+            totalCartPrice += shippingCost;
+            tableTotalPrice.InnerText = "£" + totalCartPrice;
         }
 
         private void DecreaseEditCartButton_Click(object sender, EventArgs e)
         {
-            Button buttonClickedDecrease = (Button)sender;
-            int productId = int.Parse(buttonClickedDecrease.ID.Split('_')[1]);
-            //BLCartProduct newProduct = new BLCartProduct(productId);
-
+            int productId = int.Parse(((Button)sender).ID.Split('_')[1]);
 
             foreach (BLCartProduct cartProduct in cartList)
             {
-                if (cartProduct.Quantity >= 1)
+                if (cartProduct.Id == productId)
                 {
                     int cartCount = (int)Session["cartCount"];
-                    cartCount -= cartProduct.Quantity;
+                    cartCount--;
                     Session["cartCount"] = cartCount;
                     cartProduct.Quantity--;
                     break;
                 }
-            }
-            if ((int)Session["cartCount"] == 0)
-            {
-                Session["cartList"] = null;
-                Session["cartCount"] = null;
-                Response.Redirect("Home.aspx");
             }
 
             Session["cartList"] = cartList;
@@ -208,25 +205,18 @@ namespace E_Handel
 
         private void IncreaseEditCartButton_Click(object sender, EventArgs e)
         {
-            Button buttonClickedIncrease = (Button)sender;
-            int productId = int.Parse(buttonClickedIncrease.ID.Split('_')[1]);
+            int productId = int.Parse(((Button)sender).ID.Split('_')[1]);
 
             foreach (BLCartProduct cartProduct in cartList)
             {
-                if (cartProduct.Quantity >= 1)
+                if (cartProduct.Id == productId)
                 {
                     int cartCount = (int)Session["cartCount"];
-                    cartCount += cartProduct.Quantity;
+                    cartCount++;
                     Session["cartCount"] = cartCount;
                     cartProduct.Quantity++;
                     break;
                 }
-            }
-            if ((int)Session["cartCount"] == 0)
-            {
-                Session["cartList"] = null;
-                Session["cartCount"] = null;
-                Response.Redirect("Home.aspx");
             }
             Session["cartList"] = cartList;
             Response.Redirect("Checkout.aspx");
@@ -260,9 +250,12 @@ namespace E_Handel
 
         protected void SubmitOrder_Click(object sender, EventArgs e)
         {
-            InsertCustomerInformation();
-            InsertOrderProducts();
-            Response.Redirect("ReceiptPage.aspx");
+            if (Page.IsValid && cartList != null)
+            {
+                InsertCustomerInformation();
+                InsertOrderProducts();
+                Response.Redirect("ReceiptPage.aspx");
+            }
         }
 
         private void InsertCustomerInformation()
@@ -276,7 +269,7 @@ namespace E_Handel
                 string shippingMethod = ShippingDrowdown(out shippingCost);
 
                 cmd.Parameters.Add("@postage", SqlDbType.Float).Value = shippingCost;
-                cmd.Parameters.Add("@totalPrice", SqlDbType.Float).Value = totalPrice;
+                cmd.Parameters.Add("@totalPrice", SqlDbType.Float).Value = totalCartPrice;
                 cmd.Parameters.Add("@address", SqlDbType.NVarChar, 255).Value = customer_address.Text;
                 cmd.Parameters.Add("@postalCode", SqlDbType.NVarChar, 50).Value = customer_postalcode.Text;
                 cmd.Parameters.Add("@city", SqlDbType.NVarChar, 50).Value = customer_city.Text;
@@ -309,7 +302,6 @@ namespace E_Handel
                     }
                     insertProductInOrderProducts.Dispose();
                 }
-
             }
             catch (Exception ex)
             {
@@ -320,7 +312,6 @@ namespace E_Handel
                 con.Close();
                 con.Dispose();
             }
-
         }
-    }
+        }
 }

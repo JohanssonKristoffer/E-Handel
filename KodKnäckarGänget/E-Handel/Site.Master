@@ -6,15 +6,54 @@
 <head runat="server">
     <title></title>
     <script src="Scripts/bootstrap.js"></script>
-    <%--<link href="Content/bootstrap.css" rel="stylesheet" />--%>
+    <script src="Scripts/jquery-1.9.1.js"></script>
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" rel="stylesheet" />
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet" />
     <link href="Style/Master.css" rel="stylesheet" />
+
+    <script type='text/javascript'>
+        $(function () {
+            $("#textlink").click(function (evt) {
+                evt.preventDefault();
+                if ($('#CartPanel').is(":hidden")) {
+                    $("#CartPanel").slideDown("fast");
+                } else {
+                    $("#CartPanel").slideUp("fast");
+                }
+            });
+        });
+    </script>
+
+    <style type="text/css">
+        .testpanel {
+            display: none;
+            text-align: right;
+            float: right;
+            width: 300px;
+            height: 200px;
+            padding: 15px;
+            overflow-y: scroll;
+            border: 1px solid #cccccc;
+        }
+
+        .cartPanel {
+            display: none;
+            text-align: right;
+            float: right;
+            width: 300px;
+            height: 200px;
+            padding: 15px;
+            overflow-y: scroll;
+            border: 1px solid #cccccc;
+        }
+    </style>
+
     <asp:ContentPlaceHolder ID="PlaceholderHead" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form" runat="server">
+
         <header class="container-fluid">
             <asp:SqlDataSource ID="DataSourceCategories" runat="server" ConnectionString="<%$ ConnectionStrings:KKG-EHandelConnectionString %>" SelectCommand="SELECT [ID], [Name] FROM [Categories] ORDER BY [Name]"></asp:SqlDataSource>
             <div class="row" id="SearchArea">
@@ -31,19 +70,20 @@
                         </asp:DropDownList>
                     </li>
                     <li id="CartLi" runat="server">
-                        <asp:Button runat="server" ID="ShowCartButton" Text="Cart" OnClick="ShowCart_Click" />
-                        <asp:Label runat="server" ID="CartCountLabel"></asp:Label></li>
+                        <asp:HyperLink ID="textlink" runat="server" NavigateUrl="#">Button Toggle</asp:HyperLink>
+                        <asp:Label runat="server" ID="CartCountLabel"></asp:Label>
+                    </li>
                 </ul>
             </nav>
-            <asp:Panel ID="CartPanel" runat="server" CssClass="cartPanel" Visible="False">
+            <asp:Panel ID="CartPanel" runat="server" CssClass="cartPanel">
                 <hr />
                 <asp:Table runat="server" ID="CartListTable">
                     <asp:TableHeaderRow runat="server">
                         <asp:TableHeaderCell></asp:TableHeaderCell>
                         <asp:TableHeaderCell>Title</asp:TableHeaderCell>
+                        <asp:TableHeaderCell>Price</asp:TableHeaderCell>
                         <asp:TableHeaderCell>Quantity</asp:TableHeaderCell>
-                        <asp:TableHeaderCell>Price per item</asp:TableHeaderCell>
-                        <asp:TableHeaderCell>Total amount</asp:TableHeaderCell>
+                        <asp:TableHeaderCell>Total</asp:TableHeaderCell>
                     </asp:TableHeaderRow>
                 </asp:Table>
                 <asp:Button runat="server" ID="CheckoutButton" Text="Proceed To Checkout" PostBackUrl="Checkout.aspx" />
