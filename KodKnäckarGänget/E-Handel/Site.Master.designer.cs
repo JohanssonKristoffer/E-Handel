@@ -82,7 +82,7 @@ namespace E_Handel {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink textlink;
+        protected global::System.Web.UI.WebControls.Button textlink;
         
         /// <summary>
         /// CartCountLabel control.
@@ -103,6 +103,15 @@ namespace E_Handel {
         protected global::System.Web.UI.WebControls.Panel CartPanel;
         
         /// <summary>
+        /// CartDropDownTableText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CartDropDownTableText;
+        
+        /// <summary>
         /// CartListTable control.
         /// </summary>
         /// <remarks>
@@ -110,6 +119,15 @@ namespace E_Handel {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table CartListTable;
+        
+        /// <summary>
+        /// CartDropDownTableHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderRow CartDropDownTableHeader;
         
         /// <summary>
         /// CheckoutButton control.

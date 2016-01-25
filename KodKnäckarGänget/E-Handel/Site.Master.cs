@@ -21,7 +21,12 @@ namespace E_Handel
             if (TryRetrieveCartList())
             {
                 GenerateCartContent();
-                CartPanel.Visible = true;
+                CartDropDownTableText.Visible = false;
+            }
+            else
+            {
+                CartDropDownTableHeader.Visible = false;
+                CheckoutButton.Visible = false;
             }
         }
 

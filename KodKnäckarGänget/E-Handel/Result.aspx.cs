@@ -57,8 +57,7 @@ namespace E_Handel
         private void LoadDiscountResult()
         {
             SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlGetDiscounts =
-                new SqlCommand("SELECT ProductID FROM DiscountedProducts", sqlConnection);
+            SqlCommand sqlGetDiscounts = new SqlCommand("SELECT ProductID FROM DiscountedProducts", sqlConnection);
             SqlDataReader sqlDiscountDataReader = null;
             try
             {
@@ -87,11 +86,12 @@ namespace E_Handel
         }
         private void DisplayDiscountResults()
         {
-            ResultTitle.InnerHtml = "Sales:";
+            ResultTitle.InnerText = "Sales:";
+            ResultDescription.InnerText = " Dont miss out of this great sale of among our great products with up to 30 % discount. This sale only applies to the products in our current stock. Dont miss out!! First come, first served!";
             DisplayProducts();
         }
 
-        private bool ValidateSearchString() //TBI
+        private bool ValidateSearchString()
         {
             if (searchString.Contains(";"))
                 return false;
