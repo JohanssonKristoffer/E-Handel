@@ -57,8 +57,9 @@ namespace E_Handel.BL
                 while (sqlReader.Read())
                 {
                     AccountId = -1;
-                    if (sqlReader["AccountID"] != null)
-                        AccountId = int.Parse(sqlReader["AccountID"].ToString());
+                    int accountId;
+                    if (int.TryParse(sqlReader["AccountID"].ToString(), out accountId))
+                        AccountId = accountId;
                     Id = id;
                     Postage = double.Parse(sqlReader["Postage"].ToString());
                     TotalPrice = double.Parse(sqlReader["TotalPrice"].ToString());
