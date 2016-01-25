@@ -44,7 +44,7 @@ namespace E_Handel
             {
                 originalProductPrice.InnerText = "£" + product.Price;
                 originalProductPrice.Visible = true;
-                double newPrice = product.Price - product.Price * product.Discount / 100;
+                double newPrice = product.Price * (1 - product.Discount / 100);
                 productPrice.InnerText = "£" + newPrice;
             }
             else
