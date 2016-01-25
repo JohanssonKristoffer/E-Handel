@@ -22,13 +22,10 @@ namespace E_Handel
         protected void Page_Load(object sender, EventArgs e)
         {
             if (TryLoadCartList())
-            {
-                //GenerateDummyData();
                 CreateTableCellsFromCartList();
-            }
             else
             {
-                // error
+                //Error attempting to retrieve empty cartlist
                 Response.Redirect("Home.aspx");
             }
         }
@@ -41,20 +38,6 @@ namespace E_Handel
                 return true;
             }
             return false;
-        }
-
-        private void GenerateDummyData()
-        {
-            List<BLCartProduct> cartList = new List<BLCartProduct>();
-            BLCartProduct cartProductOne = new BLCartProduct(10, 5);
-            BLCartProduct cartProductTwo = new BLCartProduct(11, 2);
-            BLCartProduct cartProductThree = new BLCartProduct(41, 5);
-
-            cartList.Add(cartProductOne);
-            cartList.Add(cartProductTwo);
-            cartList.Add(cartProductThree);
-
-            Session["cartList"] = cartList;
         }
 
         private string ShippingDrowdown(out double shippingCost)
@@ -88,99 +71,105 @@ namespace E_Handel
 
         private void CreateTableCellsFromCartList()
         {
-            foreach (var cartProduct in cartList)
+            try
             {
-                BLProduct product = new BLProduct(connectionString, cartProduct.Id);
-
-                HyperLink linkProduct = new HyperLink { NavigateUrl = $"Product.aspx?productId={product.Id}" };
-                Image productImage = new Image
+                foreach (var cartProduct in cartList)
                 {
-                    ImageUrl = $"ImgHandler.ashx?productIdThumb={product.Id}",
-                    AlternateText = product.Name,
-                    CssClass = "productImage"
-                };
-                linkProduct.Controls.Add(productImage);
-                TableCell cellImage = new TableCell();
-                cellImage.Controls.Add(linkProduct);
+                    BLProduct product = new BLProduct(connectionString, cartProduct.Id);
 
-                Label nameLabel = new Label { Text = product.Name };
-                TableCell cellName = new TableCell();
-                cellName.Controls.Add(nameLabel);
+                    HyperLink linkProduct = new HyperLink {NavigateUrl = $"Product.aspx?productId={product.Id}"};
+                    Image productImage = new Image
+                    {
+                        ImageUrl = $"ImgHandler.ashx?productIdThumb={product.Id}",
+                        AlternateText = product.Name,
+                        CssClass = "productImage"
+                    };
+                    linkProduct.Controls.Add(productImage);
+                    TableCell cellImage = new TableCell();
+                    cellImage.Controls.Add(linkProduct);
 
-                Label priceLabel = new Label { Text = "£" + (product.Price * (1 - product.Discount / 100)) };
-                TableCell cellPrice = new TableCell();
-                cellPrice.Controls.Add(priceLabel);
+                    Label nameLabel = new Label {Text = product.Name};
+                    TableCell cellName = new TableCell();
+                    cellName.Controls.Add(nameLabel);
 
-                Panel quantityPanel = new Panel();
-                Label quantityLabel = new Label
-                {
-                    Enabled = false,
-                    Text = cartProduct.Quantity.ToString()
-                };
-                Button increaseEditCartButton = new Button()
-                {
-                    Text = "+",
-                    ID = $"increaseEditCartButton_{product.Id}"
-                };
-                increaseEditCartButton.Click += IncreaseEditCartButton_Click;
-                if (cartProduct.Quantity >= product.StockQuantity)
-                    increaseEditCartButton.Enabled = false;
-                Button decreaseEditCartButton = new Button()
-                {
-                    Text = "-",
-                    ID = $"decreaseEditCartButton_{product.Id}"
-                };
-                decreaseEditCartButton.Click += DecreaseEditCartButton_Click;
-                if (cartProduct.Quantity <= 1)
-                    decreaseEditCartButton.Enabled = false;
+                    Label priceLabel = new Label {Text = "£" + (product.Price*(1 - product.Discount/100))};
+                    TableCell cellPrice = new TableCell();
+                    cellPrice.Controls.Add(priceLabel);
 
-                TableCell cellQuantity = new TableCell { CssClass = "QuantityTextbox td" };
-                quantityPanel.Controls.Add(decreaseEditCartButton);
-                quantityPanel.Controls.Add(quantityLabel);
-                quantityPanel.Controls.Add(increaseEditCartButton);
-                cellQuantity.Controls.Add(quantityPanel);
+                    Panel quantityPanel = new Panel();
+                    Label quantityLabel = new Label
+                    {
+                        Enabled = false,
+                        Text = cartProduct.Quantity.ToString()
+                    };
+                    Button increaseEditCartButton = new Button()
+                    {
+                        Text = "+",
+                        ID = $"increaseEditCartButton_{product.Id}"
+                    };
+                    increaseEditCartButton.Click += IncreaseEditCartButton_Click;
+                    if (cartProduct.Quantity >= product.StockQuantity)
+                        increaseEditCartButton.Enabled = false;
+                    Button decreaseEditCartButton = new Button()
+                    {
+                        Text = "-",
+                        ID = $"decreaseEditCartButton_{product.Id}"
+                    };
+                    decreaseEditCartButton.Click += DecreaseEditCartButton_Click;
+                    if (cartProduct.Quantity <= 1)
+                        decreaseEditCartButton.Enabled = false;
 
-                Label stockLabel = new Label { Text = product.StockQuantity.ToString() };
-                TableCell cellStock = new TableCell();
-                cellStock.Controls.Add(stockLabel);
+                    TableCell cellQuantity = new TableCell {CssClass = "QuantityTextbox td"};
+                    quantityPanel.Controls.Add(decreaseEditCartButton);
+                    quantityPanel.Controls.Add(quantityLabel);
+                    quantityPanel.Controls.Add(increaseEditCartButton);
+                    cellQuantity.Controls.Add(quantityPanel);
 
-                Label vatLabel = new Label { Text = product.VAT + "%" };
-                TableCell cellVAT = new TableCell();
-                cellVAT.Controls.Add(vatLabel);
+                    Label stockLabel = new Label {Text = product.StockQuantity.ToString()};
+                    TableCell cellStock = new TableCell();
+                    cellStock.Controls.Add(stockLabel);
 
-                double totalPriceSum = cartProduct.Quantity * product.Price * (1 - product.Discount / 100);
-                totalCartPrice += totalPriceSum;
-                Label totalPriceLabel = new Label { Text = "£" + totalPriceSum };
-                TableCell celltotalPrice = new TableCell();
-                celltotalPrice.Controls.Add(totalPriceLabel);
+                    Label vatLabel = new Label {Text = product.VAT + "%"};
+                    TableCell cellVAT = new TableCell();
+                    cellVAT.Controls.Add(vatLabel);
 
-                Button removeProductButton = new Button()
-                {
-                    Text = "Remove from cart",
-                    ID = $"removeButton_{product.Id}"
-                };
-                removeProductButton.Click += RemoveButton_Click;
-                TableCell cellRemoveProductButton = new TableCell();
-                cellRemoveProductButton.Controls.Add(removeProductButton);
+                    double totalPriceSum = cartProduct.Quantity*product.Price*(1 - product.Discount/100);
+                    totalCartPrice += totalPriceSum;
+                    Label totalPriceLabel = new Label {Text = "£" + totalPriceSum};
+                    TableCell celltotalPrice = new TableCell();
+                    celltotalPrice.Controls.Add(totalPriceLabel);
 
-                TableRow row = new TableRow();
-                row.Controls.Add(cellImage);
-                row.Controls.Add(cellName);
-                row.Controls.Add(cellPrice);
-                row.Controls.Add(cellQuantity);
-                row.Controls.Add(cellStock);
-                row.Controls.Add(cellVAT);
-                row.Controls.Add(celltotalPrice);
-                row.Controls.Add(cellRemoveProductButton);
+                    Button removeProductButton = new Button()
+                    {
+                        Text = "Remove from cart",
+                        ID = $"removeButton_{product.Id}"
+                    };
+                    removeProductButton.Click += RemoveButton_Click;
+                    TableCell cellRemoveProductButton = new TableCell();
+                    cellRemoveProductButton.Controls.Add(removeProductButton);
 
-                checkout_product_table.Controls.Add(row);
+                    TableRow row = new TableRow();
+                    row.Controls.Add(cellImage);
+                    row.Controls.Add(cellName);
+                    row.Controls.Add(cellPrice);
+                    row.Controls.Add(cellQuantity);
+                    row.Controls.Add(cellStock);
+                    row.Controls.Add(cellVAT);
+                    row.Controls.Add(celltotalPrice);
+                    row.Controls.Add(cellRemoveProductButton);
+
+                    checkout_product_table.Controls.Add(row);
+                }
+                double shippingCost;
+                ShippingDrowdown(out shippingCost);
+                tableShippingPrice.InnerText = "£" + shippingCost;
+                totalCartPrice += shippingCost;
+                tableTotalPrice.InnerText = "£" + totalCartPrice;
             }
-
-            double shippingCost;
-            ShippingDrowdown(out shippingCost);
-            tableShippingPrice.InnerText = "£" + shippingCost;
-            totalCartPrice += shippingCost;
-            tableTotalPrice.InnerText = "£" + totalCartPrice;
+            catch (Exception)
+            {
+                throw; //Error retrieving product from Products
+            }
         }
 
         private void DecreaseEditCartButton_Click(object sender, EventArgs e)
@@ -261,9 +250,9 @@ namespace E_Handel
                     Session["orderId"] = order.Id;
                     Response.Redirect("ReceiptPage.aspx");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    //error
+                    throw; //Error inserting order into database
                 }
             }
         }

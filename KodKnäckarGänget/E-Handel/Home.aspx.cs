@@ -53,7 +53,7 @@ namespace E_Handel
             }
             catch (Exception)
             {
-                //Error
+                throw; //Error retrieving popular products from Products
             }
             finally
             {
@@ -125,10 +125,17 @@ namespace E_Handel
                 {
                     discountIdList.Add(int.Parse(sqlReader["ProductID"].ToString()));
                 }
+
+                Random randomProduct = new Random();
+                int ad1 = randomProduct.Next(0, discountIdList.Count - 2);
+                int ad2 = randomProduct.Next(ad1 + 1, discountIdList.Count - 1);
+                adProductList.Add(new BLProduct(connectionString, discountIdList[ad1]));
+                adProductList.Add(new BLProduct(connectionString, discountIdList[ad2]));
+                Session["adProductList"] = adProductList;
             }
             catch (Exception)
             {
-                //Error
+                throw; //Error retrieving discounted products from DiscountedProducts or Products
             }
             finally
             {
@@ -141,13 +148,6 @@ namespace E_Handel
                 sqlConnection.Dispose();
                 sqlGetDiscountedProducts.Dispose();
             }
-
-            Random randomProduct = new Random();
-            int ad1 = randomProduct.Next(0, discountIdList.Count - 2);
-            int ad2 = randomProduct.Next(ad1 + 1, discountIdList.Count - 1);
-            adProductList.Add(new BLProduct(connectionString, discountIdList[ad1]));
-            adProductList.Add(new BLProduct(connectionString, discountIdList[ad2]));
-            Session["adProductList"] = adProductList;
         }
 
         private void ShowAds()

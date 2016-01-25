@@ -50,7 +50,7 @@ namespace E_Handel
             }
             else
             {
-                ResultTitle.InnerHtml = "No search or category results."; //or error page
+                ResultTitle.InnerHtml = "No search or category results."; //Error getting valid querystring from url
             }
         }
 
@@ -68,9 +68,9 @@ namespace E_Handel
                     resultBLProducts.Add(new BLProduct(connectionString, int.Parse(sqlDiscountDataReader["ProductID"].ToString())));
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                ResultTitle.InnerHtml = "Error when attempting to retrieve discounted products."; //or error page
+                ResultTitle.InnerHtml = "Error when attempting to retrieve discounted products."; //Error retrieving discounted products from DiscountedProducts or Products
             }
             finally
             {
@@ -125,9 +125,9 @@ namespace E_Handel
                     resultBLProducts.Add(product);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                ResultTitle.InnerHtml = "Error when attempting to search."; //or error page
+                ResultTitle.InnerHtml = "Error when attempting to search."; //Error when retrieving product from Products
             }
             finally
             {
@@ -152,51 +152,45 @@ namespace E_Handel
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             SqlCommand sqlGetCategory = new SqlCommand($"SELECT Name, Description FROM Categories WHERE ID = {categoryId}", sqlConnection);
             SqlCommand sqlGetProducts = new SqlCommand($"SELECT ID, Name, Description, Price, Popularity, StockQuantity, VAT FROM Products WHERE CategoryID = {categoryId} AND ID NOT IN (SELECT VariantID FROM ProductVariants)", sqlConnection);
-            SqlDataReader sqlCategoryDataReader = null;
-            SqlDataReader sqlProductDataReader = null;
+            SqlDataReader sqlDataReader = null;
             try
             {
                 sqlConnection.Open();
 
-                sqlCategoryDataReader = sqlGetCategory.ExecuteReader();
-                while (sqlCategoryDataReader.Read())
+                sqlDataReader = sqlGetCategory.ExecuteReader();
+                while (sqlDataReader.Read())
                 {
-                    categoryName = sqlCategoryDataReader["Name"].ToString();
-                    categoryDescription = sqlCategoryDataReader["Description"].ToString();
+                    categoryName = sqlDataReader["Name"].ToString();
+                    categoryDescription = sqlDataReader["Description"].ToString();
                 }
-                sqlCategoryDataReader.Close();
-                sqlCategoryDataReader.Dispose();
+                sqlDataReader.Close();
+                sqlDataReader.Dispose();
 
-                sqlProductDataReader = sqlGetProducts.ExecuteReader();
-                while (sqlProductDataReader.Read())
+                sqlDataReader = sqlGetProducts.ExecuteReader();
+                while (sqlDataReader.Read())
                 {
-                    int id = int.Parse(sqlProductDataReader["ID"].ToString());
-                    string name = sqlProductDataReader["Name"].ToString();
-                    string description = sqlProductDataReader["Description"].ToString();
-                    double price = double.Parse(sqlProductDataReader["Price"].ToString());
-                    int popularity = int.Parse(sqlProductDataReader["Popularity"].ToString());
-                    int stockQuantity = int.Parse(sqlProductDataReader["StockQuantity"].ToString());
-                    double VAT = double.Parse(sqlProductDataReader["VAT"].ToString());
+                    int id = int.Parse(sqlDataReader["ID"].ToString());
+                    string name = sqlDataReader["Name"].ToString();
+                    string description = sqlDataReader["Description"].ToString();
+                    double price = double.Parse(sqlDataReader["Price"].ToString());
+                    int popularity = int.Parse(sqlDataReader["Popularity"].ToString());
+                    int stockQuantity = int.Parse(sqlDataReader["StockQuantity"].ToString());
+                    double VAT = double.Parse(sqlDataReader["VAT"].ToString());
                     BLProduct product = new BLProduct(id, categoryId, name, description, price, popularity, stockQuantity, VAT);
                     product.GetDiscountFromDB(connectionString);
                     resultBLProducts.Add(product);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                ResultTitle.InnerHtml = "Error when attempting to retrieve category products."; //or error page
+                ResultTitle.InnerHtml = "Error when attempting to retrieve category products."; //Error when retrieving product from Products
             }
             finally
             {
-                if (sqlCategoryDataReader != null)
+                if (sqlDataReader != null)
                 {
-                    sqlCategoryDataReader.Close();
-                    sqlCategoryDataReader.Dispose();
-                }
-                if (sqlProductDataReader != null)
-                {
-                    sqlProductDataReader.Close();
-                    sqlProductDataReader.Dispose();
+                    sqlDataReader.Close();
+                    sqlDataReader.Dispose();
                 }
                 sqlConnection.Close();
                 sqlConnection.Dispose();

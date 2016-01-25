@@ -47,10 +47,12 @@ namespace E_Handel.BL
         {
             SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
             SqlCommand sqlGetOrder = new SqlCommand($"SELECT AccountID, TotalPrice, Postage, Address, PostalCode, City, Country, Email, Telephone, PaymentOptions, DeliveryOptions, Name, Surname FROM Orders WHERE ID = {id}", sqlConnection);
+            SqlCommand sqlGetOrderProducts = new SqlCommand($"SELECT ProductID, Quantity FROM OrderProducts WHERE OrderID = {id}", sqlConnection);
             SqlDataReader sqlReader = null;
             try
             {
                 sqlConnection.Open();
+
                 sqlReader = sqlGetOrder.ExecuteReader();
                 while (sqlReader.Read())
                 {
@@ -70,6 +72,15 @@ namespace E_Handel.BL
                     DeliveryOptions = sqlReader["DeliveryOptions"].ToString(); ;
                     Name = sqlReader["Name"].ToString(); ;
                     Surname = sqlReader["Surname"].ToString(); ;
+                }
+                sqlReader.Close();
+                sqlReader.Dispose();
+
+                CartProducts = new List<BLCartProduct>();
+                sqlReader = sqlGetOrderProducts.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                    CartProducts.Add(new BLCartProduct(id: int.Parse(sqlReader["ProductID"].ToString()), quantity: int.Parse(sqlReader["Quantity"].ToString())));
                 }
             }
             finally
