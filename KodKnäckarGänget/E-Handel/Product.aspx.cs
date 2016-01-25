@@ -43,8 +43,16 @@ namespace E_Handel
             {
                 originalProductPrice.InnerText = "£" + product.Price;
                 originalProductPrice.Visible = true;
-                double newPrice = product.Price - product.Price * product.Discount / 100;
-                productPrice.InnerText = "£" + newPrice;
+
+                //Can't be null, it's a placeholder until I know what to put there.
+                if(product.Discount != null) {
+                    double discount = product.Discount / 100;
+                    double newPrice = product.Price * discount;
+                    productPrice.InnerText = "£" + newPrice;
+                    originalProductPrice.InnerText = "<strike>£" + product.Price + "</strike>";
+                //double newPrice = product.Price * product.Discount / 100;
+                //productPrice.InnerText = "£" + newPrice;
+                }
             }
             else
                 productPrice.InnerText = "£" + product.Price;
