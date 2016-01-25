@@ -93,14 +93,9 @@ namespace E_Handel
 
         private bool ValidateSearchString() //TBI
         {
-            if (true)
-            {
-                return true;
-            }
-            else
-            {
+            if (searchString.Contains(";"))
                 return false;
-            }
+            return true;
         }
         private void LoadSearchResult()
         {
