@@ -36,23 +36,30 @@ footer {
     text-align: center;
 }
 
-     cartPanel {
-         display: none;
-      }
+.cartPanel {
+}
 
-    .cartPanel .th {
-        min-width: 80px;
-        vertical-align: top;
-        text-align: left;
-        padding: 5px;
-    }
+#CartCountLabel {
+    background-color: #ff9900;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    padding: 10px 15px;
+}
 
-    .cartPanel .td {
-        min-width: 80px;
-        vertical-align: top;
-        text-align: left;
-        padding: 5px;
-    }
+.cartPanel .th {
+    min-width: 80px;
+    vertical-align: top;
+    text-align: left;
+    padding: 5px;
+}
+
+.cartPanel .td {
+    min-width: 80px;
+    vertical-align: top;
+    text-align: left;
+    padding: 5px;
+}
 
 #ads {
     float:right;

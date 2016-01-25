@@ -184,17 +184,19 @@ namespace E_Handel
             {
                 Panel productPanel = new Panel { CssClass = "span3 result_product_container" };
 
+                HyperLink productLink = new HyperLink {NavigateUrl = $"Product.aspx?productId={product.Id}"};
                 Image productThumb = new Image
                 {
                     CssClass = "image_thumbnail",
                     ImageUrl = $"ImgHandler.ashx?productIdThumb={product.Id}"
                 };
+                productLink.Controls.Add(productThumb);
                 Label productNameLabel = new Label
                 {
                     CssClass = "result_product_name",
                     Text = product.Name
                 };
-                productPanel.Controls.Add(productThumb);
+                productPanel.Controls.Add(productLink);
                 productPanel.Controls.Add(productNameLabel);
 
                 if (product.Discount > 0)
