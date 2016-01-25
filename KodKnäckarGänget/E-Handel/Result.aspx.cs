@@ -26,6 +26,7 @@ namespace E_Handel
             searchString = Request.QueryString["search"];
             string categoryIdString = Request.QueryString["categoryId"];
 
+
             if (searchString != null)
             {
                 if (ValidateSearchString())
@@ -42,13 +43,55 @@ namespace E_Handel
                     DisplayCategoryResult();
                 }
             }
+            else if (Request.QueryString["sales"] != null)
+            {
+                LoadDiscountResult();
+                DisplayDiscountResults();
+            }
             else
             {
                 ResultTitle.InnerHtml = "No search or category results."; //or error page
             }
         }
 
-        private bool ValidateSearchString()
+        private void LoadDiscountResult()
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            SqlCommand sqlGetDiscounts =
+                new SqlCommand("SELECT ProductID FROM DiscountedProducts", sqlConnection);
+            SqlDataReader sqlDiscountDataReader = null;
+            try
+            {
+                sqlConnection.Open();
+                sqlDiscountDataReader = sqlGetDiscounts.ExecuteReader();
+                while (sqlDiscountDataReader.Read())
+                {
+                    resultBLProducts.Add(new BLProduct(connectionString, int.Parse(sqlDiscountDataReader["ProductID"].ToString())));
+                }
+            }
+            catch (Exception ex)
+            {
+                ResultTitle.InnerHtml = "Error when attempting to retrieve discounted products."; //or error page
+            }
+            finally
+            {
+                if (sqlDiscountDataReader != null)
+                {
+                    sqlDiscountDataReader.Close();
+                    sqlDiscountDataReader.Dispose();
+                }
+                sqlConnection.Close();
+                sqlConnection.Dispose();
+                sqlGetDiscounts.Dispose();
+            }
+        }
+        private void DisplayDiscountResults()
+        {
+            ResultTitle.InnerHtml = "Sales:";
+            DisplayProducts();
+        }
+
+        private bool ValidateSearchString() //TBI
         {
             if (true)
             {
