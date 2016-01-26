@@ -1,8 +1,26 @@
 ﻿body {
     background-color: ghostwhite;
-    color:black;
+    color: #000000;
+}
+#Search{
+    float:right;
+    margin:0px;
+    display:inline-block;
+}
+#SearchButton{
+    width:100px;
 }
 
+#MainHead{
+    display:inline;
+}
+
+#Logon{
+    width:1500px;
+    height:150px;
+   
+    
+}
 header nav ul li {
     display: inline;
 }
@@ -15,9 +33,12 @@ a {
     color: blue;
 }
 
-footer {
-    text-align: center;
-}
+  
+/*.container-fluid {
+    background-image: url('../Images/Photo1.jpg');
+}*/
+
+
 
 #SearchArea {
     margin: 0 auto;
@@ -92,4 +113,8 @@ footer {
 
 #LinkPolicy {
     color: green;
+}
+
+footer {
+    text-align: center;
 }

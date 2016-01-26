@@ -47,7 +47,9 @@ namespace E_Handel
                     originalProductPrice.InnerText = "£" + product.Price;
                     originalProductPrice.Visible = true;
                     double newPrice = product.Price * (1 - product.Discount / 100);
-                    productPrice.InnerText = "£" + newPrice;
+                    productPrice.Visible = false;
+                    discountProductPrice.Visible = true;
+                    discountProductPrice.InnerText = "£" + newPrice;
                 }
                 else
                     productPrice.InnerText = "£" + product.Price;
@@ -144,7 +146,7 @@ namespace E_Handel
 
         protected void SendVariantChoice_SelectChange(object sender, EventArgs e)
         {
-            Response.Redirect($"Product.aspx?productId={DropDownVariants.SelectedValue}");
+            Response.Redirect($"/Product.aspx?productId={DropDownVariants.SelectedValue}");
         }
 
         protected void AddToCart_Click(object sender, EventArgs e)
@@ -180,7 +182,7 @@ namespace E_Handel
             Session["cartCount"] = cartCount;
             Session["cartList"] = cartList;
 
-            Response.Redirect($"Product.aspx?productId={product.Id}");
+            Response.Redirect($"/Product.aspx?productId={product.Id}");
         }
     }
 }

@@ -1,12 +1,30 @@
 ﻿footer > div{
     display: inline-block;
+    width:33%;
 }
-#socialMedia > div{
-    display: inline-block;
-}
+
 footer{
     background-color: #eeeeee;
+    margin-top: 10px;
 }
+
+#MainFooter {
+    height: 100px;
+}
+
+#FooterImages img {
+    width: 50px;
+}
+
 ul{
     list-style: none;
 }
+#Policy , #Contact, #socialMedia{
+    text-align:center;
+}
+#FotterImages, a{
+    margin:10px;
+}
+
+
+

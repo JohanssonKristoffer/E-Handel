@@ -1,8 +1,29 @@
 ﻿.price_tag {
-    background-color: #cccccc;
+    background-color: transparent;
     padding: 5px;
     width: 50px;
 }
+
+#PlaceholderMain_discountProductPrice {
+    color: #ff0000;
+}
+
 .original_price_tag {
     text-decoration: line-through;
+}
+
+input[type="number"] {
+    display: inline-block;
+    height: 30px;
+    padding: 4px 6px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #555555;
+    vertical-align: middle;
+    width: 116px;
+}
+
+.image_placeholder img {
+    width: 310px;
 }

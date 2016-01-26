@@ -1,12 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="E_Handel.Home" %>
 
-<%@ Import Namespace="E_Handel" %>
-
 <asp:Content ID="ContentHead" ContentPlaceHolderID="PlaceholderHead" runat="server">
-    <link href="Content/bootstrap.css" rel="stylesheet" />
     <link href="Style/Home.css" rel="stylesheet" />
-    <script src="Scripts/jquery-1.9.1.min.js"></script>
-    <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/parallax.js"></script>
 </asp:Content>
 <asp:Content ID="ContentMain" ContentPlaceHolderID="PlaceholderMain" runat="server">
@@ -98,41 +93,38 @@
         </div>
     </div>
 
-        <div class="parallax-window" data-parallax="scroll" data-image-src="/Images/ShrekDisplay.jpg">
-            <h1>Popular DVD's</h1>
-            <div class="col-md-4 col-sm-4">
+    <div class="parallax-window" data-parallax="scroll" data-image-src="/Images/ShrekDisplay.jpg">
+        <h1>Popular Products</h1>
+        <div class="col-md-4 col-sm-4">
 
-                <asp:HyperLink runat="server" ID="LinkPop1">
-                    <asp:Image ID="ImagePop1" runat="server" CssClass="popImage" />
-                </asp:HyperLink>
-                <asp:Label ID="TitlePop1" CssClass="popTitle" runat="server"></asp:Label>
-                <asp:Label ID="OriginalPricePop1" CssClass="popOriginalPrice" runat="server"></asp:Label>
-                <asp:Label ID="DiscountPricePop1" CssClass="popDiscountPrice" runat="server"></asp:Label>
-                <asp:Button ID="AddtoCartPop1" runat="server" Text="Add to Cart" class="btn btn-primary" OnClick="AddtoCartPop1_Click" />
-            </div>
-
-            <div class="col-md-4 col-sm-4">
-                <asp:HyperLink runat="server" ID="LinkPop2">
-                    <asp:Image ID="ImagePop2" runat="server" CssClass="popImage" />
-                </asp:HyperLink>
-                <asp:Label ID="TitlePop2" CssClass="popTitle" runat="server"></asp:Label>
-                <asp:Label ID="OriginalPricePop2" CssClass="popOriginalPrice" runat="server"></asp:Label>
-                <asp:Label ID="DiscountPricePop2" CssClass="popDiscountPrice" runat="server"></asp:Label>
-                <asp:Button ID="AddtoCartPop2" runat="server" Text="Add to Cart" class="btn btn-primary" OnClick="AddtoCartPop2_Click" />
-            </div>
-
-            <div class="col-md-4 col-sm-4">
-                <asp:HyperLink runat="server" ID="LinkPop3">
-                    <asp:Image ID="ImagePop3" runat="server" CssClass="popImage" />
-                </asp:HyperLink>
-                <asp:Label ID="TitlePop3" CssClass="popTitle" runat="server"></asp:Label>
-                <asp:Label ID="OriginalPricePop3" CssClass="popOriginalPrice" runat="server"></asp:Label>
-                <asp:Label ID="DiscountPricePop3" CssClass="popDiscountPrice" runat="server"></asp:Label>
-                <asp:Button ID="AddtoCartPop3" runat="server" Text="Add to Cart" class="btn btn-primary" OnClick="AddtoCartPop3_Click" />
-            </div>
+            <asp:HyperLink runat="server" ID="LinkPop1">
+                <asp:Image ID="ImagePop1" runat="server" CssClass="popImage" />
+            </asp:HyperLink>
+            <asp:Label ID="TitlePop1" CssClass="popTitle" runat="server"></asp:Label>
+            <asp:Label ID="OriginalPricePop1" CssClass="popOriginalPrice" runat="server"></asp:Label>
+            <asp:Label ID="DiscountPricePop1" CssClass="popDiscountPrice" runat="server"></asp:Label>
+            <asp:Button ID="AddtoCartPop1" runat="server" Text="Add to Cart" class="btn btn-primary" OnClick="AddtoCartPop1_Click" />
         </div>
-   
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <div class="col-md-4 col-sm-4">
+            <asp:HyperLink runat="server" ID="LinkPop2">
+                <asp:Image ID="ImagePop2" runat="server" CssClass="popImage" />
+            </asp:HyperLink>
+            <asp:Label ID="TitlePop2" CssClass="popTitle" runat="server"></asp:Label>
+            <asp:Label ID="OriginalPricePop2" CssClass="popOriginalPrice" runat="server"></asp:Label>
+            <asp:Label ID="DiscountPricePop2" CssClass="popDiscountPrice" runat="server"></asp:Label>
+            <asp:Button ID="AddtoCartPop2" runat="server" Text="Add to Cart" class="btn btn-primary" OnClick="AddtoCartPop2_Click" />
+        </div>
+
+        <div class="col-md-4 col-sm-4">
+            <asp:HyperLink runat="server" ID="LinkPop3">
+                <asp:Image ID="ImagePop3" runat="server" CssClass="popImage" />
+            </asp:HyperLink>
+            <asp:Label ID="TitlePop3" CssClass="popTitle" runat="server"></asp:Label>
+            <asp:Label ID="OriginalPricePop3" CssClass="popOriginalPrice" runat="server"></asp:Label>
+            <asp:Label ID="DiscountPricePop3" CssClass="popDiscountPrice" runat="server"></asp:Label>
+            <asp:Button ID="AddtoCartPop3" runat="server" Text="Add to Cart" class="btn btn-primary" OnClick="AddtoCartPop3_Click" />
+        </div>
+    </div>
     <script src="Scripts/bootstrap.min.js"></script>
 </asp:Content>

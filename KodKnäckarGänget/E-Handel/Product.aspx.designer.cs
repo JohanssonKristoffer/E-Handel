@@ -49,6 +49,15 @@ namespace E_Handel {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl originalProductPrice;
         
         /// <summary>
+        /// discountProductPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl discountProductPrice;
+        
+        /// <summary>
         /// productPrice control.
         /// </summary>
         /// <remarks>
