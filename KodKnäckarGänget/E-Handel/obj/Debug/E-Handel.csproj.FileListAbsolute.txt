@@ -114,7 +114,6 @@ C:\Users\Peter\Documents\GitHubVisualStudio\WF-Project\2016-01-19(2)\E-Handel\Ko
 C:\Users\Peter\Documents\GitHubVisualStudio\WF-Project\2016-01-19(2)\E-Handel\KodKnäckarGänget\E-Handel\bin\E-Handel.pdb
 C:\Users\Peter\Documents\GitHubVisualStudio\WF-Project\2016-01-19(2)\E-Handel\KodKnäckarGänget\E-Handel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Peter\Documents\GitHubVisualStudio\WF-Project\2016-01-19(2)\E-Handel\KodKnäckarGänget\E-Handel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Peter\Documents\GitHubVisualStudio\WF-Project\2016-01-19(2)\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.csprojResolveAssemblyReference.cache
 C:\Users\Peter\Documents\GitHubVisualStudio\WF-Project\2016-01-19(2)\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.dll
 C:\Users\Peter\Documents\GitHubVisualStudio\WF-Project\2016-01-19(2)\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.pdb
 C:\Users\Lifebook\Source\Repos\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.csprojResolveAssemblyReference.cache

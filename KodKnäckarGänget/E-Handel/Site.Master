@@ -21,7 +21,7 @@
 
         <header class="container-fluid">
             <asp:SqlDataSource ID="DataSourceCategories" runat="server" ConnectionString="<%$ ConnectionStrings:KKG-EHandelConnectionString %>" SelectCommand="SELECT [ID], [Name] FROM [Categories] ORDER BY [Name]"></asp:SqlDataSource>
-           <img src="Images/Logo.png" id="Logon" />
+           <img src="/Images/Logo.png" id="Logon" />
              <div class="row" id="MainHead">
               <div  id="Search">
 
@@ -84,9 +84,9 @@
                 <h2>Find the latest news</h2>
                 <div id="FooterImages">
                     <a href="https://www.facebook.com">
-                        <img src="Images/1453755185_social-facebook-square2.png" /></a>            
+                        <img src="/Images/1453755185_social-facebook-square2.png" /></a>            
                     <a href="https://www.twitter.com">
-                        <img src="Images/1453755419_twitter.png" /></a>
+                        <img src="/Images/1453755419_twitter.png" /></a>
                 </div>
             </div>
         </footer>
