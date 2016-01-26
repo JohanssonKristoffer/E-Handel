@@ -95,7 +95,6 @@ C:\Users\F554LA\Documents\GitHubVisualStudio\E-Handel\KodKnäckarGänget\E-Hande
 C:\Users\F554LA\Documents\GitHubVisualStudio\E-Handel\KodKnäckarGänget\E-Handel\bin\E-Handel.pdb
 C:\Users\F554LA\Documents\GitHubVisualStudio\E-Handel\KodKnäckarGänget\E-Handel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\F554LA\Documents\GitHubVisualStudio\E-Handel\KodKnäckarGänget\E-Handel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\F554LA\Documents\GitHubVisualStudio\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.csprojResolveAssemblyReference.cache
 C:\Users\F554LA\Documents\GitHubVisualStudio\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.dll
 C:\Users\F554LA\Documents\GitHubVisualStudio\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.pdb
 C:\Users\Peter\Documents\GitHubVisualStudio\WF-Project\2016-01-19(2)\E-Handel\KodKnäckarGänget\E-Handel\bin\roslyn\csc.exe
@@ -158,3 +157,4 @@ C:\Users\timmy\Source\Repos\E-Handel-Current\KodKnäckarGänget\E-Handel\bin\Mic
 C:\Users\timmy\Source\Repos\E-Handel-Current\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.csprojResolveAssemblyReference.cache
 C:\Users\timmy\Source\Repos\E-Handel-Current\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.dll
 C:\Users\timmy\Source\Repos\E-Handel-Current\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.pdb
+C:\Users\F554LA\Documents\GitHubVisualStudio\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.csprojResolveAssemblyReference.cache

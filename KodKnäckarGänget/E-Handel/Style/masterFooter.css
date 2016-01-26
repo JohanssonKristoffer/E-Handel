@@ -1,0 +1,12 @@
+﻿footer > div{
+    display: inline-block;
+}
+#socialMedia > div{
+    display: inline-block;
+}
+footer{
+    background-color: #eeeeee;
+}
+ul{
+    list-style: none;
+}
