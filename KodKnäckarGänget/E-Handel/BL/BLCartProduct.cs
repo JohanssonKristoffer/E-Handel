@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace E_Handel.BL
+﻿namespace E_Handel.BL
 {
     public class BLCartProduct
     {

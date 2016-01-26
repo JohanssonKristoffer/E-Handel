@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace E_Handel.BL
 {
@@ -65,14 +62,14 @@ namespace E_Handel.BL
                     TotalPrice = double.Parse(sqlReader["TotalPrice"].ToString());
                     Address = sqlReader["Address"].ToString();
                     PostalCode = sqlReader["PostalCode"].ToString();
-                    City = sqlReader["City"].ToString(); ;
-                    Country = sqlReader["Country"].ToString(); ;
-                    Email = sqlReader["Email"].ToString(); ;
-                    Telephone = sqlReader["Telephone"].ToString(); ;
-                    PaymentOptions = sqlReader["PaymentOptions"].ToString(); ;
-                    DeliveryOptions = sqlReader["DeliveryOptions"].ToString(); ;
-                    Name = sqlReader["Name"].ToString(); ;
-                    Surname = sqlReader["Surname"].ToString(); ;
+                    City = sqlReader["City"].ToString();
+                    Country = sqlReader["Country"].ToString();
+                    Email = sqlReader["Email"].ToString();
+                    Telephone = sqlReader["Telephone"].ToString();
+                    PaymentOptions = sqlReader["PaymentOptions"].ToString();
+                    DeliveryOptions = sqlReader["DeliveryOptions"].ToString();
+                    Name = sqlReader["Name"].ToString();
+                    Surname = sqlReader["Surname"].ToString();
                 }
                 sqlReader.Close();
                 sqlReader.Dispose();
@@ -100,7 +97,7 @@ namespace E_Handel.BL
         public void InsertIntoDB(string databaseConnectionString)
         {
             SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
-            SqlCommand sqlInsertOrder = null;
+            SqlCommand sqlInsertOrder;
             SqlCommand sqlInsertOrderProduct = null;
             if (AccountId < 0)
                 sqlInsertOrder =
