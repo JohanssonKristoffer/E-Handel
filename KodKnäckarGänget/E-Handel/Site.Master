@@ -20,10 +20,13 @@
 
         <header class="container-fluid">
             <asp:SqlDataSource ID="DataSourceCategories" runat="server" ConnectionString="<%$ ConnectionStrings:KKG-EHandelConnectionString %>" SelectCommand="SELECT [ID], [Name] FROM [Categories] ORDER BY [Name]"></asp:SqlDataSource>
-            <div class="row" id="SearchArea">
+           <img src="Images/Logo.png" id="Logon" />
+             <div class="row" id="MainHead">
+              <div  id="Search">
+
                 <asp:TextBox ID="SearchBox" runat="server"></asp:TextBox>
-                <asp:Button ID="SearchButton" runat="server" Text="Search" OnClick="SendSearch_Click" />
-            </div>
+                <asp:Button ID="SearchButton" runat="server" Text="Search" class="btn btn-primary" OnClick="SendSearch_Click" /> </div>
+            <div id="Category">
             <nav class="row">
                 <ul>
                     <li id="HomeLi"><a href="Home.aspx">Home</a></li>
@@ -38,9 +41,11 @@
                         <asp:Label runat="server" ID="CartCountLabel"></asp:Label>
                     </li>
                 </ul>
-            </nav>
+            </nav></div>
+            <div id="Cart">
             <asp:Panel ID="CartPanel" runat="server" CssClass="cartPanel">
-                <asp:Label ID="CartDropDownTableText" runat="server">No products in the cart</asp:Label>
+              <hr /> 
+                 <asp:Label ID="CartDropDownTableText" runat="server">No products in the cart</asp:Label>
                 <asp:Table runat="server" ID="CartListTable">
                     <asp:TableHeaderRow ID="CartDropDownTableHeader" runat="server">
                         <asp:TableHeaderCell></asp:TableHeaderCell>
@@ -51,36 +56,34 @@
                     </asp:TableHeaderRow>
                 </asp:Table>
                 <asp:Button runat="server" ID="CheckoutButton" Text="Proceed To Checkout" PostBackUrl="Checkout.aspx" />
-            </asp:Panel>
+            </asp:Panel></div>
+                  </div>
         </header>
         <hr />
             <asp:ContentPlaceHolder ID="PlaceholderMain" runat="server">
             </asp:ContentPlaceHolder>
-        <hr />
-        <footer class="container-fluid">
-            <div>
-                <h2>Kontakta oss!</h2>
-                <p>Email: pleaseDontContactUs@dummyMail.com</p>
-                <p>Phone number: 1337 420 8008</p>
+        <footer class="container-fluid" id="MainFotter">
+            <div class="span4" id="Contact">
+                <h2>Contact Us!</h2>
+                <a href="mailto:s5.kristoffer@gmail.com">Send E-mail</a>
+                <p>Phone number: 07 013 374 20 </p>
             </div>
 
 
-            <div>
+            <div class="span4" id="Policy">
                 <h2>Policy and Law</h2>
                 <ul>
                     <li><a href="Home.aspx">Our policies</a></li>
-                    <li><a href="Home.aspx">Relevant laws</a></li>
+                    <li><a href="http://rkrattsdb.gov.se/sfsdoc/00/000274.PDF">Relevant laws</a></li>
                 </ul>
             </div>
 
 
-            <div id="socialMedia">
+            <div class="span4" id="socialMedia">
                 <h2>Find the latest news</h2>
-                <div>
+                <div id="FooterImages">
                     <a href="https://www.facebook.com">
-                        <img src="Images/1453755185_social-facebook-square2.png" /></a>
-                </div>
-                <div>
+                        <img src="Images/1453755185_social-facebook-square2.png" /></a>            
                     <a href="https://www.twitter.com">
                         <img src="Images/1453755419_twitter.png" /></a>
                 </div>
