@@ -1,2 +1,140 @@
 ﻿body {
+    background-color: #ffffff;
+}
+
+.parallax-window {
+    background-color: transparent;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-filter: blur(50%); /* Chrome, Safari, Opera */
+    filter: blur(50%);
+    padding: 20px;
+    min-height: 450px 
+}
+
+.parallax-window h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+.parallax-window img {
+    width: 200px;
+    display: block;
+}
+
+.parallax-window input[type="submit"] {
+    display: block;    
+}
+
+#ads img {
+    width: 120px;
+    display: block;
+}
+
+#ads {
+    width: 200px;
+}
+
+.adDiscountPrice {
+    display: inline;
+    background-color: transparent;
+    padding: 0 5px;
+    font-weight: bold;
+    color: #FF0000;
+    margin-bottom: 10px;  
+}
+
+.adOriginalPrice {
+    display: inline;    
+}
+
+.adImage img {
+    width: 50px;
+    display: block;
+    margin: 0 auto 1px;
+}
+
+.adImage button {
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.hero-unit {
+    width: 900px;    
+    padding: 1px;
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 30px;
+    color: inherit;
+    background-color: #ffffff;
+    -webkit-border-radius: 0px;
+       -moz-border-radius: 0px;
+            border-radius: 0px;
+}
+
+.auto-style3 {
+    width: 1200px;
+    height: 315px;
+}
+
+/* BOOTSTRAP OVERRIDE */
+
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+  top: 0px;
+  left: 0px;
+  height: 35px;
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    width: 100%;
+    margin: auto;
+    border-radius: 15px;
+}
+
+.carousel-caption {
+    right: 0%;
+    left: 0%;
+    padding-bottom: 30px;
+}
+
+.carousel-caption h3 {
+    font-size: 35px;
+}
+
+.carousel-control {
+    position: absolute;
+    top: 220px;
+    height: 70px;
+    bottom: 0;
+    left: 0;
+    width: 15%;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    border: 0px;
+}
+
+.col-md-4, .col-sm-4 {
+    text-align: center;
+}
+
+.col-md-4, .col-sm-4 img {
+    text-align: center;
+    margin: 0 auto;
+}
+
+input[type="submit"] {
+  -webkit-appearance: button;
+  top: 0px;
+  left: 0px;
+  height: 35px;
+  width: 100px;
+  margin: 0 auto 10px;
 }

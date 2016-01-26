@@ -1,4 +1,5 @@
-﻿using E_Handel.BL;
+﻿
+using E_Handel.BL;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -75,10 +76,10 @@ namespace E_Handel
             TitlePop1.Text = popularProductList[0].Name;
             if (popularProductList[0].Discount > 0)
             {
-                OriginalPricePop1.Text = "Original Price: <strike>£" + popularProductList[0].Price +
+                OriginalPricePop1.Text = "<strike>£" + popularProductList[0].Price +
                                          "</strike>";
-                DiscountPricePop1.Text = "Discount Price: £" +
-                                         (popularProductList[0].Price*(1 - popularProductList[0].Discount/100));
+                DiscountPricePop1.Text = "£" +
+                                         (popularProductList[0].Price * (1 - popularProductList[0].Discount / 100));
             }
             else
                 OriginalPricePop1.Text = "Price: £" + popularProductList[0].Price;
@@ -88,9 +89,9 @@ namespace E_Handel
             TitlePop2.Text = popularProductList[1].Name;
             if (popularProductList[1].Discount > 0)
             {
-                OriginalPricePop2.Text = "Original Price: <strike>£" + popularProductList[1].Price +
+                OriginalPricePop2.Text = "<strike>£" + popularProductList[1].Price +
                                          "</strike>";
-                DiscountPricePop2.Text = "Discount Price: £" +
+                DiscountPricePop2.Text = "£" +
                                          (popularProductList[1].Price * (1 - popularProductList[1].Discount / 100));
             }
             else
@@ -101,9 +102,9 @@ namespace E_Handel
             TitlePop3.Text = popularProductList[2].Name;
             if (popularProductList[2].Discount > 0)
             {
-                OriginalPricePop3.Text = "Original Price: <strike>£" + popularProductList[2].Price +
+                OriginalPricePop3.Text = "<strike>£" + popularProductList[2].Price +
                                          "</strike>";
-                DiscountPricePop3.Text = "Discount Price: £" +
+                DiscountPricePop3.Text = "£" +
                                          (popularProductList[2].Price * (1 - popularProductList[2].Discount / 100));
             }
             else
@@ -155,14 +156,14 @@ namespace E_Handel
             LinkAd1.NavigateUrl = "Product.aspx?productId=" + adProductList[0].Id;
             ImageAd1.ImageUrl = "ImgHandler.ashx?productId=" + adProductList[0].Id;
             TitleAd1.Text = adProductList[0].Name;
-            OriginalPriceAd1.Text = "Original Price: <strike>£" + adProductList[0].Price + "</strike>";
-            DiscountPriceAd1.Text = "Discount Price: £" + (adProductList[0].Price - (adProductList[0].Price * adProductList[0].Discount / 100));
+            OriginalPriceAd1.Text = "<strike>£" + adProductList[0].Price + "</strike>";
+            DiscountPriceAd1.Text = "£" + (adProductList[0].Price - (adProductList[0].Price * adProductList[0].Discount / 100));
 
             LinkAd2.NavigateUrl = "Product.aspx?productId=" + adProductList[1].Id;
             ImageAd2.ImageUrl = "ImgHandler.ashx?productId=" + adProductList[1].Id;
             TitleAd2.Text = adProductList[1].Name;
-            OriginalPriceAd2.Text = "Original Price: <strike>£" + adProductList[1].Price + "</strike>";
-            DiscountPriceAd2.Text = "Discount Price: £" + (adProductList[1].Price - (adProductList[1].Price * adProductList[1].Discount / 100));
+            OriginalPriceAd2.Text = "<strike>£" + adProductList[1].Price + "</strike>";
+            DiscountPriceAd2.Text = "£" + (adProductList[1].Price - (adProductList[1].Price * adProductList[1].Discount / 100));
         }
 
         protected void AddToCartAd1_Click(object sender, EventArgs e) => AddToCart(adProductList[0]);
