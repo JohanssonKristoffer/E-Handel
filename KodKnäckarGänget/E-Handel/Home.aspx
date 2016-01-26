@@ -82,7 +82,7 @@
                     <asp:Label ID="TitleAd1" CssClass="adTitle" runat="server"></asp:Label>
                     <asp:Label ID="OriginalPriceAd1" CssClass="adOriginalPrice" runat="server"></asp:Label>
                     <asp:Label ID="DiscountPriceAd1" CssClass="adDiscountPrice" runat="server"></asp:Label>
-                    <asp:Button ID="AddToCartAd1" runat="server" Text="Add to Cart" class="btn btn-primary" OnClick="AddToCartAd1_Click" />
+                   <asp:Button ID="AddToCartAd1" runat="server" Text="Add to Cart" class="btn btn-primary" OnClick="AddToCartAd1_Click" />
                 </asp:Panel>
                 <asp:Panel ID="PanelAd2" runat="server">
                     <asp:HyperLink runat="server" ID="LinkAd2">
@@ -131,8 +131,6 @@
                 <asp:Button ID="AddtoCartPop3" runat="server" Text="Add to Cart" class="btn btn-primary" OnClick="AddtoCartPop3_Click" />
             </div>
         </div>
-   
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
 </asp:Content>
