@@ -17,7 +17,6 @@
     margin-bottom: 30px;
 }
 
-
 .parallax-window img {
     width: 200px;
     display: block;
@@ -28,8 +27,9 @@
 }
 
 #ads img {
-    width: 120px;
+    width: 110px;
     display: block;
+    margin: 0 auto;
 }
 
 #ads {
@@ -37,7 +37,7 @@
 }
 
 .adDiscountPrice {
-    display: inline;
+    display: inline-block;
     background-color: transparent;
     padding: 0 5px;
     font-weight: bold;
@@ -46,13 +46,15 @@
 }
 
 .adOriginalPrice {
-    display: inline;    
+    display: inline-block;    
 }
 
-.adImage img {
-    width: 50px;
-    display: block;
-    margin: 0 auto 1px;
+.adTitle {
+    display: block;    
+}
+
+#PlaceholderMain_TitleAd1, #PlaceholderMain_TitleAd2 {
+    display: block;    
 }
 
 .adImage button {
@@ -108,6 +110,11 @@ input[type="submit"] {
     font-size: 35px;
 }
 
+.carousel-indicators {
+    height: 20px;
+    margin: 0 auto;
+}
+
 .carousel-control {
     position: absolute;
     top: 220px;
@@ -137,4 +144,8 @@ input[type="submit"] {
   height: 35px;
   width: 100px;
   margin: 0 auto 10px;
+}
+
+.btn {
+    display: block;
 }
