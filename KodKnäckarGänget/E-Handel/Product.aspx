@@ -19,7 +19,10 @@
             <div class="col-md-8">
                 <h1 runat="server" id="productTitle"></h1>
                 <h3 class="original_price_tag" runat="server" id="originalProductPrice" visible="False"></h3>
+                <h3 class="discount_price_tag" runat="server" id="discountProductPrice" visible="False"></h3>
+                
                 <h3 class="price_tag" runat="server" id="productPrice"></h3>
+
                 <p id="productDescription" runat="server"></p>
                 <p>
                     <label for="productQuantity">Quantity:</label><input id="productQuantity" runat="server" type="number" min="1" max="100" value="1" />
@@ -27,7 +30,7 @@
                     <asp:DropDownList ID="DropDownVariants" runat="server" AutoPostBack="True" OnSelectedIndexChanged="SendVariantChoice_SelectChange" />
                 </p>
                 <p>
-                    <asp:Button ID="ButtonAddToCart" runat="server" OnClick="AddToCart_Click" Text="Add To Cart" /></p>
+                    <asp:Button ID="ButtonAddToCart" runat="server" OnClick="AddToCart_Click" class="btn btn-primary" Text="Add To Cart" /></p>
             </div>
         </div>
     </div>

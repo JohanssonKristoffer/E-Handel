@@ -99,7 +99,7 @@
     </div>
 
         <div class="parallax-window" data-parallax="scroll" data-image-src="/Images/ShrekDisplay.jpg">
-            <h1>Popular DVD's</h1>
+            <h1>Popular Products</h1>
             <div class="col-md-4 col-sm-4">
 
                 <asp:HyperLink runat="server" ID="LinkPop1">

@@ -9,7 +9,7 @@
     -webkit-filter: blur(50%); /* Chrome, Safari, Opera */
     filter: blur(50%);
     padding: 20px;
-    min-height: 450px 
+    min-height: 480px;
 }
 
 .parallax-window h1 {
@@ -24,6 +24,30 @@
 
 .parallax-window input[type="submit"] {
     display: block;    
+}
+
+#PlaceholderMain_TitlePop1 {
+    display: block;
+}
+
+#PlaceholderMain_TitlePop2 {
+    display: block;
+}
+
+#PlaceholderMain_TitlePop3 {
+    display: block;
+}
+
+#PlaceholderMain_OriginalPricePop1 {
+    font-weight: 700;    
+}
+
+#PlaceholderMain_OriginalPricePop2 {
+    font-weight: 700;    
+}
+
+#PlaceholderMain_OriginalPricePop3 {
+    font-weight: 700;    
 }
 
 #ads img {
