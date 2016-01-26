@@ -54,10 +54,8 @@
             </asp:Panel>
         </header>
         <hr />
-        <div class="container">
             <asp:ContentPlaceHolder ID="PlaceholderMain" runat="server">
             </asp:ContentPlaceHolder>
-        </div>
         <hr />
         <footer class="container-fluid">
             <div>
@@ -77,7 +75,7 @@
 
 
             <div id="socialMedia">
-                <h2>Follow for the latest news</h2>
+                <h2>Find the latest news</h2>
                 <div>
                     <a href="https://www.facebook.com">
                         <img src="Images/1453755185_social-facebook-square2.png" /></a>
