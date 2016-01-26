@@ -5,8 +5,17 @@
 
 footer{
     background-color: #eeeeee;
-    
+    margin-top: 10px;
 }
+
+#MainFooter {
+    height: 100px;
+}
+
+#FooterImages img {
+    width: 50px;
+}
+
 ul{
     list-style: none;
 }

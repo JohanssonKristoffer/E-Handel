@@ -8,10 +8,11 @@
     <script src="Scripts/bootstrap.js"></script>
     <script src="Scripts/jquery-1.9.1.js"></script>
     <script src="Scripts/cartScript.js"></script>
-    <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" rel="stylesheet" />
-    <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
     <link href="Style/Master.css" rel="stylesheet" />
     <link href="Style/masterFooter.css" rel="stylesheet" />
+    <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="PlaceholderHead" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -62,7 +63,7 @@
         <hr />
             <asp:ContentPlaceHolder ID="PlaceholderMain" runat="server">
             </asp:ContentPlaceHolder>
-        <footer class="container-fluid" id="MainFotter">
+        <footer class="container-fluid" id="MainFooter">
             <div class="span4" id="Contact">
                 <h2>Contact Us!</h2>
                 <a href="mailto:s5.kristoffer@gmail.com">Send E-mail</a>

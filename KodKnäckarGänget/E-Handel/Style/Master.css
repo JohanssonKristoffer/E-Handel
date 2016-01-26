@@ -33,26 +33,18 @@ a {
     color: blue;
 }
 
-  text-align: center;
-}*/
+  
 /*.container-fluid {
     background-image: url('../Images/Photo1.jpg');
 }*/
 
-#SearchArea {ea {
-{
 
 
 #SearchArea {
     margin: 0 auto;
     padding: 10px;
     text-align: right;
-}e
-rrchBox {
-   {
-SearchBox {
-   hBox {
-         hei
+}
 
 #SearchBox {
     height: 40px;
@@ -121,4 +113,8 @@ SearchBox {
 
 #LinkPolicy {
     color: green;
+}
+
+footer {
+    text-align: center;
 }
