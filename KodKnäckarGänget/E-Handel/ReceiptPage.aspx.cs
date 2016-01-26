@@ -15,100 +15,58 @@ namespace E_Handel
     {
         private readonly string connectionString =
             ConfigurationManager.ConnectionStrings["KKG-EHandelConnectionString"].ConnectionString;
-            List<BLCartProduct> productList = new List<BLCartProduct>();
+        private BLOrder order;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["orderId"] = 2;
-            LoadOrder();
-            LoadProducts();
-            ShowProducts();
-        }
-
-        private void ShowProducts()
-        {
-            foreach (var product in productList)
+            try
             {
-                Label nameLabel = new Label();
-                //nameLabel.Text = Product.LoadName(product.Id);
-                ReceiptPanel.Controls.Add(nameLabel);
+                order = new BLOrder(connectionString, (int)Session["orderId"]);
+                ShowOrder();
+            }
+            catch (Exception)
+            {
+                throw; //Error retrieving order from Orders or OrderProducts
             }
         }
 
-        private void LoadOrder()
+        private void ShowOrder()
         {
-            SqlConnection con = new SqlConnection(connectionString);
-            string sqlQueryLabels = $"SELECT * From Orders WHERE ID = {(int)Session["orderId"]}";
-
-            SqlCommand cmdGetLabels = new SqlCommand(sqlQueryLabels, con);
-            SqlDataReader oreader = null;
+            OrderIdlbl.InnerText = order.Id.ToString();
+            TotalPricelbl.InnerText = "£" + order.TotalPrice;
+            Postagelbl.InnerText = "£" + order.Postage;
+            Addresslbl.InnerText = order.Address;
+            PostalCodelbl.InnerText = order.PostalCode;
+            Citylbl.InnerText = order.City;
+            Countrylbl.InnerText = order.Country;
+            Emaillbl.InnerText = order.Email;
+            TelephoneNumberlbl.InnerText = order.Telephone;
+            PaymentOptionslbl.InnerText = order.PaymentOptions;
+            Deliveryoptionslbl.InnerText = order.DeliveryOptions;
             try
             {
-                con.Open();
-                oreader = cmdGetLabels.ExecuteReader();
-                while (oreader.Read())
+                foreach (var cartProduct in order.CartProducts)
                 {
-                    TotalPricelbl.InnerText = oreader["TotalPrice"].ToString();
-                    //VATlbl.InnerText = oreader["VAT"].ToString();
-                    Postagelbl.InnerText = oreader["Postage"].ToString();
-                    Addresslbl.InnerText = oreader["Address"].ToString();
-                    PostalCodelbl.InnerText = oreader["PostalCode"].ToString();
-                    Citylbl.InnerText = oreader["City"].ToString();
-                    Countrylbl.InnerText = oreader["Country"].ToString();
-                    Emaillbl.InnerText = oreader["Email"].ToString();
-                    TelephoneNumberlbl.InnerText = oreader["Telephone"].ToString();
-                    PaymentOptionslbl.InnerText = oreader["PaymentOptions"].ToString();
-                    Deliveryoptionslbl.InnerText = oreader["DeliveryOptions"].ToString();
+                    BLProduct product = new BLProduct(connectionString, cartProduct.Id);
+                    Label nameAndQuantityLabel = new Label();
+                    nameAndQuantityLabel.Text = product.Name + "Amount: " + cartProduct.Quantity;
+                    ReceiptPanel.Controls.Add(nameAndQuantityLabel);
                 }
             }
             catch (Exception)
             {
-                throw;
-            }
-            finally
-            {
-                if (oreader != null)
-                {
-                    oreader.Close();
-                    oreader.Dispose();
-                }
-                con.Close();
-                con.Dispose();
-                cmdGetLabels.Dispose();
+                throw; //Error retrieving product from Products
             }
         }
 
-        private void LoadProducts()
+        protected void receiptHomeButton_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(connectionString);
-            string sqlQuery = $"SELECT * From OrderProducts WHERE OrderID = {(int)Session["orderId"]}";
+            Response.Redirect(Page.ResolveClientUrl("Home.aspx/"));
+        }
 
-            SqlCommand cmd = new SqlCommand(sqlQuery, con);
-            SqlDataReader oreader = null;
-            try
-            {
-                con.Open();
-                oreader = cmd.ExecuteReader();
-                while (oreader.Read())
-                {
-                    productList.Add(new BLCartProduct(int.Parse(oreader["ProductID"].ToString()), int.Parse(oreader["Quantity"].ToString())));
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                if (oreader != null)
-                {
-                    oreader.Close();
-                    oreader.Dispose();
-                }
-                con.Close();
-                con.Dispose();
-                cmd.Dispose();
-            }
+        protected void receiptPrintButton_Click(object sender, EventArgs e)
+        {
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "key", "window.print()", true);
         }
     }
 }
