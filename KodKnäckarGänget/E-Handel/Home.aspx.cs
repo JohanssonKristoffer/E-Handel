@@ -76,9 +76,9 @@ namespace E_Handel
             TitlePop1.Text = popularProductList[0].Name;
             if (popularProductList[0].Discount > 0)
             {
-                OriginalPricePop1.Text = "Original Price: <strike>£" + popularProductList[0].Price +
+                OriginalPricePop1.Text = "<strike>£" + popularProductList[0].Price +
                                          "</strike>";
-                DiscountPricePop1.Text = "Discount Price: £" +
+                DiscountPricePop1.Text = "£" +
                                          (popularProductList[0].Price * (1 - popularProductList[0].Discount / 100));
             }
             else
