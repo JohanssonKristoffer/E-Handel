@@ -248,6 +248,8 @@ namespace E_Handel
                     BLOrder order = new BLOrder(postage: shippingCost, totalPrice: totalCartPrice, address: customer_address.Text, postalCode: customer_postalcode.Text, city: customer_city.Text, country: customer_country.Text, email: customer_email.Text, telephone: customer_phone.Text, paymentOptions: PaymentDropdown(), deliveryOptions: shippingMethod, name: customer_name.Text, surname: customer_surname.Text, cartProducts: cartList);
                     order.InsertIntoDB(connectionString);
                     Session["orderId"] = order.Id;
+                    Session["cartList"] = null;
+                    Session["cartCount"] = null;
                     Response.Redirect("ReceiptPage.aspx");
                 }
                 catch (Exception)

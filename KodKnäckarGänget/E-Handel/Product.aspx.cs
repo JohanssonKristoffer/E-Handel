@@ -52,6 +52,11 @@ namespace E_Handel
                 else
                     productPrice.InnerText = "£" + product.Price;
                 productDescription.InnerText = product.Description;
+                if (product.TrailerUrl != null)
+                {
+                    linkViewTrailer.Visible = true;
+                    linkViewTrailer.HRef = product.TrailerUrl;
+                }
             }
             catch (Exception)
             {

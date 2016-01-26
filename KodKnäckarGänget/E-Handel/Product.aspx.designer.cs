@@ -22,6 +22,15 @@ namespace E_Handel {
         protected global::System.Web.UI.HtmlControls.HtmlImage productImage;
         
         /// <summary>
+        /// linkViewTrailer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor linkViewTrailer;
+        
+        /// <summary>
         /// productTitle control.
         /// </summary>
         /// <remarks>

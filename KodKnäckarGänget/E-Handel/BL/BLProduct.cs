@@ -17,8 +17,9 @@ namespace E_Handel.BL
         public int StockQuantity { get; set; }
         public double VAT { get; set; }
         public double Discount { get; set; }
+        public string TrailerUrl { get; set; }
 
-        public BLProduct(int id, int categoryId, string name, string description, double price, int popularity, int stockQuantity, double VAT, double discount = 0)
+        public BLProduct(int id, int categoryId, string name, string description, double price, int popularity, int stockQuantity, double VAT, double discount = 0, string trailerUrl = null)
         {
             Id = id;
             CategoryId = categoryId;
@@ -29,6 +30,7 @@ namespace E_Handel.BL
             StockQuantity = stockQuantity;
             this.VAT = VAT;
             Discount = discount;
+            TrailerUrl = trailerUrl;
         }
         public BLProduct(string databaseConnectionString, int id)
         {
@@ -51,6 +53,8 @@ namespace E_Handel.BL
                     VAT = double.Parse(sqlReader["VAT"].ToString());
                 }
                 GetDiscountFromDB(databaseConnectionString);
+                if (!TryGetTrailerUrlFromDB(databaseConnectionString))
+                    TrailerUrl = null;
             }
             finally
             {
@@ -79,6 +83,38 @@ namespace E_Handel.BL
                 {
                     Discount = double.Parse(sqlReader["DiscountPercentage"].ToString());
                 }
+            }
+            finally
+            {
+                if (sqlReader != null)
+                {
+                    sqlReader.Close();
+                    sqlReader.Dispose();
+                }
+                sqlConnection.Close();
+                sqlConnection.Dispose();
+                sqlGetProduct.Dispose();
+            }
+        }
+        public bool TryGetTrailerUrlFromDB(string databaseConnectionString)
+        {
+            SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
+            SqlCommand sqlGetProduct = new SqlCommand($"SELECT TrailerURL FROM ProductTrailers WHERE ProductID = {Id}", sqlConnection);
+            SqlDataReader sqlReader = null;
+            try
+            {
+                sqlConnection.Open();
+                sqlReader = sqlGetProduct.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                    TrailerUrl = sqlReader["TrailerURL"].ToString();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
             }
             finally
             {
