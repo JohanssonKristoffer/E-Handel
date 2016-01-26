@@ -96,6 +96,8 @@
     <Content Include="Scripts\cartScript.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\parallax.js" />
+    <Content Include="Scripts\parallax.min.js" />
     <Content Include="Site.Master" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">

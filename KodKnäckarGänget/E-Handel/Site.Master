@@ -53,18 +53,18 @@
             </asp:Panel>
         </header>
         <hr />
-        <div class="container">
             <asp:ContentPlaceHolder ID="PlaceholderMain" runat="server">
             </asp:ContentPlaceHolder>
-        </div>
         <hr />
         <footer class="container-fluid">
+            <row>
             <div>
                 <asp:HyperLink ID="LinkLegal" runat="server" source="http://www.konsumentverket.se/Global/Konsumentverket.se/Best%C3%A4lla%20och%20ladda%20ner/Broschyrer/Dokument/kis_svenska_06.pdf">Legal</asp:HyperLink>
             </div>
             <div>
                 <asp:HyperLink ID="LinkPolicy" runat="server" source="http://www.konsumentverket.se/Global/Konsumentverket.se/Best%C3%A4lla%20och%20ladda%20ner/Broschyrer/Dokument/kis_svenska_06.pdf">Policy</asp:HyperLink>
-            </div>
+            </div
+                </row>
         </footer>
     </form>
 </body>
