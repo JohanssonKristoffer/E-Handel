@@ -5,80 +5,85 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link href="Style/ReceiptPage.css" rel="stylesheet" />
+    <link href="Style/Receipt.css" rel="stylesheet" />
 </head>
 <body>
     <form id="ReceiptForm" runat="server">
         <div class="container-fluid">
             <div class="row-fluid">
                 <div id="ReceiptOutput">
-                    
 
+                    <div>
                     <asp:Panel ID="ReceiptPanel" runat="server">
-                        
                     </asp:Panel>
-
+                    </div>
+                        
                     <div id="ReceiptOrderId">
-                        <p>
-                            Your order id is:
-                            <p>
-                                <label id="OrderIdlbl" runat="server"></label>
+                        
+                                <label id="OrderIdlbl" runat="server">Your order id is: </label>
                     </div>
 
                     <div id="ReceiptTotalPrice">
-                        <p>Total price: </p>
-                        <label id="TotalPricelbl" runat="server"></label>
+
+                        <label id="TotalPricelbl" runat="server">Total price: </label>
                     </div>
 
                     <div id="ReceiptVAT">
-                        <p>Value added tax: </p>
-                        <label id="VATlbl" runat="server"></label>
+
+                        <label id="VATlbl" runat="server">Value added tax: </label>
                     </div>
 
                     <div id="ReceiptPostage">
-                        <p>Postage: </p>
-                        <label id="Postagelbl" runat="server"></label>
+
+                        <label id="Postagelbl" runat="server">Postage: </label>
                     </div>
 
                     <div id="ReceiptDeliveryAdress">
-                        <p>Delivery Adress: </p>
-                        <label id="Addresslbl" runat="server"></label>
+
+                        <label id="Addresslbl" runat="server">Delivery Adress: </label>
                     </div>
 
                     <div id="ReceiptPostalCode">
-                        <p>Postal code: </p>
-                        <label id="PostalCodelbl" runat="server"></label>
+
+                        <label id="PostalCodelbl" runat="server">Postal Code: </label>
                     </div>
 
                     <div id="ReceiptCity">
-                        <p>City: </p>
-                        <label id="Citylbl" runat="server"></label>
+
+                        <label id="Citylbl" runat="server">City: </label>
                     </div>
 
                     <div id="ReceiptCountry">
-                        <p>Country: </p>
-                        <label id="Countrylbl" runat="server"></label>
+
+                        <label id="Countrylbl" runat="server">Country: </label>
                     </div>
 
                     <div id="ReceiptEmail">
-                        <p>Email adress: </p>
-                        <label id="Emaillbl" runat="server"></label>
+
+                        <label id="Emaillbl" runat="server">Email adress: </label>
                     </div>
 
                     <div id="ReceiptPhoneNumber">
-                        <p>Phone number: </p>
-                        <label id="TelephoneNumberlbl" runat="server"></label>
+
+                        <label id="TelephoneNumberlbl" runat="server">Phone number: </label>
                     </div>
 
                     <div id="ReceiptPaymentOptions">
-                        <p>Payment option: </p>
-                        <label id="PaymentOptionslbl" runat="server"></label>
+
+                        <label id="PaymentOptionslbl" runat="server">Payment options: </label>
                     </div>
 
                     <div id="ReceiptDeliveryOption">
-                        <p>Delivery option: </p>
-                        <label id="Deliveryoptionslbl" runat="server"></label>
+
+                        <label id="Deliveryoptionslbl" runat="server">Delivery options: </label>
                     </div>
+                    
+
+                    <div id="receiptPageButtons">
+                    <asp:Button ID="receiptHomeButton" runat="server" text="Return to shop" OnClick="receiptHomeButton_Click"/>     
+                    <asp:Button ID="receiptPrintButton" runat="server" text="Print receipt" OnClick="receiptPrintButton_Click" />   
+                    </div>
+                    
 
                 </div>
 

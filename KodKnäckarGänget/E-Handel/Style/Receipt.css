@@ -1,1 +1,30 @@
-﻿
+﻿#ReceiptOutput {
+    text-align: center;
+    border:solid  black 2px;
+    width: 350px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+}
+
+label {
+    
+    float: left;
+}
+
+div > label {
+    display: inline-block;
+}
+
+span {
+    float: left;
+}
+
+#receiptPageButtons {
+    clear: both;
+    /*text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;*/
+}

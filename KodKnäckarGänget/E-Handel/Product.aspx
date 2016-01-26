@@ -10,6 +10,7 @@
             <div class="image_placeholder" runat="server">
                 <img alt="" runat="server" id="productImage" />
             </div>
+            <a id="linkViewTrailer" runat="server" Visible="False">View Trailer</a>
         </div>
 
         <div class="span8">

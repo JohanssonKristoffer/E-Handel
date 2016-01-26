@@ -31,25 +31,37 @@ namespace E_Handel
             }
             else
             {
-                productTitle.InnerText = "Unable to retrieve product.";//error
+                productTitle.InnerText = "Unable to retrieve product."; //Error parsing productId from url
             }
         }
 
         private void LoadProduct(int productId)
         {
-            product = new BLProduct(connectionString, productId);
-            productImage.Src = $"ImgHandler.ashx?productId={productId}";
-            productTitle.InnerText = product.Name;
-            if (product.Discount > 0)
+            try
             {
-                originalProductPrice.InnerText = "£" + product.Price;
-                originalProductPrice.Visible = true;
-                double newPrice = product.Price * (1 - product.Discount / 100);
-                productPrice.InnerText = "£" + newPrice;
+                product = new BLProduct(connectionString, productId);
+                productImage.Src = $"ImgHandler.ashx?productId={productId}";
+                productTitle.InnerText = product.Name;
+                if (product.Discount > 0)
+                {
+                    originalProductPrice.InnerText = "£" + product.Price;
+                    originalProductPrice.Visible = true;
+                    double newPrice = product.Price * (1 - product.Discount / 100);
+                    productPrice.InnerText = "£" + newPrice;
+                }
+                else
+                    productPrice.InnerText = "£" + product.Price;
+                productDescription.InnerText = product.Description;
+                if (product.TrailerUrl != null)
+                {
+                    linkViewTrailer.Visible = true;
+                    linkViewTrailer.HRef = product.TrailerUrl;
+                }
             }
-            else
-                productPrice.InnerText = "£" + product.Price;
-            productDescription.InnerText = product.Description;
+            catch (Exception)
+            {
+                throw; //Error loading product from Products
+            }
         }
 
         private void LoadVariant()
@@ -94,9 +106,9 @@ namespace E_Handel
                 sqlCheckForVariants.Dispose();
                 sqlCheckForOriginal.Dispose();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //Error
+                throw; //Error loading variants from ProductVariants
             }
             finally
             {
@@ -112,14 +124,21 @@ namespace E_Handel
 
         private void ShowVariants()
         {
-            DropDownVariants.Items.Clear();
-            ListItem selectedProduct = new ListItem(productTitle.InnerText, product.Id.ToString());
-            DropDownVariants.Items.Add(selectedProduct);
-            foreach (int variantId in variantIdList)
+            try
             {
-                BLProduct variant = new BLProduct(connectionString, variantId);
-                ListItem item = new ListItem(variant.Name, variantId.ToString());
-                DropDownVariants.Items.Add(item);
+                DropDownVariants.Items.Clear();
+                ListItem selectedProduct = new ListItem(productTitle.InnerText, product.Id.ToString());
+                DropDownVariants.Items.Add(selectedProduct);
+                foreach (int variantId in variantIdList)
+                {
+                    BLProduct variant = new BLProduct(connectionString, variantId);
+                    ListItem item = new ListItem(variant.Name, variantId.ToString());
+                    DropDownVariants.Items.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                throw; //Error loading variant from Products
             }
         }
 
