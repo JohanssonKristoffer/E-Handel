@@ -11,6 +11,7 @@
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" rel="stylesheet" />
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet" />
     <link href="Style/Master.css" rel="stylesheet" />
+    <link href="Style/masterFooter.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="PlaceholderHead" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -60,10 +61,31 @@
         <hr />
         <footer class="container-fluid">
             <div>
-                <asp:HyperLink ID="LinkLegal" runat="server" source="http://www.konsumentverket.se/Global/Konsumentverket.se/Best%C3%A4lla%20och%20ladda%20ner/Broschyrer/Dokument/kis_svenska_06.pdf">Legal</asp:HyperLink>
+                <h2>Kontakta oss!</h2>
+                <p>Email: pleaseDontContactUs@dummyMail.com</p>
+                <p>Phone number: 1337 420 8008</p>
             </div>
+
+
             <div>
-                <asp:HyperLink ID="LinkPolicy" runat="server" source="http://www.konsumentverket.se/Global/Konsumentverket.se/Best%C3%A4lla%20och%20ladda%20ner/Broschyrer/Dokument/kis_svenska_06.pdf">Policy</asp:HyperLink>
+                <h2>Policy and Law</h2>
+                <ul>
+                    <li><a href="Home.aspx">Our policies</a></li>
+                    <li><a href="Home.aspx">Relevant laws</a></li>
+                </ul>
+            </div>
+
+
+            <div id="socialMedia">
+                <h2>Follow for the latest news</h2>
+                <div>
+                    <a href="https://www.facebook.com">
+                        <img src="Images/1453755185_social-facebook-square2.png" /></a>
+                </div>
+                <div>
+                    <a href="https://www.twitter.com">
+                        <img src="Images/1453755419_twitter.png" /></a>
+                </div>
             </div>
         </footer>
     </form>
