@@ -1,8 +1,26 @@
 ﻿body {
     background-color: ghostwhite;
-    color:black;
+    color: #000000;
+}
+#Search{
+    float:right;
+    margin:0px;
+    display:inline-block;
+}
+#SearchButton{
+    width:100px;
 }
 
+#MainHead{
+    display:inline;
+}
+
+#Logon{
+    width:1500px;
+    height:150px;
+   
+    
+}
 header nav ul li {
     display: inline;
 }
@@ -15,15 +33,26 @@ a {
     color: blue;
 }
 
-footer {
-    text-align: center;
-}
+  text-align: center;
+}*/
+/*.container-fluid {
+    background-image: url('../Images/Photo1.jpg');
+}*/
+
+#SearchArea {ea {
+{
+
 
 #SearchArea {
     margin: 0 auto;
     padding: 10px;
     text-align: right;
-}
+}e
+rrchBox {
+   {
+SearchBox {
+   hBox {
+         hei
 
 #SearchBox {
     height: 40px;
