@@ -83,6 +83,8 @@ namespace E_Handel
             }
             catch (Exception)
             {
+                Session["cartList"] = null;
+                Session["cartCount"] = null;
                 throw; //Error retrieving product from Products
             }
         }
@@ -99,7 +101,7 @@ namespace E_Handel
 
         private void HideCartOnCheckout()
         {
-            if (Request.Url.ToString().Contains("Checkout.aspx"))
+            if (Request.Url.ToString().Contains("/Checkout.aspx"))
                 CartLi.Visible = false;
         }
 
@@ -111,13 +113,13 @@ namespace E_Handel
 
         protected void SendSearch_Click(object sender, EventArgs e)
         {
-            Response.Redirect($"Result.aspx?search={SearchBox.Text}");
+            Response.Redirect($"/Result.aspx?search={SearchBox.Text}");
         }
 
         protected void SendCategoryChoice_SelectChange(object sender, EventArgs e)
         {
             if (DropDownCategories.SelectedValue != "0")
-                Response.Redirect($"Result.aspx?categoryId={DropDownCategories.SelectedValue}");
+                Response.Redirect($"/Result.aspx?categoryId={DropDownCategories.SelectedValue}");
         }
     }
 }

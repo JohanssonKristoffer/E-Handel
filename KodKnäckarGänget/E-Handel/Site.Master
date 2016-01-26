@@ -26,7 +26,7 @@
             </div>
             <nav class="row">
                 <ul>
-                    <li id="HomeLi"><a href="Home.aspx">Home</a></li>
+                    <li id="HomeLi"><a href="/Home.aspx">Home</a></li>
                     <li>
                         <asp:DropDownList ID="DropDownCategories" AppendDataBoundItems="true" runat="server" AutoPostBack="True" DataSourceID="DataSourceCategories" DataTextField="Name" DataValueField="ID" OnSelectedIndexChanged="SendCategoryChoice_SelectChange">
                             <asp:ListItem Text="Categories" Value="0"></asp:ListItem>

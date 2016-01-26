@@ -25,8 +25,8 @@ namespace E_Handel
         {
             searchString = Request.QueryString["search"];
             string categoryIdString = Request.QueryString["categoryId"];
-
-
+            
+            throw new Exception("This is a test exception!");
             if (searchString != null)
             {
                 if (ValidateSearchString())
