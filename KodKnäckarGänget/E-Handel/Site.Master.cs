@@ -87,6 +87,7 @@ namespace E_Handel
             }
         }
 
+
         private bool TryRetrieveCartList()
         {
             if (Session["cartList"] != null)

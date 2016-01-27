@@ -74,6 +74,7 @@
     <Content Include="Home.aspx" />
     <Content Include="Images\1453755185_social-facebook-square2.png" />
     <Content Include="Images\1453755419_twitter.png" />
+    <Content Include="Images\cart_icon.png" />
     <Content Include="Images\Logo.png" />
     <Content Include="Images\media-pawn.png" />
     <Content Include="Images\Photo1.jpg" />

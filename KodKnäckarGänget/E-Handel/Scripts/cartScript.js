@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $("#textlink").click(function (evt) {
+    $("#openCart").click(function (evt) {
         evt.preventDefault();
         if ($('#CartPanel').is(":hidden")) {
             $("#CartPanel").slideDown("fast");
@@ -36,4 +36,7 @@ $(document).ready(function () {
     $(".right").click(function () {
         $(".carousel").carousel("next");
     });
-});})
+});
+})
+
+$(".dropdown-toggle").dropdown();
