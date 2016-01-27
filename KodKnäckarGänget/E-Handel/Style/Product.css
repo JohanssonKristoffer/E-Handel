@@ -27,3 +27,9 @@ input[type="number"] {
 .image_placeholder img {
     width: 310px;
 }
+body{
+    font-family:Georgia;
+    font-size:14px;
+    font-style:normal;
+
+}

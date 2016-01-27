@@ -70,16 +70,17 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="ErrorPages\404.aspx" />
+    <Content Include="ErrorPages\ErrorDefault.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Home.aspx" />
     <Content Include="Images\1453755185_social-facebook-square2.png" />
     <Content Include="Images\1453755419_twitter.png" />
-    <Content Include="Images\cart_icon.png" />
-    <Content Include="Images\Logo.png" />
+    <Content Include="Images\1453917211_print.png" />
+    <Content Include="Images\404.jpg" />
     <Content Include="Images\media-pawn.png" />
-    <Content Include="Images\Photo1.jpg" />
     <Content Include="Images\removeProduct.png" />
-    <Content Include="Images\sale2016.png" />
+    <Content Include="Images\sales2016.jpg" />
     <Content Include="Images\ShrekDisplay.jpg" />
     <Content Include="Images\updateCart.png" />
     <Content Include="packages.config" />
@@ -114,6 +115,7 @@
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
     <Content Include="Style\Checkout.css" />
+    <Content Include="Style\Error.css" />
     <Content Include="Style\Home.css" />
     <Content Include="Style\Master.css" />
     <Content Include="Style\masterFooter.css" />
@@ -126,6 +128,20 @@
     <Compile Include="BL\BLCartProduct.cs" />
     <Compile Include="BL\BLOrder.cs" />
     <Compile Include="BL\BLProduct.cs" />
+    <Compile Include="ErrorPages\404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\ErrorDefault.aspx.cs">
+      <DependentUpon>ErrorDefault.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\ErrorDefault.aspx.designer.cs">
+      <DependentUpon>ErrorDefault.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

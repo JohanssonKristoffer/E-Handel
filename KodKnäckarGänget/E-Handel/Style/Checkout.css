@@ -1,31 +1,66 @@
-﻿        .checkout_table {
-            border: 1px solid #cccccc;
-            padding: 10px;
-            width: 100%;
-        }
+﻿body {
+    font-family: Georgia;
+    font-size: 14px;
+    font-style: normal;
+}
 
-        .productImage {
-            width: 120px;
-        }
+.checkout_table {
+    border: 1px solid #cccccc;
+    padding: 10px;
+    width: 100%;
+}
 
-        td {
-            width: 80px;
-            vertical-align: top;
-            text-align: left;
-            padding: 5px;
-        }
+.productImage {
+    width: 120px;
+}
 
-        .table_icons {
-            width: 30px;
-        }
+td {
+    width: 80px;
+    vertical-align: top;
+    text-align: left;
+    padding: 5px;
+}
 
-        .QuantityTextbox {
-            width: 50px;    
-        }
 
-        input[type=text] {
-            padding: 5px;
-            height: 20px;
-            width: 40px;
-            background-color: white;
-        }
+.table_icons {
+    width: 30px;
+}
+
+.quantityNumbelLabel {
+    margin: 10px;
+}
+
+.Checkout_TextBox {
+    padding: 5px;
+    height: 20px;
+    width: 200px;
+    background-color: white;
+    margin: 10px;
+}
+
+#NameTxtBox {
+    display: inline-flex;
+    margin: 10px;
+}
+
+#Address {
+    margin: 10px;
+}
+
+#Address input[type=text] {
+        width : 420px;
+    }
+
+#PostCity {
+    margin: 10px;
+}
+
+#OtherLabel {
+    margin: 10px;
+    display: table-caption;
+}
+.ParagraphChekout{
+    margin:30px;
+    display:inline-block;
+}
+

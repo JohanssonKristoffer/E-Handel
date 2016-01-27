@@ -12,7 +12,7 @@
                 <div class="image_placeholder" runat="server">
                     <img alt="" runat="server" id="productImage" />
                 </div>
-                <a id="linkViewTrailer" target="_blank" runat="server" visible="False">View Trailer</a>
+                <a id="linkViewTrailer" target="_blank" runat="server" class="btn btn-primary" visible="False">View Trailer</a>
             </div>
 
             <div class="col-md-8">

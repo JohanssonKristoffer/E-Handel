@@ -100,7 +100,8 @@ namespace E_Handel
                     Label quantityLabel = new Label
                     {
                         Enabled = false,
-                        Text = cartProduct.Quantity.ToString()
+                        Text = cartProduct.Quantity.ToString(),
+                        CssClass = "quantityNumbelLabel"
                     };
                     Button increaseEditCartButton = new Button()
                     {
@@ -139,9 +140,9 @@ namespace E_Handel
                     TableCell celltotalPrice = new TableCell();
                     celltotalPrice.Controls.Add(totalPriceLabel);
 
-                    Button removeProductButton = new Button()
+                    ImageButton removeProductButton = new ImageButton()
                     {
-                        Text = "Remove from cart",
+                        ImageUrl= "/Images/removeProduct.png",
                         ID = $"removeButton_{product.Id}"
                     };
                     removeProductButton.Click += RemoveButton_Click;
@@ -213,7 +214,7 @@ namespace E_Handel
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            Button buttonClicked = (Button)sender;
+            ImageButton buttonClicked = (ImageButton)sender;
             int productId = int.Parse(buttonClicked.ID.Split('_')[1]);
 
             foreach (BLCartProduct cartProduct in cartList)

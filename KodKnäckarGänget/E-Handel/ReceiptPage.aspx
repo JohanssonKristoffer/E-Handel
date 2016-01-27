@@ -13,78 +13,58 @@
             <div class="row-fluid">
                 <div id="ReceiptOutput">
 
-                    <div>
+                    <table runat="server">
+                        <tr>
+                            <th>OrderId</th>
+                            <td id="orderIdOutput"></td>
+                        </tr>
+                        <tr>
+                            <th>TotalPrice</th>
+                            <td id="totalPrice"></td>
+                        </tr>
+                        <tr>
+                            <th>Postage</th>
+                            <td id="postage"></td>
+                        </tr>
+                        <tr>
+                            <th>Adress</th>
+                            <td id="adress"></td>
+                        </tr>
+                        <tr>
+                            <th>PostalCode</th>
+                            <td id="postalCode"></td>
+                        </tr>
+                        <tr>
+                            <th>City</th>
+                            <td id="city"></td>
+                        </tr>
+                        <tr>
+                            <th>Country</th>
+                            <td id="country"></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td id="email"></td>
+                        </tr>
+                        <tr>
+                            <th>PhoneNumber</th>
+                            <td id="phoneNumber"></td>
+                        </tr>
+                        <tr>
+                            <th>Payment Options</th>
+                            <td id="paymentOptions"></td>
+                        </tr>
+                        <tr>
+                            <th>Delivery Option</th>
+                            <td id="deliveryOptions"></td>
+                        </tr>
+                    </table>
                     <asp:Panel ID="ReceiptPanel" runat="server">
                     </asp:Panel>
-                    </div>
-                        
-                    <div id="ReceiptOrderId">
-                        
-                                <label id="OrderIdlbl" runat="server">Your order id is: </label>
-                    </div>
-
-                    <div id="ReceiptTotalPrice">
-
-                        <label id="TotalPricelbl" runat="server">Total price: </label>
-                    </div>
-
-                    <div id="ReceiptVAT">
-
-                        <label id="VATlbl" runat="server">Value added tax: </label>
-                    </div>
-
-                    <div id="ReceiptPostage">
-
-                        <label id="Postagelbl" runat="server">Postage: </label>
-                    </div>
-
-                    <div id="ReceiptDeliveryAdress">
-
-                        <label id="Addresslbl" runat="server">Delivery Adress: </label>
-                    </div>
-
-                    <div id="ReceiptPostalCode">
-
-                        <label id="PostalCodelbl" runat="server">Postal Code: </label>
-                    </div>
-
-                    <div id="ReceiptCity">
-
-                        <label id="Citylbl" runat="server">City: </label>
-                    </div>
-
-                    <div id="ReceiptCountry">
-
-                        <label id="Countrylbl" runat="server">Country: </label>
-                    </div>
-
-                    <div id="ReceiptEmail">
-
-                        <label id="Emaillbl" runat="server">Email adress: </label>
-                    </div>
-
-                    <div id="ReceiptPhoneNumber">
-
-                        <label id="TelephoneNumberlbl" runat="server">Phone number: </label>
-                    </div>
-
-                    <div id="ReceiptPaymentOptions">
-
-                        <label id="PaymentOptionslbl" runat="server">Payment options: </label>
-                    </div>
-
-                    <div id="ReceiptDeliveryOption">
-
-                        <label id="Deliveryoptionslbl" runat="server">Delivery options: </label>
-                    </div>
-                    
-
                     <div id="receiptPageButtons">
                     <asp:Button ID="receiptHomeButton" runat="server" text="Return to shop" OnClick="receiptHomeButton_Click"/>     
-                    <asp:Button ID="receiptPrintButton" runat="server" text="Print receipt" OnClick="receiptPrintButton_Click" />   
+                    <asp:Button ID="receiptPrintButton" runat="server" text="Print Receipt" OnClick="receiptPrintButton_Click" />
                     </div>
-                    
-
                 </div>
 
             </div>

@@ -25,8 +25,7 @@ namespace E_Handel
         {
             searchString = Request.QueryString["search"];
             string categoryIdString = Request.QueryString["categoryId"];
-
-
+            
             if (searchString != null)
             {
                 if (ValidateSearchString())

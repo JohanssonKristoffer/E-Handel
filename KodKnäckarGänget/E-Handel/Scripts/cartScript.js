@@ -10,7 +10,7 @@
 
 $(document).ready(function () {
     // Activate Carousel
-    $(".carousel").carousel({ interval: 80000 });
+    $(".carousel").carousel({ interval: 3000 });
 
     // Enable Carousel Indicators
     $(".item").click(function () {
