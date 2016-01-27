@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $("#textlink").click(function (evt) {
+    $("#openCart").click(function (evt) {
         evt.preventDefault();
         if ($('#CartPanel').is(":hidden")) {
             $("#CartPanel").slideDown("fast");
@@ -10,7 +10,7 @@
 
 $(document).ready(function () {
     // Activate Carousel
-    $(".carousel").carousel({ interval: 80000 });
+    $(".carousel").carousel({ interval: 3000 });
 
     // Enable Carousel Indicators
     $(".item").click(function () {
@@ -36,4 +36,7 @@ $(document).ready(function () {
     $(".right").click(function () {
         $(".carousel").carousel("next");
     });
-});})
+});
+})
+
+$(".dropdown-toggle").dropdown();

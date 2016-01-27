@@ -5,12 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <script src="Scripts/bootstrap.js"></script>
-    <script src="Scripts/jquery-1.9.1.js"></script>
-    <script src="Scripts/cartScript.js"></script>
-    <link href="Content/bootstrap.css" rel="stylesheet" />
-    <link href="Style/Master.css" rel="stylesheet" />
-    <link href="Style/masterFooter.css" rel="stylesheet" />
+    <script src="/Scripts/bootstrap.js"></script>
+    <script src="/Scripts/jquery-1.9.1.js"></script>
+    <script src="/Scripts/cartScript.js"></script>
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Style/Master.css" rel="stylesheet" />
+    <link href="/Style/masterFooter.css" rel="stylesheet" />
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" rel="stylesheet" />
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="PlaceholderHead" runat="server">
@@ -18,19 +18,75 @@
 </head>
 <body>
     <form id="form" runat="server">
+        <asp:SqlDataSource ID="DataSourceCategories" runat="server" ConnectionString="<%$ ConnectionStrings:KKG-EHandelConnectionString %>" SelectCommand="SELECT [ID], [Name] FROM [Categories] ORDER BY [Name]"></asp:SqlDataSource>
 
-        <header class="container-fluid">
-            <asp:SqlDataSource ID="DataSourceCategories" runat="server" ConnectionString="<%$ ConnectionStrings:KKG-EHandelConnectionString %>" SelectCommand="SELECT [ID], [Name] FROM [Categories] ORDER BY [Name]"></asp:SqlDataSource>
-           <img src="/Images/Logo.png" id="Logon" />
-             <div class="row" id="MainHead">
-              <div  id="Search">
+        <div class="container">
+            <div class="row">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <span class="navbar-brand">Logo</span>
+                        </div>
 
-                <asp:TextBox ID="SearchBox" runat="server"></asp:TextBox>
-                <asp:Button ID="SearchButton" runat="server" Text="Search" class="btn btn-primary" OnClick="SendSearch_Click" /> </div>
-            <div id="Category">
-            <nav class="row">
-                <ul>
-                    <li id="HomeLi"><a href="/Home.aspx">Home</a></li>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a href="Home.aspx">Home</a></li>
+                                <li><a href="result.aspx?sales=view">Sales</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" ID="">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">One more separated link</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <asp:Label CssClass="navbar-form navbar-left" role="search" runat="server">
+                                <asp:TextBox ID="SearchBox" runat="server"></asp:TextBox>
+                                <asp:Button ID="SearchButton" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="SendSearch_Click" />
+                            </asp:Label>
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <asp:Button ID="openCart" runat="server" />
+
+                                <asp:Panel ID="CartPanel" runat="server" CssClass="cartPanel">
+                                    <asp:Label ID="CartDropDownTableText" runat="server">No products in the cart</asp:Label>
+                                    <asp:Table runat="server" ID="CartListTable">
+                                        <asp:TableHeaderRow ID="CartDropDownTableHeader" runat="server">
+                                            <asp:TableHeaderCell></asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>Title</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>Price</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>Quantity</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>Total</asp:TableHeaderCell>
+                                        </asp:TableHeaderRow>
+                                    </asp:Table>
+                                    <asp:Button runat="server" ID="CheckoutButton" Text="Proceed To Checkout" PostBackUrl="Checkout.aspx" />
+                                </asp:Panel>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+            </div>
+        </div>
+
+        <header class="container">
+            <!--<img src="Images/Logo.png" id="Logon" />-->
+            <!--  <ul>
+                    <li id="HomeLi"><a href="Home.aspx">Home</a></li>
                     <li>
                         <asp:DropDownList ID="DropDownCategories" AppendDataBoundItems="true" runat="server" AutoPostBack="True" DataSourceID="DataSourceCategories" DataTextField="Name" DataValueField="ID" OnSelectedIndexChanged="SendCategoryChoice_SelectChange">
                             <asp:ListItem Text="Categories" Value="0"></asp:ListItem>
@@ -38,31 +94,14 @@
                         </asp:DropDownList>
                     </li>
                     <li id="CartLi" runat="server">
-                        <asp:Button ID="textlink" runat="server" Text="Cart" />
                         <asp:Label runat="server" ID="CartCountLabel"></asp:Label>
                     </li>
-                </ul>
-            </nav></div>
-            <div id="Cart">
-            <asp:Panel ID="CartPanel" runat="server" CssClass="cartPanel">
-              <hr /> 
-                 <asp:Label ID="CartDropDownTableText" runat="server">No products in the cart</asp:Label>
-                <asp:Table runat="server" ID="CartListTable">
-                    <asp:TableHeaderRow ID="CartDropDownTableHeader" runat="server">
-                        <asp:TableHeaderCell></asp:TableHeaderCell>
-                        <asp:TableHeaderCell>Title</asp:TableHeaderCell>
-                        <asp:TableHeaderCell>Price</asp:TableHeaderCell>
-                        <asp:TableHeaderCell>Quantity</asp:TableHeaderCell>
-                        <asp:TableHeaderCell>Total</asp:TableHeaderCell>
-                    </asp:TableHeaderRow>
-                </asp:Table>
-                <asp:Button runat="server" ID="CheckoutButton" Text="Proceed To Checkout" PostBackUrl="Checkout.aspx" />
-            </asp:Panel></div>
-                  </div>
+                </ul> -->
+
         </header>
         <hr />
-            <asp:ContentPlaceHolder ID="PlaceholderMain" runat="server">
-            </asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder ID="PlaceholderMain" runat="server">
+        </asp:ContentPlaceHolder>
         <footer class="container-fluid" id="MainFooter">
             <div class="span4" id="Contact">
                 <h2>Contact Us!</h2>
@@ -84,9 +123,9 @@
                 <h2>Find the latest news</h2>
                 <div id="FooterImages">
                     <a href="https://www.facebook.com">
-                        <img src="/Images/1453755185_social-facebook-square2.png" /></a>            
+                        <img src="Images/1453755185_social-facebook-square2.png" /></a>
                     <a href="https://www.twitter.com">
-                        <img src="/Images/1453755419_twitter.png" /></a>
+                        <img src="Images/1453755419_twitter.png" /></a>
                 </div>
             </div>
         </footer>

@@ -58,40 +58,13 @@ namespace E_Handel {
         protected global::System.Web.UI.WebControls.Button SearchButton;
         
         /// <summary>
-        /// DropDownCategories control.
+        /// openCart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownCategories;
-        
-        /// <summary>
-        /// CartLi control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CartLi;
-        
-        /// <summary>
-        /// textlink control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button textlink;
-        
-        /// <summary>
-        /// CartCountLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CartCountLabel;
+        protected global::System.Web.UI.WebControls.Button openCart;
         
         /// <summary>
         /// CartPanel control.
@@ -137,6 +110,33 @@ namespace E_Handel {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button CheckoutButton;
+        
+        /// <summary>
+        /// DropDownCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownCategories;
+        
+        /// <summary>
+        /// CartLi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CartLi;
+        
+        /// <summary>
+        /// CartCountLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CartCountLabel;
         
         /// <summary>
         /// PlaceholderMain control.

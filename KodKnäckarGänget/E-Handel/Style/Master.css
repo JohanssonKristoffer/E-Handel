@@ -2,27 +2,52 @@
     background-color: ghostwhite;
     color: #000000;
 }
-#Search{
-    float:right;
-    margin:0px;
-    display:inline-block;
-}
-#SearchButton{
-    width:100px;
+
+#SearchArea {
+    margin: 0 auto;
+    padding: 10px;
+    display: inline;
 }
 
-#MainHead{
-    display:inline;
+#SearchBox {
+    width: 280px;
+    height: 30px;
+    display: inline;
+    margin-right: 10px;
+}
+
+#SearchButton {
+    height: 30px;
+    width: 82px;
+    display: inline;
+    margin-top: 6px;
+}
+
+#Search{
+    display: inline;
 }
 
 #Logon{
     width:1500px;
     height:150px;
-   
-    
 }
+
 header nav ul li {
     display: inline;
+}
+
+.navbar-default {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    /* position: fixed; */
+    z-index: 10;
+    width: 100%;
+    padding: 10px 0 10px;
+    margin-bottom: 60px;
+}
+
+.caret {
+    vertical-align: top;    
 }
 
 label {
@@ -33,34 +58,27 @@ a {
     color: blue;
 }
 
-  
-/*.container-fluid {
-    background-image: url('../Images/Photo1.jpg');
-}*/
+select {
+    width: 150px;
+    background-color: #ffffff;
+    border: 0;
+    padding: 5px 0 0;
+}
 
-
-
-#SearchArea {
+#openCart {
+    background-color: #ffffff;
+    background-image: url('../images/cart_icon.png');
+    background-repeat: no-repeat; 
+    border: 0;
+    height: 50px;
+    width: 50px;
     margin: 0 auto;
-    padding: 10px;
-    text-align: right;
-}
-
-#SearchBox {
-    height: 40px;
-    width: 160px;
-}
-
-#SearchButton {
-    height: 40px;
-    width: 82px;
-    text-align: center;
 }
 
 .cartPanel {
     display: none;
     text-align: right;
-    float: right;
+    /*float: right;*/
     width: 600px;
     height: 200px;
     padding: 15px;

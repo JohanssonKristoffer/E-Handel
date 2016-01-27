@@ -58,15 +58,6 @@ namespace E_Handel {
         protected global::System.Web.UI.WebControls.DropDownList payment_dropdown;
         
         /// <summary>
-        /// customer_name_label control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label customer_name_label;
-        
-        /// <summary>
         /// customer_name control.
         /// </summary>
         /// <remarks>
@@ -74,15 +65,6 @@ namespace E_Handel {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox customer_name;
-        
-        /// <summary>
-        /// customer_surname_label control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label customer_surname_label;
         
         /// <summary>
         /// customer_surname control.
@@ -94,51 +76,6 @@ namespace E_Handel {
         protected global::System.Web.UI.WebControls.TextBox customer_surname;
         
         /// <summary>
-        /// customer_email_label control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label customer_email_label;
-        
-        /// <summary>
-        /// customer_email control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox customer_email;
-        
-        /// <summary>
-        /// customer_phone_label control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label customer_phone_label;
-        
-        /// <summary>
-        /// customer_phone control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox customer_phone;
-        
-        /// <summary>
-        /// customer_address_label control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label customer_address_label;
-        
-        /// <summary>
         /// customer_address control.
         /// </summary>
         /// <remarks>
@@ -146,15 +83,6 @@ namespace E_Handel {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox customer_address;
-        
-        /// <summary>
-        /// customer_postalcode_label control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label customer_postalcode_label;
         
         /// <summary>
         /// customer_postalcode control.
@@ -166,15 +94,6 @@ namespace E_Handel {
         protected global::System.Web.UI.WebControls.TextBox customer_postalcode;
         
         /// <summary>
-        /// customer_city_label control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label customer_city_label;
-        
-        /// <summary>
         /// customer_city control.
         /// </summary>
         /// <remarks>
@@ -184,15 +103,6 @@ namespace E_Handel {
         protected global::System.Web.UI.WebControls.TextBox customer_city;
         
         /// <summary>
-        /// customer_country_label control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label customer_country_label;
-        
-        /// <summary>
         /// customer_country control.
         /// </summary>
         /// <remarks>
@@ -200,6 +110,24 @@ namespace E_Handel {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox customer_country;
+        
+        /// <summary>
+        /// customer_phone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox customer_phone;
+        
+        /// <summary>
+        /// customer_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox customer_email;
         
         /// <summary>
         /// customer_submit_order control.
