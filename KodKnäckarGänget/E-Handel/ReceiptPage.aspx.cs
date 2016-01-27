@@ -61,7 +61,7 @@ namespace E_Handel
 
         protected void receiptHomeButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect(Page.ResolveClientUrl("Home.aspx/"));
+            Response.Redirect(Page.ResolveClientUrl("/Home.aspx"));
         }
 
         protected void receiptPrintButton_Click(object sender, EventArgs e)

@@ -5,12 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <script src="Scripts/bootstrap.js"></script>
-    <script src="Scripts/jquery-1.9.1.js"></script>
-    <script src="Scripts/cartScript.js"></script>
-    <link href="Content/bootstrap.css" rel="stylesheet" />
-    <link href="Style/Master.css" rel="stylesheet" />
-    <link href="Style/masterFooter.css" rel="stylesheet" />
+    <script src="/Scripts/bootstrap.js"></script>
+    <script src="/Scripts/jquery-1.9.1.js"></script>
+    <script src="/Scripts/cartScript.js"></script>
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Style/Master.css" rel="stylesheet" />
+    <link href="/Style/masterFooter.css" rel="stylesheet" />
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" rel="stylesheet" />
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="PlaceholderHead" runat="server">
