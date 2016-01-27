@@ -26,6 +26,60 @@ namespace E_Handel
             ShowAds();
             RetrievePopularProducts();
             ShowPopularProducts();
+            PopulateCarousel();
+        }
+
+        private void PopulateCarousel()
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            SqlCommand sqlGetCategories = new SqlCommand("SELECT ID, Name, Description FROM Categories", sqlConnection);
+            SqlDataReader sqlReader = null;
+            try
+            {
+                sqlConnection.Open();
+                sqlReader = sqlGetCategories.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                    Image image = new Image
+                    {
+                        CssClass = "carousel-image",
+                        ImageUrl = $"ImgHandler.ashx?categoryId={int.Parse(sqlReader["ID"].ToString())}"
+                    };
+                    HyperLink link = new HyperLink
+                    {
+                        NavigateUrl = $"/Result.aspx?categoryId={int.Parse(sqlReader["ID"].ToString())}"
+                    };
+                    link.Controls.Add(image);
+
+                    Label captionLabel = new Label
+                    {
+                        Text = $"<h3 style = 'color: #FFFFFF' > {sqlReader["Name"]} </ h3 >"
+                    };
+                    Panel captionPanel = new Panel {CssClass = "carousel-caption"};
+                    captionPanel.Controls.Add(captionLabel);
+
+                    Panel itemPanel = new Panel {CssClass = "item"};
+                    itemPanel.Controls.Add(link);
+                    itemPanel.Controls.Add(captionPanel);
+
+                    categoryCarousel.Controls.Add(itemPanel);
+                }
+            }
+            catch (Exception)
+            {
+                throw; //Error retrieving categories from Categories
+            }
+            finally
+            {
+                if (sqlReader != null)
+                {
+                    sqlReader.Close();
+                    sqlReader.Dispose();
+                }
+                sqlConnection.Close();
+                sqlConnection.Dispose();
+                sqlGetCategories.Dispose();
+            }
         }
 
         private void RetrievePopularProducts()
