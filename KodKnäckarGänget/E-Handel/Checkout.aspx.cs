@@ -22,7 +22,7 @@ namespace E_Handel
         protected void Page_Load(object sender, EventArgs e)
         {
             if (TryLoadCartList())
-                CreateTableCellsFromCartList();
+                FillTableCellsFromCartList();
             else
             {
                 //Error attempting to retrieve empty cartlist
@@ -69,15 +69,16 @@ namespace E_Handel
             }
         }
 
-        private void CreateTableCellsFromCartList()
+        private void FillTableCellsFromCartList()
         {
             try
             {
+                checkout_product_table.Controls.Clear();
                 foreach (var cartProduct in cartList)
                 {
                     BLProduct product = new BLProduct(connectionString, cartProduct.Id);
 
-                    HyperLink linkProduct = new HyperLink {NavigateUrl = $"Product.aspx?productId={product.Id}"};
+                    HyperLink linkProduct = new HyperLink { NavigateUrl = $"Product.aspx?productId={product.Id}" };
                     Image productImage = new Image
                     {
                         ImageUrl = $"ImgHandler.ashx?productIdThumb={product.Id}",
@@ -88,11 +89,11 @@ namespace E_Handel
                     TableCell cellImage = new TableCell();
                     cellImage.Controls.Add(linkProduct);
 
-                    Label nameLabel = new Label {Text = product.Name};
+                    Label nameLabel = new Label { Text = product.Name };
                     TableCell cellName = new TableCell();
                     cellName.Controls.Add(nameLabel);
 
-                    Label priceLabel = new Label {Text = "£" + (product.Price*(1 - product.Discount/100))};
+                    Label priceLabel = new Label { Text = "£" + (product.Price * (1 - product.Discount / 100)) };
                     TableCell cellPrice = new TableCell();
                     cellPrice.Controls.Add(priceLabel);
 
@@ -106,6 +107,7 @@ namespace E_Handel
                     Button increaseEditCartButton = new Button()
                     {
                         Text = "+",
+                        CausesValidation = false,
                         ID = $"increaseEditCartButton_{product.Id}"
                     };
                     increaseEditCartButton.Click += IncreaseEditCartButton_Click;
@@ -114,35 +116,37 @@ namespace E_Handel
                     Button decreaseEditCartButton = new Button()
                     {
                         Text = "-",
+                        CausesValidation = false,
                         ID = $"decreaseEditCartButton_{product.Id}"
                     };
                     decreaseEditCartButton.Click += DecreaseEditCartButton_Click;
                     if (cartProduct.Quantity <= 1)
                         decreaseEditCartButton.Enabled = false;
 
-                    TableCell cellQuantity = new TableCell {CssClass = "QuantityTextbox td"};
+                    TableCell cellQuantity = new TableCell { CssClass = "QuantityTextbox td" };
                     quantityPanel.Controls.Add(decreaseEditCartButton);
                     quantityPanel.Controls.Add(quantityLabel);
                     quantityPanel.Controls.Add(increaseEditCartButton);
                     cellQuantity.Controls.Add(quantityPanel);
 
-                    Label stockLabel = new Label {Text = product.StockQuantity.ToString()};
+                    Label stockLabel = new Label { Text = product.StockQuantity.ToString() };
                     TableCell cellStock = new TableCell();
                     cellStock.Controls.Add(stockLabel);
 
-                    Label vatLabel = new Label {Text = product.VAT + "%"};
+                    Label vatLabel = new Label { Text = product.VAT + "%" };
                     TableCell cellVAT = new TableCell();
                     cellVAT.Controls.Add(vatLabel);
 
-                    double totalPriceSum = cartProduct.Quantity*product.Price*(1 - product.Discount/100);
+                    double totalPriceSum = cartProduct.Quantity * product.Price * (1 - product.Discount / 100);
                     totalCartPrice += totalPriceSum;
-                    Label totalPriceLabel = new Label {Text = "£" + totalPriceSum};
+                    Label totalPriceLabel = new Label { Text = "£" + totalPriceSum };
                     TableCell celltotalPrice = new TableCell();
                     celltotalPrice.Controls.Add(totalPriceLabel);
 
                     ImageButton removeProductButton = new ImageButton()
                     {
-                        ImageUrl= "/Images/removeProduct.png",
+                        ImageUrl = "/Images/removeProduct.png",
+                        CausesValidation = false,
                         ID = $"removeButton_{product.Id}"
                     };
                     removeProductButton.Click += RemoveButton_Click;
@@ -190,7 +194,7 @@ namespace E_Handel
             }
 
             Session["cartList"] = cartList;
-            Response.Redirect("Checkout.aspx");
+            FillTableCellsFromCartList();
         }
 
         private void IncreaseEditCartButton_Click(object sender, EventArgs e)
@@ -209,7 +213,7 @@ namespace E_Handel
                 }
             }
             Session["cartList"] = cartList;
-            Response.Redirect("Checkout.aspx");
+            FillTableCellsFromCartList();
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
