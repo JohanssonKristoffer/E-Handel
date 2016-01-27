@@ -5,7 +5,7 @@
 #Search{
     float:right;
     margin:0px;
-    display:inline-block;
+    display:flex;
 }
 #SearchButton{
     width:100px;
@@ -118,3 +118,4 @@ a {
 footer {
     text-align: center;
 }
+ 
