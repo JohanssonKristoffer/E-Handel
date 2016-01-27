@@ -43,11 +43,11 @@ namespace E_Handel
                     Image image = new Image
                     {
                         CssClass = "carousel-image",
-                        ImageUrl = $"ImgHandler.ashx?categoryId={int.Parse(sqlReader["ID"].ToString())}"
+                        ImageUrl = $"ImgHandler.ashx?categoryId={sqlReader["ID"]}"
                     };
                     HyperLink link = new HyperLink
                     {
-                        NavigateUrl = $"/Result.aspx?categoryId={int.Parse(sqlReader["ID"].ToString())}"
+                        NavigateUrl = $"/Result.aspx?categoryId={sqlReader["ID"]}"
                     };
                     link.Controls.Add(image);
 
@@ -184,8 +184,8 @@ namespace E_Handel
                 Random randomProduct = new Random();
                 int ad1 = randomProduct.Next(0, discountIdList.Count - 2);
                 int ad2 = randomProduct.Next(ad1 + 1, discountIdList.Count - 1);
-                adProductList.Add(new BLProduct(connectionString, discountIdList[ad1]));
-                adProductList.Add(new BLProduct(connectionString, discountIdList[ad2]));
+                adProductList.Add(BLProduct.RetrieveFromDB(connectionString, discountIdList[ad1]));
+                adProductList.Add(BLProduct.RetrieveFromDB(connectionString, discountIdList[ad2]));
                 Session["adProductList"] = adProductList;
             }
             catch (Exception)
@@ -259,7 +259,7 @@ namespace E_Handel
             Session["cartCount"] = cartCount;
             Session["cartList"] = cartList;
 
-            Response.Redirect($"Home.aspx");
+            Response.Redirect("Home.aspx");
         }
     }
 }

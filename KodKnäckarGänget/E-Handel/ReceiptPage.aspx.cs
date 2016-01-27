@@ -21,7 +21,7 @@ namespace E_Handel
         {
             try
             {
-                order = new BLOrder(connectionString, (int)Session["orderId"]);
+                order = BLOrder.RetrieveFromDB(connectionString, (int)Session["orderId"]);
                 ShowOrder();
             }
             catch (Exception)
@@ -47,7 +47,7 @@ namespace E_Handel
             {
                 foreach (var cartProduct in order.CartProducts)
                 {
-                    BLProduct product = new BLProduct(connectionString, cartProduct.Id);
+                    BLProduct product = BLProduct.RetrieveFromDB(connectionString, cartProduct.Id);
                     Label nameAndQuantityLabel = new Label();
                     nameAndQuantityLabel.Text = product.Name + "Amount: " + cartProduct.Quantity;
                     ReceiptPanel.Controls.Add(nameAndQuantityLabel);

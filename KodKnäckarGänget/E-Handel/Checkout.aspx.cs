@@ -24,10 +24,7 @@ namespace E_Handel
             if (TryLoadCartList())
                 FillTableCellsFromCartList();
             else
-            {
-                //Error attempting to retrieve empty cartlist
-                Response.Redirect("Home.aspx");
-            }
+                throw new HttpException(404, "Checkout.aspx content doesn't exist in the context given.");
         }
 
         private bool TryLoadCartList()
@@ -73,10 +70,28 @@ namespace E_Handel
         {
             try
             {
+                totalCartPrice = 0;
                 checkout_product_table.Controls.Clear();
+                TableHeaderRow headerRow = new TableHeaderRow();
+                TableCell headerImageCell = new TableCell();
+                TableCell headerTitleCell = new TableCell { Text = " Title " };
+                TableCell headerPriceCell = new TableCell { Text = " Price " };
+                TableCell headerQuantityCell = new TableCell { Text = " Quantity " };
+                TableCell headerStockStatusCell = new TableCell { Text = " Stock status " };
+                TableCell headerVATCell = new TableCell { Text = " VAT " };
+                TableCell headerTotalCell = new TableCell { Text = " Total " };
+                headerRow.Controls.Add(headerImageCell);
+                headerRow.Controls.Add(headerTitleCell);
+                headerRow.Controls.Add(headerPriceCell);
+                headerRow.Controls.Add(headerQuantityCell);
+                headerRow.Controls.Add(headerStockStatusCell);
+                headerRow.Controls.Add(headerVATCell);
+                headerRow.Controls.Add(headerTotalCell);
+                checkout_product_table.Controls.Add(headerRow);
+
                 foreach (var cartProduct in cartList)
                 {
-                    BLProduct product = new BLProduct(connectionString, cartProduct.Id);
+                    BLProduct product = BLProduct.RetrieveFromDB(connectionString, cartProduct.Id);
 
                     HyperLink linkProduct = new HyperLink { NavigateUrl = $"Product.aspx?productId={product.Id}" };
                     Image productImage = new Image
@@ -236,10 +251,10 @@ namespace E_Handel
             {
                 Session["cartList"] = null;
                 Session["cartCount"] = null;
-                Response.Redirect("Home.aspx");
+                Response.Redirect("/Home.aspx");
             }
             Session["cartList"] = cartList;
-            Response.Redirect("Checkout.aspx");
+            FillTableCellsFromCartList();
         }
 
         protected void SubmitOrder_Click(object sender, EventArgs e)
@@ -255,7 +270,7 @@ namespace E_Handel
                     Session["orderId"] = order.Id;
                     Session["cartList"] = null;
                     Session["cartCount"] = null;
-                    Response.Redirect("ReceiptPage.aspx");
+                    Response.Redirect("/ReceiptPage.aspx");
                 }
                 catch (Exception)
                 {

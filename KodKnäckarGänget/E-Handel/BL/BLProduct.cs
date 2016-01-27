@@ -29,7 +29,7 @@ namespace E_Handel.BL
             Discount = discount;
             TrailerUrl = trailerUrl;
         }
-        public BLProduct(string databaseConnectionString, int id)
+        public static BLProduct RetrieveFromDB(string databaseConnectionString, int id)
         {
             SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
             SqlCommand sqlGetProduct = new SqlCommand($"SELECT CategoryID, Name, Description, Price, Popularity, StockQuantity, VAT FROM Products WHERE ID = {id}", sqlConnection);
@@ -40,18 +40,17 @@ namespace E_Handel.BL
                 sqlReader = sqlGetProduct.ExecuteReader();
                 while (sqlReader.Read())
                 {
-                    Id = id;
-                    CategoryId = int.Parse(sqlReader["CategoryID"].ToString());
-                    Name = sqlReader["Name"].ToString();
-                    Description = sqlReader["Description"].ToString();
-                    Price = double.Parse(sqlReader["Price"].ToString());
-                    Popularity = int.Parse(sqlReader["Popularity"].ToString());
-                    StockQuantity = int.Parse(sqlReader["StockQuantity"].ToString());
-                    VAT = double.Parse(sqlReader["VAT"].ToString());
+                    BLProduct product = new BLProduct(id: id, categoryId: int.Parse(sqlReader["CategoryID"].ToString()),
+                        name: sqlReader["Name"].ToString(), description: sqlReader["Description"].ToString(),
+                        price: double.Parse(sqlReader["Price"].ToString()),
+                        popularity: int.Parse(sqlReader["Popularity"].ToString()),
+                        stockQuantity: int.Parse(sqlReader["StockQuantity"].ToString()),
+                        VAT: double.Parse(sqlReader["VAT"].ToString()));
+                    product.GetDiscountFromDB(databaseConnectionString);
+                    product.GetTrailerUrlFromDB(databaseConnectionString);
+                    return product;
                 }
-                GetDiscountFromDB(databaseConnectionString);
-                if (!TryGetTrailerUrlFromDB(databaseConnectionString))
-                    TrailerUrl = null;
+                return null;
             }
             finally
             {
@@ -65,7 +64,7 @@ namespace E_Handel.BL
                 sqlGetProduct.Dispose();
             }
         }
-
+       
         public void GetDiscountFromDB(string databaseConnectionString)
         {
             SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
@@ -77,9 +76,7 @@ namespace E_Handel.BL
                 sqlConnection.Open();
                 sqlReader = sqlGetProduct.ExecuteReader();
                 while (sqlReader.Read())
-                {
                     Discount = double.Parse(sqlReader["DiscountPercentage"].ToString());
-                }
             }
             finally
             {
@@ -93,7 +90,7 @@ namespace E_Handel.BL
                 sqlGetProduct.Dispose();
             }
         }
-        public bool TryGetTrailerUrlFromDB(string databaseConnectionString)
+        public void GetTrailerUrlFromDB(string databaseConnectionString)
         {
             SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
             SqlCommand sqlGetProduct = new SqlCommand($"SELECT TrailerURL FROM ProductTrailers WHERE ProductID = {Id}", sqlConnection);
@@ -103,15 +100,7 @@ namespace E_Handel.BL
                 sqlConnection.Open();
                 sqlReader = sqlGetProduct.ExecuteReader();
                 while (sqlReader.Read())
-                {
                     TrailerUrl = sqlReader["TrailerURL"].ToString();
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception)
-            {
-                return false;
             }
             finally
             {

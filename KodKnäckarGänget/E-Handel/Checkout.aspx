@@ -7,15 +7,6 @@
     <div class="row-fluid">
         <div class="span12">
             <asp:Table class="checkout_table" ID="checkout_product_table" runat="server">
-                <asp:TableHeaderRow>
-                    <asp:TableCell></asp:TableCell>
-                    <asp:TableCell>Title</asp:TableCell>
-                    <asp:TableCell>Price</asp:TableCell>
-                    <asp:TableCell>Quantity</asp:TableCell>
-                    <asp:TableCell>Stock status</asp:TableCell>
-                    <asp:TableCell>VAT</asp:TableCell>
-                    <asp:TableCell>Total</asp:TableCell>
-                </asp:TableHeaderRow>
             </asp:Table>
         </div>
         <div class="span12">
