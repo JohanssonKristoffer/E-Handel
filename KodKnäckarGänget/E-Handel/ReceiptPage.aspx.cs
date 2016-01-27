@@ -32,17 +32,17 @@ namespace E_Handel
 
         private void ShowOrder()
         {
-            OrderIdlbl.InnerText = order.Id.ToString();
-            TotalPricelbl.InnerText = "£" + order.TotalPrice;
-            Postagelbl.InnerText = "£" + order.Postage;
-            Addresslbl.InnerText = order.Address;
-            PostalCodelbl.InnerText = order.PostalCode;
-            Citylbl.InnerText = order.City;
-            Countrylbl.InnerText = order.Country;
-            Emaillbl.InnerText = order.Email;
-            TelephoneNumberlbl.InnerText = order.Telephone;
-            PaymentOptionslbl.InnerText = order.PaymentOptions;
-            Deliveryoptionslbl.InnerText = order.DeliveryOptions;
+            orderIdOutput.InnerText = order.Id.ToString();
+            totalPrice.InnerText = "£" + order.TotalPrice;
+            postage.InnerText = "£" + order.Postage;
+            adress.InnerText = order.Address;
+            postalCode.InnerText = order.PostalCode;
+            city.InnerText = order.City;
+            country.InnerText = order.Country;
+            email.InnerText = order.Email;
+            phoneNumber.InnerText = order.Telephone;
+            paymentOptions.InnerText = order.PaymentOptions;
+            deliveryOptions.InnerText = order.DeliveryOptions;
             try
             {
                 foreach (var cartProduct in order.CartProducts)

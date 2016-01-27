@@ -28,9 +28,6 @@ span {
     margin-right: auto;
     margin-top: auto;*/
 }
-body{
-    font-family:Georgia;
-    font-size:14px;
-    font-style:normal;
-
+#receiptPrintButton {
+    /*background-image: url('../Images/1453917211_print.png');*/
 }

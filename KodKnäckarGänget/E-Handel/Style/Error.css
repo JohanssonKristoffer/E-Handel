@@ -1,3 +1,8 @@
 ﻿.errorDiv {
     background-color: white;
+    text-align: center;
 }
+
+    .errorDiv img {
+        padding-right: 100px;
+    }

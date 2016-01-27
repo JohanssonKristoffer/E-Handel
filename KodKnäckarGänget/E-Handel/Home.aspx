@@ -17,46 +17,11 @@
                             <li data-target="#carousel-example-generic" data-slide-to="3"></li>
                             <li data-target="#carousel-example-generic" data-slide-to="4"></li>
                         </ol>
-                        <div class="carousel-inner">
+                        <div class="carousel-inner" id="categoryCarousel" runat="server">
                             <div class="item active">
-                                <asp:HyperLink NavigateUrl="/Result.aspx?categoryId=17" runat="server">
-                                <img class="carouselImage" src="ImgHandler.ashx?categoryId=17">
+                                <asp:HyperLink NavigateUrl="/Result.aspx?sales=true" runat="server">
+                                <img class="carousel-image" src="/Images/sales2016.jpg">
                                 </asp:HyperLink>
-                                <div class="carousel-caption">
-                                    <h3 style="color: #FFFFFF">Action</h3>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <asp:HyperLink NavigateUrl="/Result.aspx?categoryId=18" runat="server">
-                                    <img class="carouselImage" src="ImgHandler.ashx?categoryId=18">
-                                </asp:HyperLink>
-                                <div class="carousel-caption">
-                                    <h3 style="color: #FFFFFF">Thriller</h3>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <asp:HyperLink NavigateUrl="/Result.aspx?categoryId=19" runat="server">
-                                <img class="carouselImage" src="ImgHandler.ashx?categoryId=19">
-                                </asp:HyperLink>
-                                <div class="carousel-caption">
-                                    <h3 style="color: #ffffff">Animation</h3>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <asp:HyperLink NavigateUrl="/Result.aspx?categoryId=20" runat="server">
-                                <img class="carouselImage" src="ImgHandler.ashx?categoryId=20">
-                                </asp:HyperLink>
-                                <div class="carousel-caption">
-                                    <h3 style="color: #ffffff">Comedy</h3>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <asp:HyperLink NavigateUrl="/Result.aspx?categoryId=22" runat="server">
-                                <img class="carouselImage" src="ImgHandler.ashx?categoryId=22">
-                                </asp:HyperLink>
-                                <div class="carousel-caption">
-                                    <h3 style="color: #ffffff">Drama</h3>
-                                </div>
                             </div>
                         </div>
                         <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
