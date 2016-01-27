@@ -80,7 +80,7 @@
     <Content Include="Images\404.jpg" />
     <Content Include="Images\media-pawn.png" />
     <Content Include="Images\removeProduct.png" />
-    <Content Include="Images\sale2016.png" />
+    <Content Include="Images\sales2016.jpg" />
     <Content Include="Images\ShrekDisplay.jpg" />
     <Content Include="Images\updateCart.png" />
     <Content Include="packages.config" />
