@@ -44,11 +44,21 @@ namespace E_Handel
             foreach (var cartProduct in order.CartProducts)
             {
                 BLProduct product = BLProduct.RetrieveFromDB(connectionString, cartProduct.Id);
-                Label nameAndQuantityLabel = new Label
-                {
-                    Text = "<li>" + product.Name + " Amount: " + cartProduct.Quantity + "</li>"
-                };
-                ulReceipt.InnerHtml += nameAndQuantityLabel.Text;
+
+                TableCell title = new TableCell { Text = product.Name };
+                TableCell amount = new TableCell { Text = cartProduct.Quantity.ToString() };
+                TableCell price = new TableCell { Text = "£" + product.Price.ToString() };
+                TableCell totalPrice = new TableCell { Text = "£" + (cartProduct.Quantity * product.Price).ToString() };
+                TableCell vat = new TableCell { Text = "£" + (cartProduct.Quantity * product.Price * 0.2).ToString() };
+                TableRow row = new TableRow();
+
+                row.Controls.Add(title);
+                row.Controls.Add(amount);
+                row.Controls.Add(price);
+                row.Controls.Add(vat);
+                row.Controls.Add(totalPrice);
+
+                productTable.Controls.Add(row);
             }
         }
 

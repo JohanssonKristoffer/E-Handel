@@ -16,7 +16,7 @@
         <div class="container-fluid">
             <div class="row-fluid">
                 <div id="ReceiptOutput">
-                    <h1>Thank you for shopping with us!</h1>
+                    <h1>Thank you for shopping <br /> with us!</h1>
                     <table runat="server">
                         <tr>
                             <th>OrderId: </th>
@@ -62,14 +62,16 @@
                             <th>Delivery Option: </th>
                             <td id="deliveryOptions"></td>
                         </tr>
-                        <tr>
-                            <th>VAT: </th>
-                            <td id="vatAmount"></td>
-                        </tr>
                     </table>
-                    <ul id="ulReceipt" runat="server">
-
-                    </ul>
+                    <asp:Table ID="productTable" runat="server">
+                        <asp:TableHeaderRow ID="tableHead">
+                            <asp:TableCell>Title:</asp:TableCell>
+                            <asp:TableCell>Amount: </asp:TableCell>
+                            <asp:TableCell>Price: </asp:TableCell>
+                            <asp:TableCell>Vat: </asp:TableCell>
+                            <asp:TableCell>Total Price: </asp:TableCell>
+                        </asp:TableHeaderRow>
+                    </asp:Table>
                     <div id="receiptPageButtons">
                     <asp:Button ID="receiptHomeButton" runat="server" class="btn btn-primary" text="Return to shop" OnClick="receiptHomeButton_Click"/> <br />    
                     <asp:Button ID="receiptPrintButton" runat="server" OnClick="receiptPrintButton_Click" />
