@@ -13,6 +13,7 @@ namespace E_Handel
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            MoveFooter();
             PopulateCategoryDropdown();
             HideCartOnCheckout();
             RetrieveCartCount();
@@ -27,6 +28,7 @@ namespace E_Handel
                 CheckoutButton.Visible = false;
             }
         }
+
         private void PopulateCategoryDropdown()
         {
             List<BLCategory> categories = BLCategory.RetrieveListFromDB(connectionString);
@@ -121,6 +123,15 @@ namespace E_Handel
                 CartCountLabel.Text = ((int)Session["cartCount"]).ToString();
             else
                 CartCountLabel.Visible = false;
+        }
+
+        private void MoveFooter()
+        {
+            if (Request.Url.ToString().Contains("/ErrorDefault.aspx") ||
+                Request.Url.ToString().Contains("/404.aspx"))
+            {
+                MainFooter.Style["bottom"] = "0px";
+            }
         }
 
         protected void SendSearch_Click(object sender, EventArgs e)
