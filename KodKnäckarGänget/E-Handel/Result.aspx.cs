@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Web;
-using System.Web.Caching;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using E_Handel.BL;
 
@@ -18,8 +14,6 @@ namespace E_Handel
         private List<BLProduct> resultBLProducts = new List<BLProduct>();
         private string searchString;
         private int categoryId;
-        private string categoryName;
-        private string categoryDescription;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,64 +23,28 @@ namespace E_Handel
             if (searchString != null)
             {
                 if (ValidateSearchString())
-                {
-                    LoadSearchResult();
                     DisplaySearchResult();
-                }
                 else
-                    throw new HttpException(404, $"Result.aspx?search={Request.QueryString["search"]} isn't a valid search.");
+                    throw new HttpException(404,
+                        $"Result.aspx?search={Request.QueryString["search"]} isn't a valid search.");
             }
             else if (categoryIdString != null)
             {
                 if (int.TryParse(categoryIdString, out categoryId))
-                {
-                    LoadCategoryResult();
                     DisplayCategoryResult();
-                }
                 else
-                    throw new HttpException(404, $"Result.aspx?categoryId={Request.QueryString["categoryId"]} doesn't exist.");
+                    throw new HttpException(404,
+                        $"Result.aspx?categoryId={Request.QueryString["categoryId"]} doesn't exist.");
             }
             else if (Request.QueryString["sales"] != null)
-            {
-                LoadDiscountResult();
                 DisplayDiscountResults();
-            }
             else
                 throw new HttpException(404, "Result.aspx content doesn't exist in the context given.");
         }
 
-        private void LoadDiscountResult()
-        {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlGetDiscounts = new SqlCommand("SELECT ProductID FROM DiscountedProducts", sqlConnection);
-            SqlDataReader sqlDiscountDataReader = null;
-            try
-            {
-                sqlConnection.Open();
-                sqlDiscountDataReader = sqlGetDiscounts.ExecuteReader();
-                while (sqlDiscountDataReader.Read())
-                {
-                    resultBLProducts.Add(BLProduct.RetrieveFromDB(connectionString, int.Parse(sqlDiscountDataReader["ProductID"].ToString())));
-                }
-            }
-            catch (Exception)
-            {
-                throw; //Error retrieving discounted products from DiscountedProducts or Products
-            }
-            finally
-            {
-                if (sqlDiscountDataReader != null)
-                {
-                    sqlDiscountDataReader.Close();
-                    sqlDiscountDataReader.Dispose();
-                }
-                sqlConnection.Close();
-                sqlConnection.Dispose();
-                sqlGetDiscounts.Dispose();
-            }
-        }
         private void DisplayDiscountResults()
         {
+            resultBLProducts = BLProduct.RetrieveDiscountedProductsFromDB(connectionString);
             ResultTitle.InnerText = "Sales:";
             ResultDescription.InnerText = " Dont miss out of this great sale of among our great products with up to 30 % discount. This sale only applies to the products in our current stock. Dont miss out!! First come, first served!";
             DisplayProducts();
@@ -98,52 +56,13 @@ namespace E_Handel
                 return false;
             return true;
         }
-        private void LoadSearchResult()
+        private void DisplaySearchResult()
         {
             string[] searchWords = searchString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             string sqlSearchString = "%";
             for (int i = 0; i < searchWords.Length; i++)
                 sqlSearchString += searchWords[i] + "%";
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlGetSearch = new SqlCommand($"SELECT ID, Name, Description, Price, Popularity, StockQuantity, VAT FROM Products WHERE Name LIKE '{sqlSearchString}'", sqlConnection);
-            SqlDataReader sqlProductDataReader = null;
-            try
-            {
-                sqlConnection.Open();
-
-                sqlProductDataReader = sqlGetSearch.ExecuteReader();
-                while (sqlProductDataReader.Read())
-                {
-                    int id = int.Parse(sqlProductDataReader["ID"].ToString());
-                    string name = sqlProductDataReader["Name"].ToString();
-                    string description = sqlProductDataReader["Description"].ToString();
-                    double price = double.Parse(sqlProductDataReader["Price"].ToString());
-                    int popularity = int.Parse(sqlProductDataReader["Popularity"].ToString());
-                    int stockQuantity = int.Parse(sqlProductDataReader["StockQuantity"].ToString());
-                    double VAT = double.Parse(sqlProductDataReader["VAT"].ToString());
-                    BLProduct product = new BLProduct(id, categoryId, name, description, price, popularity, stockQuantity, VAT);
-                    product.GetDiscountFromDB(connectionString);
-                    resultBLProducts.Add(product);
-                }
-            }
-            catch (Exception)
-            {
-                throw; //Error when retrieving product from Products
-            }
-            finally
-            {
-                if (sqlProductDataReader != null)
-                {
-                    sqlProductDataReader.Close();
-                    sqlProductDataReader.Dispose();
-                }
-                sqlConnection.Close();
-                sqlConnection.Dispose();
-                sqlGetSearch.Dispose();
-            }
-        }
-        private void DisplaySearchResult()
-        {
+            resultBLProducts = BLProduct.RetrieveListFromDB(connectionString, $"Name LIKE '{sqlSearchString}'");
             if (resultBLProducts.Count > 0)
             {
                 ResultTitle.InnerHtml = $"Search results for '{searchString}':";
@@ -152,67 +71,17 @@ namespace E_Handel
             else
                 ResultTitle.InnerHtml = $"No results were found for '{searchString}'.";
         }
-
-        private void LoadCategoryResult()
-        {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlGetCategory = new SqlCommand($"SELECT Name, Description FROM Categories WHERE ID = {categoryId}", sqlConnection);
-            bool categoryExists = false;
-            SqlCommand sqlGetProducts = new SqlCommand($"SELECT ID, Name, Description, Price, Popularity, StockQuantity, VAT FROM Products WHERE CategoryID = {categoryId} AND ID NOT IN (SELECT VariantID FROM ProductVariants)", sqlConnection);
-            SqlDataReader sqlDataReader = null;
-            try
-            {
-                sqlConnection.Open();
-
-                sqlDataReader = sqlGetCategory.ExecuteReader();
-                while (sqlDataReader.Read())
-                {
-                    categoryName = sqlDataReader["Name"].ToString();
-                    categoryDescription = sqlDataReader["Description"].ToString();
-                    categoryExists = true;
-                }
-                sqlDataReader.Close();
-                sqlDataReader.Dispose();
-                if(!categoryExists)
-                    throw new HttpException(404, $"Result.aspx?categoryId={categoryId} doesn't exist.");
-
-                sqlDataReader = sqlGetProducts.ExecuteReader();
-                while (sqlDataReader.Read())
-                {
-                    int id = int.Parse(sqlDataReader["ID"].ToString());
-                    string name = sqlDataReader["Name"].ToString();
-                    string description = sqlDataReader["Description"].ToString();
-                    double price = double.Parse(sqlDataReader["Price"].ToString());
-                    int popularity = int.Parse(sqlDataReader["Popularity"].ToString());
-                    int stockQuantity = int.Parse(sqlDataReader["StockQuantity"].ToString());
-                    double VAT = double.Parse(sqlDataReader["VAT"].ToString());
-                    BLProduct product = new BLProduct(id, categoryId, name, description, price, popularity, stockQuantity, VAT);
-                    product.GetDiscountFromDB(connectionString);
-                    resultBLProducts.Add(product);
-                }
-            }
-            catch (Exception)
-            {
-                throw; //Error when retrieving product from Products
-            }
-            finally
-            {
-                if (sqlDataReader != null)
-                {
-                    sqlDataReader.Close();
-                    sqlDataReader.Dispose();
-                }
-                sqlConnection.Close();
-                sqlConnection.Dispose();
-                sqlGetCategory.Dispose();
-                sqlGetProducts.Dispose();
-            }
-        }
+        
         private void DisplayCategoryResult()
         {
-            ResultTitle.InnerHtml = categoryName;
+            BLCategory category = BLCategory.RetrieveFromDB(connectionString, categoryId);
+            if(category == null)
+                throw new HttpException(404, $"Result.aspx?categoryId={categoryId} doesn't exist.");
+            resultBLProducts = BLProduct.RetrieveListFromDB(connectionString,
+                $"CategoryID = {categoryId} AND ID NOT IN (SELECT VariantID FROM ProductVariants)");
+            ResultTitle.InnerHtml = category.Name;
             ResultImage.Src = $"ImgHandler.ashx?categoryId={categoryId}";
-            ResultDescription.InnerHtml = categoryDescription;
+            ResultDescription.InnerHtml = category.Description;
             DisplayProducts();
         }
 

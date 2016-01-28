@@ -67,15 +67,6 @@ namespace E_Handel {
         protected global::System.Web.UI.WebControls.Button SearchButton;
         
         /// <summary>
-        /// openCart control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button openCart;
-        
-        /// <summary>
         /// CartLi control.
         /// </summary>
         /// <remarks>
@@ -83,6 +74,15 @@ namespace E_Handel {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl CartLi;
+        
+        /// <summary>
+        /// openCart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button openCart;
         
         /// <summary>
         /// CartCountLabel control.
@@ -146,5 +146,14 @@ namespace E_Handel {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder PlaceholderMain;
+        
+        /// <summary>
+        /// MainFooter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MainFooter;
     }
 }
