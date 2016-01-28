@@ -5,7 +5,7 @@
 #MainFooter {
     padding-top: 20px;
     height: 150px;
-    margin: 0 auto;
+    margin: 0 auto !important;
 }
 
 #MainFooter img {
