@@ -3,7 +3,9 @@
 }
 
 #MainFooter {
+    padding-top: 20px;
     height: 150px;
+    margin: 0 auto;
 }
 
 #MainFooter img {
