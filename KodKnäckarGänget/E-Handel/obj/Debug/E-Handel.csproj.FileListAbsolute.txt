@@ -173,7 +173,6 @@ C:\Users\Lifebook\Documents\GitHub\E-Handel\KodKnäckarGänget\E-Handel\bin\E-Ha
 C:\Users\Lifebook\Documents\GitHub\E-Handel\KodKnäckarGänget\E-Handel\bin\E-Handel.pdb
 C:\Users\Lifebook\Documents\GitHub\E-Handel\KodKnäckarGänget\E-Handel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Lifebook\Documents\GitHub\E-Handel\KodKnäckarGänget\E-Handel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Lifebook\Documents\GitHub\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.csprojResolveAssemblyReference.cache
 C:\Users\Lifebook\Documents\GitHub\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.dll
 C:\Users\Lifebook\Documents\GitHub\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.pdb
 C:\Users\Peter\Documents\GitHubVisualStudio\WF-Project\2016-01-19(2)\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.csprojResolveAssemblyReference.cache
@@ -198,3 +197,4 @@ C:\Users\slisk_000\Documents\GitHub\E-Handel\KodKnäckarGänget\E-Handel\obj\Deb
 C:\Users\slisk_000\Documents\GitHub\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.pdb
 C:\Users\slisk_000\Documents\GitHub\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.csprojResolveAssemblyReference.cache
 C:\Users\F554LA\Documents\GitHubVisualStudio\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.csprojResolveAssemblyReference.cache
+C:\Users\Lifebook\Documents\GitHub\E-Handel\KodKnäckarGänget\E-Handel\obj\Debug\E-Handel.csprojResolveAssemblyReference.cache

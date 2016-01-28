@@ -1,13 +1,25 @@
 ﻿$(function () {
     $("#openCart").click(function (evt) {
         evt.preventDefault();
-        if ($('#categoryDropdownMenu').is(":hidden")) {
-            $("#categoryDropdownMenu").slideDown("fast");
+        if ($('#CartPanel').is(":hidden")) {
+            $("#CartPanel").slideDown("fast");
         } else {
-            $("#categoryDropdownMenu").slideUp("fast");
+            $("#CartPanel").slideUp("fast");
         }
     });
 
+    $(function () {
+            $("#Link4").click(function(evt) {
+                evt.preventDefault();
+                if ($('#panelText').is(":hidden")) {
+                    $("#panelText").slideDown("fast");
+                } else {
+                    $("#panelText").slideUp("fast");
+                }
+            });
+        });
+
+    /*
     $(function () {
         $("#categoryDropdownMenu").click(function (evt) {
             evt.preventDefault();
@@ -17,7 +29,7 @@
                 $("#CartPanel").slideUp("fast");
             }
         });
-
+        */
 
 $(document).ready(function () {
     // Activate Carousel

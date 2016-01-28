@@ -107,6 +107,7 @@ namespace E_Handel
             int ad2 = randomProduct.Next(ad1 + 1, discountedProducts.Count - 1);
             adProductList.Add(discountedProducts[ad1]);
             adProductList.Add(discountedProducts[ad2]);
+            Session["adProductList"] = adProductList;
         }
         private void ShowAds()
         {
