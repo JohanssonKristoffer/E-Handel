@@ -27,9 +27,44 @@ input[type="number"] {
 .image_placeholder img {
     width: 310px;
 }
+
 body{
     font-family:Georgia;
     font-size:14px;
     font-style:normal;
+}
 
+.navbar-default {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    /* position: fixed; */
+    z-index: 10;
+    width: 100%;
+    padding: 10px 0 1px;
+}
+
+.caret {
+    vertical-align: top;    
+}
+
+.navbar {*
+  position: relative;*
+  z-index: 2;
+  margin-bottom: 1px !important;
+  overflow: visible;
+}
+
+input[type="submit"].btn {
+    padding-bottom: 25px;
+    width: 100px;
+}
+
+/* bootstrap override  */
+
+.col-md-8 {
+    background-color: #f8f8f8 !important;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px;
 }

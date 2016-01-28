@@ -90,6 +90,10 @@ select {
     margin: 0 auto;
 }
 
+#openCart:focus {
+    display: none;
+}
+
 #CartPanel {
     display: none;
     padding: 20px;
@@ -100,15 +104,20 @@ select {
     text-align: right;
     height: 300px;
     padding: 15px;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     border: 1px solid #cccccc;
     z-index: 1; 
     position: absolute; 
     top: 50px;
     right: 80px;
-    background-color: #ffffff;
-    border-radius: 15px;
+    background-color: rgba(255,255,255, 0.99);
+    -webkit-border-top-left-radius: 15px;
+    -webkit-border-bottom-left-radius: 15px;
+    -moz-border-radius-topleft: 15px;
+    -moz-border-radius-bottomleft: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
 .cartPanel th {

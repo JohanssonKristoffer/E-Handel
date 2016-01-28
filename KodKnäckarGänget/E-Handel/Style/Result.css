@@ -10,6 +10,8 @@
 #PlaceholderMain_ResultImage {
     position: relative;
     border-radius: 15px;
+    -webkit-border-radius: 15px; 
+    -moz-border-radius: 15px;
 }
 
 #PlaceholderMain_ResultDescription {
@@ -49,4 +51,29 @@ body{
     font-size:14px;
     font-style:normal;
 
+}
+
+.caret {
+    vertical-align: top;    
+}
+
+.navbar-default {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    /* position: fixed; */
+    z-index: 10;
+    width: 100%;
+    padding: 10px 0 1px;
+}
+
+.navbar {*
+  position: relative;*
+  z-index: 2;
+  margin-bottom: 1px !important;
+  overflow: visible;
+}
+
+input[type="submit"].btn {
+    padding-bottom: 25px;
+    width: 100px;
 }

@@ -1,7 +1,7 @@
 ﻿#ReceiptOutput {
     text-align: center;
     border:solid  black 2px;
-    width: 550px;
+    width: 650px;
     height: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -12,27 +12,16 @@ body{
     padding: 50px;
 }
 
-label {
-    
-    float: left;
-}
-
 div > label {
     display: inline-block;
 }
 
-span {
-    float: left;
-}
 th{
-    text-align: left;
+    text-align: center;
 }
 li{
     list-style-type: none;
-    text-align: left;
-}
-span{
-    display: block;
+    text-align: center;
 }
 #receiptPageButtons {
     clear: both;
@@ -49,4 +38,26 @@ span{
     padding: 0;
     background-repeat: no-repeat;
     margin-top: 10px;
+}
+table{
+    margin-right: auto;
+    margin-left: auto;
+}
+#tableHead > td{
+    padding: 5px;
+    font-weight: 600;
+}
+td {
+    text-align: right;
+}
+tr > th{
+    padding-right: 10px;
+}
+tr > td{
+    padding-left: 10px;
+    max-width: 200px;
+}
+#receiptHomeButton{
+    margin-top: 15px;
+    padding-bottom: 25px;
 }

@@ -46,6 +46,7 @@ namespace E_Handel
         {
             resultBLProducts = BLProduct.RetrieveDiscountedProductsFromDB(connectionString);
             ResultTitle.InnerText = "Sales";
+            ResultImage.Src = "/Images/sales2016promo.jpg";
             ResultDescription.InnerText = " Dont miss out of this great sale of among our great products with up to 30 % discount. This sale only applies to the products in our current stock. Dont miss out!! First come, first served!";
             DisplayProducts();
         }
@@ -58,6 +59,7 @@ namespace E_Handel
         }
         private void DisplaySearchResult()
         {
+            ResultDescription.Visible = false;
             string[] searchWords = searchString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             string sqlSearchString = "%";
             for (int i = 0; i < searchWords.Length; i++)
@@ -138,7 +140,7 @@ namespace E_Handel
 
                 Button productInfoButton = new Button
                 {
-                    CssClass = "result_product_infobutton",
+                    CssClass = "btn btn-primary",
                     Text = "More info",
                     PostBackUrl = $"Product.aspx?productId={product.Id}"
                 };
