@@ -71,7 +71,7 @@ namespace E_Handel
             TableCell headerQuantityCell = new TableCell { Text = " Quantity " };
             TableCell headerStockStatusCell = new TableCell { Text = " Stock status " };
             TableCell headerVATCell = new TableCell { Text = " VAT " };
-            TableCell headerTotalCell = new TableCell { Text = " Total " };
+            TableCell headerTotalCell = new TableCell { Text = " Sum " };
             headerRow.Controls.Add(headerImageCell);
             headerRow.Controls.Add(headerTitleCell);
             headerRow.Controls.Add(headerPriceCell);
@@ -93,7 +93,10 @@ namespace E_Handel
                     CssClass = "productImage"
                 };
                 linkProduct.Controls.Add(productImage);
-                TableCell cellImage = new TableCell();
+                TableCell cellImage = new TableCell()
+                {
+                    CssClass = "imageCell"
+                };
                 cellImage.Controls.Add(linkProduct);
 
                 Label nameLabel = new Label { Text = product.Name };
@@ -140,11 +143,12 @@ namespace E_Handel
                 TableCell cellStock = new TableCell();
                 cellStock.Controls.Add(stockLabel);
 
-                Label vatLabel = new Label { Text = product.VAT + "%" };
+                double totalPriceSum = cartProduct.Quantity * product.Price * (1 - product.Discount / 100);
+
+                Label vatLabel = new Label { Text = "£" + (product.VAT * totalPriceSum / (100 + product.VAT)) };
                 TableCell cellVAT = new TableCell();
                 cellVAT.Controls.Add(vatLabel);
 
-                double totalPriceSum = cartProduct.Quantity * product.Price * (1 - product.Discount / 100);
                 totalCartPrice += totalPriceSum;
                 Label totalPriceLabel = new Label { Text = "£" + totalPriceSum };
                 TableCell celltotalPrice = new TableCell();
