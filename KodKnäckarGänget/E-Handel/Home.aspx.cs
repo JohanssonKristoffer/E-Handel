@@ -1,12 +1,7 @@
-﻿
-using E_Handel.BL;
+﻿using E_Handel.BL;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace E_Handel
@@ -24,107 +19,45 @@ namespace E_Handel
             else
                 adProductList = (List<BLProduct>)Session["adProductList"];
             ShowAds();
-            RetrievePopularProducts();
             ShowPopularProducts();
             PopulateCarousel();
         }
 
         private void PopulateCarousel()
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlGetCategories = new SqlCommand("SELECT ID, Name, Description FROM Categories", sqlConnection);
-            SqlDataReader sqlReader = null;
-            try
+            List<BLCategory> categories = BLCategory.RetrieveListFromDB(connectionString);
+            foreach (BLCategory category in categories)
             {
-                sqlConnection.Open();
-                sqlReader = sqlGetCategories.ExecuteReader();
-                while (sqlReader.Read())
+                Image image = new Image
                 {
-                    Image image = new Image
-                    {
-                        CssClass = "carousel-image",
-                        ImageUrl = $"ImgHandler.ashx?categoryId={sqlReader["ID"]}"
-                    };
-                    HyperLink link = new HyperLink
-                    {
-                        NavigateUrl = $"/Result.aspx?categoryId={sqlReader["ID"]}"
-                    };
-                    link.Controls.Add(image);
-
-                    Label captionLabel = new Label
-                    {
-                        Text = $"<h3 style = 'color: #FFFFFF' > {sqlReader["Name"]} </ h3 >"
-                    };
-                    Panel captionPanel = new Panel {CssClass = "carousel-caption"};
-                    captionPanel.Controls.Add(captionLabel);
-
-                    Panel itemPanel = new Panel {CssClass = "item"};
-                    itemPanel.Controls.Add(link);
-                    itemPanel.Controls.Add(captionPanel);
-
-                    categoryCarousel.Controls.Add(itemPanel);
-                }
-            }
-            catch (Exception)
-            {
-                throw; //Error retrieving categories from Categories
-            }
-            finally
-            {
-                if (sqlReader != null)
+                    CssClass = "carousel-image",
+                    ImageUrl = $"ImgHandler.ashx?categoryId={category.Id}"
+                };
+                HyperLink link = new HyperLink
                 {
-                    sqlReader.Close();
-                    sqlReader.Dispose();
-                }
-                sqlConnection.Close();
-                sqlConnection.Dispose();
-                sqlGetCategories.Dispose();
-            }
-        }
+                    NavigateUrl = $"/Result.aspx?categoryId={category.Id}"
+                };
+                link.Controls.Add(image);
 
-        private void RetrievePopularProducts()
-        {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlGetPopularProducts = new SqlCommand("SELECT TOP 3 ID, CategoryID, Name, Description, Price, Popularity, StockQuantity, VAT FROM Products ORDER BY Popularity DESC", sqlConnection);
-            SqlDataReader sqlReader = null;
-            try
-            {
-                sqlConnection.Open();
-                sqlReader = sqlGetPopularProducts.ExecuteReader();
-                while (sqlReader.Read())
+                Label captionLabel = new Label
                 {
-                    int id = int.Parse(sqlReader["ID"].ToString());
-                    int categoryId = int.Parse(sqlReader["CategoryID"].ToString());
-                    string name = sqlReader["Name"].ToString();
-                    string description = sqlReader["Description"].ToString();
-                    double price = double.Parse(sqlReader["Price"].ToString());
-                    int popularity = int.Parse(sqlReader["Popularity"].ToString());
-                    int stockQuantity = int.Parse(sqlReader["StockQuantity"].ToString());
-                    double VAT = double.Parse(sqlReader["VAT"].ToString());
-                    BLProduct product = new BLProduct(id, categoryId, name, description, price, popularity, stockQuantity, VAT);
-                    product.GetDiscountFromDB(connectionString);
-                    popularProductList.Add(product);
-                }
-            }
-            catch (Exception)
-            {
-                throw; //Error retrieving popular products from Products
-            }
-            finally
-            {
-                if (sqlReader != null)
-                {
-                    sqlReader.Close();
-                    sqlReader.Dispose();
-                }
-                sqlConnection.Close();
-                sqlConnection.Dispose();
-                sqlGetPopularProducts.Dispose();
+                    Text = $"<h3 style = 'color: #FFFFFF' > {category.Name} </ h3 >"
+                };
+                Panel captionPanel = new Panel { CssClass = "carousel-caption" };
+                captionPanel.Controls.Add(captionLabel);
+
+                Panel itemPanel = new Panel { CssClass = "item" };
+                itemPanel.Controls.Add(link);
+                itemPanel.Controls.Add(captionPanel);
+
+                categoryCarousel.Controls.Add(itemPanel);
             }
         }
 
         private void ShowPopularProducts()
         {
+            popularProductList = BLProduct.RetrieveTopNPopularProductsFromDB(connectionString, numberOfProducts: 3);
+
             LinkPop1.NavigateUrl = "Product.aspx?productId=" + popularProductList[0].Id;
             ImagePop1.ImageUrl = "ImgHandler.ashx?productId=" + popularProductList[0].Id;
             TitlePop1.Text = popularProductList[0].Name;
@@ -167,44 +100,14 @@ namespace E_Handel
 
         private void RetrieveRandomDiscountedProducts()
         {
-            List<int> discountIdList = new List<int>();
+            List<BLProduct> discountedProducts = BLProduct.RetrieveDiscountedProductsFromDB(connectionString);
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlGetDiscountedProducts = new SqlCommand("SELECT ProductID FROM DiscountedProducts", sqlConnection);
-            SqlDataReader sqlReader = null;
-            try
-            {
-                sqlConnection.Open();
-                sqlReader = sqlGetDiscountedProducts.ExecuteReader();
-                while (sqlReader.Read())
-                {
-                    discountIdList.Add(int.Parse(sqlReader["ProductID"].ToString()));
-                }
-
-                Random randomProduct = new Random();
-                int ad1 = randomProduct.Next(0, discountIdList.Count - 2);
-                int ad2 = randomProduct.Next(ad1 + 1, discountIdList.Count - 1);
-                adProductList.Add(BLProduct.RetrieveFromDB(connectionString, discountIdList[ad1]));
-                adProductList.Add(BLProduct.RetrieveFromDB(connectionString, discountIdList[ad2]));
-                Session["adProductList"] = adProductList;
-            }
-            catch (Exception)
-            {
-                throw; //Error retrieving discounted products from DiscountedProducts or Products
-            }
-            finally
-            {
-                if (sqlReader != null)
-                {
-                    sqlReader.Close();
-                    sqlReader.Dispose();
-                }
-                sqlConnection.Close();
-                sqlConnection.Dispose();
-                sqlGetDiscountedProducts.Dispose();
-            }
+            Random randomProduct = new Random();
+            int ad1 = randomProduct.Next(0, discountedProducts.Count - 2);
+            int ad2 = randomProduct.Next(ad1 + 1, discountedProducts.Count - 1);
+            adProductList.Add(discountedProducts[ad1]);
+            adProductList.Add(discountedProducts[ad2]);
         }
-
         private void ShowAds()
         {
             LinkAd1.NavigateUrl = "Product.aspx?productId=" + adProductList[0].Id;

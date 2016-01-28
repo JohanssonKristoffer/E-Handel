@@ -1,11 +1,15 @@
 ﻿#ReceiptOutput {
     text-align: center;
     border:solid  black 2px;
-    width: 350px;
-    height: 400px;
+    width: 550px;
+    height: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 5px;
+    padding: 30px;
+}
+body{
+    padding: 50px;
 }
 
 label {
@@ -20,7 +24,16 @@ div > label {
 span {
     float: left;
 }
-
+th{
+    text-align: left;
+}
+li{
+    list-style-type: none;
+    text-align: left;
+}
+span{
+    display: block;
+}
 #receiptPageButtons {
     clear: both;
     /*text-align: center;
