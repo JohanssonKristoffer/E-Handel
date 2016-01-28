@@ -49,13 +49,13 @@ namespace E_Handel {
         protected global::System.Web.UI.HtmlControls.HtmlTableCell postage;
         
         /// <summary>
-        /// adress control.
+        /// address control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableCell adress;
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell address;
         
         /// <summary>
         /// postalCode control.

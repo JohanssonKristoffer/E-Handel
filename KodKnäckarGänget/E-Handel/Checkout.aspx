@@ -60,10 +60,11 @@
             <div class="span12">
                 <div id="NameTxtBox">
                     <asp:TextBox CssClass="Checkout_TextBox" ID="customer_name" placeholder="Name" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator runat="server" CssClass="checkout_validator" ControlToValidate="customer_name" Display="Dynamic" EnableClientScript="False" ErrorMessage="Name is a required field." />
-                    <asp:RegularExpressionValidator runat="server" CssClass="checkout_validator" ControlToValidate="customer_name" Display="Dynamic" EnableClientScript="False" ErrorMessage="Name must be 2 to 50 characters." ValidationExpression="^\S[a-zA-ZöäåÖÄÅ\-.\s]{2,50}" />
-
                     <asp:TextBox CssClass="Checkout_TextBox" ID="customer_surname" placeholder="Surname" runat="server"></asp:TextBox>
+
+                    <asp:RequiredFieldValidator runat="server" CssClass="checkout_validator" ControlToValidate="customer_name" Display="Dynamic" EnableClientScript="False" ErrorMessage="Name is a required field." />
+                    <asp:RegularExpressionValidator runat="server" CssClass="checkout_validator" ControlToValidate="customer_name" Display="Dynamic" EnableClientScript="False" ErrorMessage="Name must be 2 to 50 characters. " ValidationExpression="^\S[a-zA-ZöäåÖÄÅ\-.\s]{2,50}" />
+
                     <asp:RequiredFieldValidator runat="server" CssClass="checkout_validator" ControlToValidate="customer_surname" Display="Dynamic" EnableClientScript="False" ErrorMessage="Surname is a required field." />
                     <asp:RegularExpressionValidator runat="server" CssClass="checkout_validator" ControlToValidate="customer_surname" Display="Dynamic" EnableClientScript="False" ErrorMessage="Surname must be 2 to 50 characters." ValidationExpression="^\S[a-zA-ZöäåÖÄÅ\-.\s]{2,50}" />
                 </div>
@@ -74,7 +75,7 @@
                 <div id="Address">
                     <asp:TextBox CssClass="Checkout_TextBox" ID="customer_address" placeholder="Address" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" CssClass="checkout_validator" ControlToValidate="customer_address" Display="Dynamic" EnableClientScript="False" ErrorMessage="Address is a required field." />
-                    <asp:RegularExpressionValidator runat="server" CssClass="checkout_validator" ControlToValidate="customer_address" Display="Dynamic" EnableClientScript="False" ErrorMessage="Address must be 2 to 50 characters." ValidationExpression="^\S[a-zA-ZöäåÖÄÅ1-9\s]{2,50}" />
+                    <asp:RegularExpressionValidator runat="server" CssClass="checkout_validator" ControlToValidate="customer_address" Display="Dynamic" EnableClientScript="False" ErrorMessage="Address must be 2 to 255 characters." ValidationExpression="^\S[a-zA-ZöäåÖÄÅ1-9\s]{2,255}" />
                 </div>
             </div>
         </div>
@@ -82,10 +83,11 @@
             <div class="span12">
                 <div id="PostCity">
                     <asp:TextBox CssClass="Checkout_TextBox" ID="customer_postalcode" placeholder="PostalCode" runat="server"></asp:TextBox>
+                    <asp:TextBox CssClass="Checkout_TextBox" ID="customer_city" placeholder="City" runat="server"></asp:TextBox>
+                    
                     <asp:RequiredFieldValidator runat="server" CssClass="checkout_validator" ControlToValidate="customer_postalcode" Display="Dynamic" EnableClientScript="False" ErrorMessage="Postal Code is a required field." />
                     <asp:RegularExpressionValidator runat="server" CssClass="checkout_validator" ControlToValidate="customer_postalcode" Display="Dynamic" EnableClientScript="False" ErrorMessage="Postal Code must be 2 to 50 characters." ValidationExpression="^\S[1-9\s]{2,50}" />
 
-                    <asp:TextBox CssClass="Checkout_TextBox" ID="customer_city" placeholder="City" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" CssClass="checkout_validator" ControlToValidate="customer_city" Display="Dynamic" EnableClientScript="False" ErrorMessage="City is a required field." />
                     <asp:RegularExpressionValidator runat="server" CssClass="checkout_validator" ControlToValidate="customer_city" Display="Dynamic" EnableClientScript="False" ErrorMessage="City must be 2 to 50 characters." ValidationExpression="^\S[a-zA-ZöäåÖÄÅ\s]{2,50}" />
                 </div>

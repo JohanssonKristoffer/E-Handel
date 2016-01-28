@@ -6,7 +6,7 @@
 <head runat="server">
 
     <meta charset="UTF-8" />
-    <meta name="description" content="Welcome to DVD Shop, we got what you want. We sell DVD, Bluray DVD and Steelbox DVD." />
+    <meta name="description" content="Welcome to DVD Shop, we got what you want. We sell DVD, Blu-ray and Steelbox Editions." />
     <meta name="keywords" content="dvd, bluray, steelbox, movies, film, trailers, rent movie," />
     <meta name="author" content="DEV15 Grupp 4" />
 
@@ -15,21 +15,22 @@
     <link rel="shortcut icon" href="/Images/favion.png" />
 
     <title>DVD Shop</title>
-    <script src="/Scripts/bootstrap.js"></script>
     <script src="/Scripts/jquery-1.9.1.js"></script>
+    <script src="/Scripts/bootstrap.js"></script>
     <script src="/Scripts/cartScript.js"></script>
     <link href="/Content/bootstrap.css" rel="stylesheet" />
     <link href="/Style/Master.css" rel="stylesheet" />
     <link href="/Style/masterFooter.css" rel="stylesheet" />
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" rel="stylesheet" />
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet" />
-    
+
     <script>
-        (function (i, s, o, g, r, a, m) {
+        (function (i, s, o, g, r) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                (i[r].q = i[r].q || []).push(arguments);
+            }, i[r].l = 1 * new Date(); var a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g;
+            m.parentNode.insertBefore(a, m);
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-44234184-1', 'auto');
@@ -56,7 +57,7 @@
                                 <span class="icon-bar"></span>
                             </button>
                         </div>
-                        
+
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
@@ -77,7 +78,7 @@
                             <div class="nav navbar-nav navbar-right">
                                 <div id="CartLi" runat="server">
                                     <div class="col-md-4">
-                                        <asp:Button ID="openCart" runat="server" />
+                                        <div id="openCart"></div>
                                     </div>
                                     <div class="col-md-3">
                                         <asp:Label runat="server" ID="CartCountLabel"></asp:Label>
@@ -85,20 +86,20 @@
                                 </div>
                                 <div class="col-md-5"></div>
                                 <div class="row">
-                                <asp:Panel ID="CartPanel" runat="server" CssClass="cartPanel">
-                                    <asp:Label ID="CartDropDownTableText" runat="server">No products in the cart</asp:Label>
-                                    <asp:Table runat="server" ID="CartListTable">
-                                        <asp:TableHeaderRow ID="CartDropDownTableHeader" runat="server">
-                                            <asp:TableHeaderCell></asp:TableHeaderCell>
-                                            <asp:TableHeaderCell>Title</asp:TableHeaderCell>
-                                            <asp:TableHeaderCell>Price</asp:TableHeaderCell>
-                                            <asp:TableHeaderCell>Quantity</asp:TableHeaderCell>
-                                            <asp:TableHeaderCell>Total</asp:TableHeaderCell>
-                                        </asp:TableHeaderRow>
-                                    </asp:Table>
-                                    <asp:Button runat="server" ID="CheckoutButton" Text="Proceed To Checkout" PostBackUrl="Checkout.aspx" />
-                                </asp:Panel>
-                                    </div>
+                                    <asp:Panel ID="CartPanel" runat="server" CssClass="cartPanel">
+                                        <asp:Label ID="CartDropDownTableText" runat="server">No products in the cart</asp:Label>
+                                        <asp:Table runat="server" ID="CartListTable">
+                                            <asp:TableHeaderRow ID="CartDropDownTableHeader" runat="server">
+                                                <asp:TableHeaderCell></asp:TableHeaderCell>
+                                                <asp:TableHeaderCell>Title</asp:TableHeaderCell>
+                                                <asp:TableHeaderCell>Price</asp:TableHeaderCell>
+                                                <asp:TableHeaderCell>Quantity</asp:TableHeaderCell>
+                                                <asp:TableHeaderCell>Total</asp:TableHeaderCell>
+                                            </asp:TableHeaderRow>
+                                        </asp:Table>
+                                        <asp:Button runat="server" ID="CheckoutButton" Text="Proceed To Checkout" PostBackUrl="Checkout.aspx" />
+                                    </asp:Panel>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -118,9 +119,9 @@
             </div>
 
             <div class="col-md-4" id="Policy">
-                <h2>Our Policy's</h2>
+                <h2>Our Policies</h2>
                 <ul>
-                    <li><a href="https://shop.dodgeco.com/img/product/catalogs/PrivacyPolicy.pdf" target="_blank"> Policy</a></li>
+                    <li><a href="https://shop.dodgeco.com/img/product/catalogs/PrivacyPolicy.pdf" target="_blank">Policy</a></li>
                     <li><a href="http://rkrattsdb.gov.se/sfsdoc/00/000274.PDF">Relevant laws</a></li>
                 </ul>
             </div>

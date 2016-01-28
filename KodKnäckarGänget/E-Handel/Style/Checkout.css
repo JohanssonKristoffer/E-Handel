@@ -6,31 +6,35 @@
 
 .checkout_table {
     background-color: #f8f8f8;
-    border-radius : 15px;
+    border-radius: 15px;
     padding: 10px;
     width: 100%;
 }
 
 .checkout_table_foot {
     background-color: #f5f5f5;
-    border-radius : 15px;
+    border-radius: 15px;
     padding: 10px;
     width: 100%;
 }
 
-.imageCell {    
-    background-color: white;
-    border-radius : 10px;
-    border-left: 1px solid #f8f8f8;
-    border-bottom: 1px solid #f8f8f8;
+.imageCell {
+    text-align: center;
+    border-radius: 10px;
 }
+
+    .imageCell img {
+        background-color: white;
+        padding: 0 20px;
+        border-radius: 10px;
+    }
 
 .productImage {
     width: 120px;
 }
 
 .removeProductButton {
-    height:25px;
+    height: 25px;
 }
 
 td {
@@ -60,12 +64,17 @@ input[type="text"] {
     margin: 10px;
 }
 
-.checkoutDropdowns{
-    padding : 15px;
+.checkout_validator {
+    color: red;
+    margin: 5px;
+}
+
+.checkoutDropdowns {
+    padding: 15px;
     border-bottom: 1px solid #f5f5f5;
 }
 
-.submitCheckoutButton{
+.submitCheckoutButton {
     margin: 20px;
     height: 40px !important;
 }
@@ -79,8 +88,8 @@ input[type="text"] {
     margin: 10px 0 0 10px;
 }
 
-#Address input[type=text] {
-        width : 420px;
+    #Address input[type=text] {
+        width: 420px;
     }
 
 #PostCity {
@@ -91,9 +100,9 @@ input[type="text"] {
     margin: 10px 0 0 10px;
 }
 
-.ParagraphCheckout{
-    margin:5px;
-    display:inline-block;
+.ParagraphCheckout {
+    margin: 5px;
+    display: inline-block;
 }
 
 .navbar-default {
@@ -106,12 +115,14 @@ input[type="text"] {
 }
 
 .caret {
-    vertical-align: top;    
+    vertical-align: top;
 }
 
-.navbar {*
-  position: relative;*
+.navbar {
+    *
+  position: relative;
+    *
   z-index: 2;
-  margin-bottom: 1px !important;
-  overflow: visible;
+    margin-bottom: 1px !important;
+    overflow: visible;
 }

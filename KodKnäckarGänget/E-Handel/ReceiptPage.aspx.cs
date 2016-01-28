@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
-using System.Data.SqlClient;
 using E_Handel.BL;
 
 
@@ -29,7 +24,7 @@ namespace E_Handel
             orderIdOutput.InnerText = order.Id.ToString();
             totalPrice.InnerText = "£" + order.TotalPrice;
             postage.InnerText = "£" + order.Postage;
-            adress.InnerText = order.Address;
+            address.InnerText = order.Address;
             postalCode.InnerText = order.PostalCode;
             city.InnerText = order.City;
             country.InnerText = order.Country;
@@ -41,25 +36,45 @@ namespace E_Handel
 
         private void ShowOrderProducts()
         {
+            double vatTotal = 0;
+            double sumTotal = 0;
             foreach (var cartProduct in order.CartProducts)
             {
                 BLProduct product = BLProduct.RetrieveFromDB(connectionString, cartProduct.Id);
 
-                TableCell title = new TableCell { Text = product.Name };
-                TableCell amount = new TableCell { Text = cartProduct.Quantity.ToString() };
-                TableCell price = new TableCell { Text = "£" + product.Price.ToString() };
-                TableCell totalPrice = new TableCell { Text = "£" + (cartProduct.Quantity * product.Price).ToString() };
-                TableCell vat = new TableCell { Text = "£" + (cartProduct.Quantity * product.Price * 0.2).ToString() };
-                TableRow row = new TableRow();
+                TableCell titleCell = new TableCell { Text = product.Name };
+                TableCell priceCell = new TableCell { Text = "£" + product.Price * (1 - product.Discount / 100)};
+                TableCell amountCell = new TableCell { Text = cartProduct.Quantity.ToString() };
+                double sum = cartProduct.Quantity*product.Price*(1 - product.Discount/100);
+                sumTotal += sum;
+                double vat = (product.VAT*sum/(100 + product.VAT));
+                vatTotal += vat;
+                TableCell vatCell = new TableCell { Text = "£" + vat };
+                TableCell sumCell = new TableCell { Text = "£" + sum };
 
-                row.Controls.Add(title);
-                row.Controls.Add(amount);
-                row.Controls.Add(price);
-                row.Controls.Add(vat);
-                row.Controls.Add(totalPrice);
+                TableRow row = new TableRow();
+                row.Controls.Add(titleCell);
+                row.Controls.Add(priceCell);
+                row.Controls.Add(amountCell);
+                row.Controls.Add(vatCell);
+                row.Controls.Add(sumCell);
 
                 productTable.Controls.Add(row);
             }
+            TableCell titleFoot = new TableCell();
+            TableCell priceFoot = new TableCell();
+            TableCell amountFoot = new TableCell();
+            TableCell vatFoot = new TableCell { Text = "£" + vatTotal };
+            TableCell sumFoot = new TableCell { Text = "£" + sumTotal };
+
+            TableRow footRow = new TableRow();
+            footRow.Controls.Add(titleFoot);
+            footRow.Controls.Add(priceFoot);
+            footRow.Controls.Add(amountFoot);
+            footRow.Controls.Add(vatFoot);
+            footRow.Controls.Add(sumFoot);
+
+            productTable.Controls.Add(footRow);
         }
 
         protected void receiptHomeButton_Click(object sender, EventArgs e)
@@ -69,7 +84,7 @@ namespace E_Handel
 
         protected void receiptPrintButton_Click(object sender, EventArgs e)
         {
-            ClientScript.RegisterClientScriptBlock(this.GetType(), "key", "window.print()", true);
+            ClientScript.RegisterClientScriptBlock(GetType(), "key", "window.print()", true);
         }
     }
 }

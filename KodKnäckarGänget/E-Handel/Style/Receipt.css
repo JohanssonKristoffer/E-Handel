@@ -1,6 +1,7 @@
 ﻿#ReceiptOutput {
     text-align: center;
-    border:solid  black 2px;
+    border: solid #f5f5f5 10px;
+    border-radius: 10px;
     width: 650px;
     height: 100%;
     margin-left: auto;
@@ -8,7 +9,8 @@
     margin-bottom: 5px;
     padding: 30px;
 }
-body{
+
+body {
     padding: 50px;
 }
 
@@ -16,13 +18,15 @@ div > label {
     display: inline-block;
 }
 
-th{
+th {
     text-align: center;
 }
-li{
+
+li {
     list-style-type: none;
     text-align: center;
 }
+
 #receiptPageButtons {
     clear: both;
     /*text-align: center;
@@ -30,7 +34,8 @@ li{
     margin-right: auto;
     margin-top: auto;*/
 }
-#receiptPrintButton{
+
+#receiptPrintButton {
     height: 55px;
     width: 55px;
     background-image: url('../Images/1453917211_print.png');
@@ -39,25 +44,50 @@ li{
     background-repeat: no-repeat;
     margin-top: 10px;
 }
-table{
+
+table {
     margin-right: auto;
     margin-left: auto;
 }
-#tableHead > td{
+
+#tableHead > td {
     padding: 5px;
     font-weight: 600;
 }
+
 td {
     text-align: right;
 }
-tr > th{
+
+tr > th {
     padding-right: 10px;
 }
-tr > td{
+
+tr > td {
     padding-left: 10px;
     max-width: 200px;
 }
-#receiptHomeButton{
+
+#receiptHomeButton {
     margin-top: 15px;
     padding-bottom: 25px;
+}
+
+#totalPrice {
+    font-weight: bold;
+}
+
+@media print {
+    #receiptHomeButton {
+        visibility: hidden;
+    }
+
+    #receiptPrintButton {
+        visibility: hidden;
+    }
+
+    #ReceiptOutput {
+        border: solid black 2px;
+        border-radius: 2px;
+    }
 }
