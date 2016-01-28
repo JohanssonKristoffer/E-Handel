@@ -71,8 +71,8 @@
 
                     </ul>
                     <div id="receiptPageButtons">
-                    <asp:Button ID="receiptHomeButton" runat="server" class="btn btn-primary" text="Return to shop" OnClick="receiptHomeButton_Click"/>     
-                    <asp:Button ID="receiptPrintButton" runat="server" class="btn btn-primary" text="Print Receipt" OnClick="receiptPrintButton_Click" />
+                    <asp:Button ID="receiptHomeButton" runat="server" class="btn btn-primary" text="Return to shop" OnClick="receiptHomeButton_Click"/> <br />    
+                    <asp:Button ID="receiptPrintButton" runat="server" OnClick="receiptPrintButton_Click" />
                     </div>
                 </div>
 

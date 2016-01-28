@@ -41,7 +41,12 @@ span{
     margin-right: auto;
     margin-top: auto;*/
 }
-#receiptPrintButton {
-    height: 50px;
-    width: 50px;
+#receiptPrintButton{
+    height: 55px;
+    width: 55px;
+    background-image: url('../Images/1453917211_print.png');
+    background-color: white;
+    padding: 0;
+    background-repeat: no-repeat;
+    margin-top: 10px;
 }
