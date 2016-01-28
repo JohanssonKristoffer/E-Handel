@@ -74,11 +74,11 @@
                             </asp:Label>
 
                             <div class="nav navbar-nav navbar-right">
-                                <div class="col-md-3">
-                                    <asp:Button ID="openCart" runat="server" />
-                                </div>
-                                <div class="col-md-3">
-                                    <div id="CartLi" runat="server">
+                                <div id="CartLi" runat="server">
+                                    <div class="col-md-3">
+                                        <asp:Button ID="openCart" runat="server" />
+                                    </div>
+                                    <div class="col-md-3">
                                         <asp:Label runat="server" ID="CartCountLabel"></asp:Label>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
         <asp:ContentPlaceHolder ID="PlaceholderMain" runat="server">
         </asp:ContentPlaceHolder>
 
-        <footer class="container" id="MainFooter">
+        <footer class="container" id="MainFooter" runat="server">
             <div class="col-md-4" id="Contact">
                 <h2>Contact Us</h2>
                 <a href="mailto:s5.kristoffer@gmail.com">Send E-mail</a>

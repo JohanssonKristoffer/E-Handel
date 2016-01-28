@@ -17,7 +17,8 @@ namespace E_Handel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            PopulateCartDropdown();
+            MoveFooter();
+            PopulateCategoryDropdown();
             HideCartOnCheckout();
             RetrieveCartCount();
             if (TryRetrieveCartList())
@@ -90,7 +91,7 @@ namespace E_Handel
                 throw; //Error retrieving product from Products
             }
         }
-        private void PopulateCartDropdown()
+        private void PopulateCategoryDropdown()
         {
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             SqlCommand sqlGetCategories = new SqlCommand("SELECT ID, Name FROM Categories", sqlConnection);
@@ -101,7 +102,6 @@ namespace E_Handel
                 sqlReader = sqlGetCategories.ExecuteReader();
                 while (sqlReader.Read())
                 {
-                 
                     Label listItem = new Label();
 
                     listItem.Text = $"<li><a href='/Result.aspx?categoryId={sqlReader["ID"]}'>{sqlReader["Name"]}</a></li>";
@@ -140,6 +140,15 @@ namespace E_Handel
             if (Request.Url.ToString().Contains("/Checkout.aspx"))
                 CartLi.Visible = false;
         }
+
+        private void MoveFooter()
+        {
+            if (Request.Url.ToString().Contains("/ErrorDefault.aspx") ||
+                Request.Url.ToString().Contains("/ErrorDefault.aspx"))
+            {
+                MainFooter.Style["bottom"] = "0px";
+            }
+       }
 
         private void RetrieveCartCount()
         {
