@@ -12,27 +12,16 @@ body{
     padding: 50px;
 }
 
-label {
-    
-    float: left;
-}
-
 div > label {
     display: inline-block;
 }
 
-span {
-    float: left;
-}
 th{
-    text-align: left;
+    text-align: center;
 }
 li{
     list-style-type: none;
     text-align: left;
-}
-span{
-    display: block;
 }
 #receiptPageButtons {
     clear: both;
@@ -49,4 +38,8 @@ span{
     padding: 0;
     background-repeat: no-repeat;
     margin-top: 10px;
+}
+table{
+    margin-right: auto;
+    margin-left: auto;
 }
