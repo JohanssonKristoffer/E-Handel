@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -16,6 +17,7 @@ namespace E_Handel
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            PopulateCartDropdown();
             HideCartOnCheckout();
             RetrieveCartCount();
             if (TryRetrieveCartList())
@@ -88,7 +90,40 @@ namespace E_Handel
                 throw; //Error retrieving product from Products
             }
         }
+        private void PopulateCartDropdown()
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            SqlCommand sqlGetCategories = new SqlCommand("SELECT ID, Name FROM Categories", sqlConnection);
+            SqlDataReader sqlReader = null;
+            try
+            {
+                sqlConnection.Open();
+                sqlReader = sqlGetCategories.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                 
+                    Label listItem = new Label();
 
+                    listItem.Text = $"<li><a href='/Result.aspx?categoryId={sqlReader["ID"]}'>{sqlReader["Name"]}</a></li>";
+                    categoryDropdownMenu.Controls.Add(listItem);
+                }
+            }
+            catch (Exception)
+            {
+                throw; //Error retrieving categories from Categories
+            }
+            finally
+            {
+                if (sqlReader != null)
+                {
+                    sqlReader.Close();
+                    sqlReader.Dispose();
+                }
+                sqlConnection.Close();
+                sqlConnection.Dispose();
+                sqlGetCategories.Dispose();
+            }
+        }
 
         private bool TryRetrieveCartList()
         {
@@ -109,18 +144,18 @@ namespace E_Handel
         private void RetrieveCartCount()
         {
             if (Session["cartCount"] != null)
-                CartCountLabel.Text = ((int)Session["cartCount"]).ToString();
+            {
+                CartCountLabel.Text = ((int) Session["cartCount"]).ToString();
+            }
+            else
+            {
+                CartCountLabel.Visible = false;
+            }
         }
 
         protected void SendSearch_Click(object sender, EventArgs e)
         {
             Response.Redirect($"/Result.aspx?search={SearchBox.Text}");
-        }
-
-        protected void SendCategoryChoice_SelectChange(object sender, EventArgs e)
-        {
-            if (DropDownCategories.SelectedValue != "0")
-                Response.Redirect($"/Result.aspx?categoryId={DropDownCategories.SelectedValue}");
         }
     }
 }
