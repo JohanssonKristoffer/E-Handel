@@ -7,13 +7,23 @@
 
     <meta charset="UTF-8" />
     <meta name="description" content="Welcome to DVD Shop, we got what you want. We sell DVD, Bluray DVD and Steelbox DVD." />
-    <meta name="keywords" content="dvd, bluray, steelbox, movies, film" />
+    <meta name="keywords" content="dvd, bluray, steelbox, movies, film, trailers, rent movie," />
     <meta name="author" content="DEV15 Grupp 4" />
 
     <link rel="icon" href="/Images/favion.png" />
     <link rel="apple-touch-icon" href="/Images/favion.png" />
     <link rel="shortcut icon" href="/Images/favion.png" />
 
+    <title>DVD Shop</title>
+    <script src="/Scripts/bootstrap.js"></script>
+    <script src="/Scripts/jquery-1.9.1.js"></script>
+    <script src="/Scripts/cartScript.js"></script>
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Style/Master.css" rel="stylesheet" />
+    <link href="/Style/masterFooter.css" rel="stylesheet" />
+    <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet" />
+    
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
@@ -25,15 +35,6 @@
         ga('create', 'UA-44234184-1', 'auto');
         ga('send', 'pageview');
     </script>
-    <title>DVD Shop</title>
-    <script src="/Scripts/bootstrap.js"></script>
-    <script src="/Scripts/jquery-1.9.1.js"></script>
-    <script src="/Scripts/cartScript.js"></script>
-    <link href="/Content/bootstrap.css" rel="stylesheet" />
-    <link href="/Style/Master.css" rel="stylesheet" />
-    <link href="/Style/masterFooter.css" rel="stylesheet" />
-    <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" rel="stylesheet" />
-    <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet" />
 
     <asp:ContentPlaceHolder ID="PlaceholderHead" runat="server">
     </asp:ContentPlaceHolder>
@@ -55,7 +56,7 @@
                                 <span class="icon-bar"></span>
                             </button>
                         </div>
-
+                        
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
