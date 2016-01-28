@@ -1,12 +1,23 @@
 ﻿$(function () {
     $("#openCart").click(function (evt) {
         evt.preventDefault();
-        if ($('#CartPanel').is(":hidden")) {
-            $("#CartPanel").slideDown("fast");
+        if ($('#categoryDropdownMenu').is(":hidden")) {
+            $("#categoryDropdownMenu").slideDown("fast");
         } else {
-            $("#CartPanel").slideUp("fast");
+            $("#categoryDropdownMenu").slideUp("fast");
         }
     });
+
+    $(function () {
+        $("#categoryDropdownMenu").click(function (evt) {
+            evt.preventDefault();
+            if ($('#CartPanel').is(":hidden")) {
+                $("#CartPanel").slideDown("fast");
+            } else {
+                $("#CartPanel").slideUp("fast");
+            }
+        });
+
 
 $(document).ready(function () {
     // Activate Carousel

@@ -78,7 +78,6 @@ select {
 .cartPanel {
     display: none;
     text-align: right;
-    /*float: right;*/
     width: 600px;
     height: 200px;
     padding: 15px;
@@ -89,6 +88,10 @@ select {
 
 .cartPanel th {
     text-align: left;
+    min-width: 80px;
+    vertical-align: top;
+    text-align: left;
+    padding: 5px;
 }
 
 #CartDropDownTableText {
@@ -101,13 +104,7 @@ select {
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     padding: 10px 15px;
-}
-
-.cartPanel .th {
-    min-width: 80px;
-    vertical-align: top;
-    text-align: left;
-    padding: 5px;
+    background-color: #f8f8f8;
 }
 
 .cartPanel .td {
@@ -136,3 +133,4 @@ select {
 footer {
     text-align: center;
 }
+
