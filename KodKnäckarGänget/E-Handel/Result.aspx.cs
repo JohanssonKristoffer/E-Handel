@@ -25,7 +25,7 @@ namespace E_Handel
         {
             searchString = Request.QueryString["search"];
             string categoryIdString = Request.QueryString["categoryId"];
-            
+
             if (searchString != null)
             {
                 if (ValidateSearchString())
@@ -33,6 +33,8 @@ namespace E_Handel
                     LoadSearchResult();
                     DisplaySearchResult();
                 }
+                else
+                    throw new HttpException(404, $"Result.aspx?search={Request.QueryString["search"]} isn't a valid search.");
             }
             else if (categoryIdString != null)
             {
@@ -41,6 +43,8 @@ namespace E_Handel
                     LoadCategoryResult();
                     DisplayCategoryResult();
                 }
+                else
+                    throw new HttpException(404, $"Result.aspx?categoryId={Request.QueryString["categoryId"]} doesn't exist.");
             }
             else if (Request.QueryString["sales"] != null)
             {
@@ -48,9 +52,7 @@ namespace E_Handel
                 DisplayDiscountResults();
             }
             else
-            {
-                ResultTitle.InnerHtml = "No search or category results."; //Error getting valid querystring from url
-            }
+                throw new HttpException(404, "Result.aspx content doesn't exist in the context given.");
         }
 
         private void LoadDiscountResult()
@@ -64,12 +66,12 @@ namespace E_Handel
                 sqlDiscountDataReader = sqlGetDiscounts.ExecuteReader();
                 while (sqlDiscountDataReader.Read())
                 {
-                    resultBLProducts.Add(new BLProduct(connectionString, int.Parse(sqlDiscountDataReader["ProductID"].ToString())));
+                    resultBLProducts.Add(BLProduct.RetrieveFromDB(connectionString, int.Parse(sqlDiscountDataReader["ProductID"].ToString())));
                 }
             }
             catch (Exception)
             {
-                ResultTitle.InnerHtml = "Error when attempting to retrieve discounted products."; //Error retrieving discounted products from DiscountedProducts or Products
+                throw; //Error retrieving discounted products from DiscountedProducts or Products
             }
             finally
             {
@@ -126,7 +128,7 @@ namespace E_Handel
             }
             catch (Exception)
             {
-                ResultTitle.InnerHtml = "Error when attempting to search."; //Error when retrieving product from Products
+                throw; //Error when retrieving product from Products
             }
             finally
             {
@@ -142,14 +144,20 @@ namespace E_Handel
         }
         private void DisplaySearchResult()
         {
-            ResultTitle.InnerHtml = $"Search results for '{searchString}':";
-            DisplayProducts();
+            if (resultBLProducts.Count > 0)
+            {
+                ResultTitle.InnerHtml = $"Search results for '{searchString}':";
+                DisplayProducts();
+            }
+            else
+                ResultTitle.InnerHtml = $"No results were found for '{searchString}'.";
         }
 
         private void LoadCategoryResult()
         {
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             SqlCommand sqlGetCategory = new SqlCommand($"SELECT Name, Description FROM Categories WHERE ID = {categoryId}", sqlConnection);
+            bool categoryExists = false;
             SqlCommand sqlGetProducts = new SqlCommand($"SELECT ID, Name, Description, Price, Popularity, StockQuantity, VAT FROM Products WHERE CategoryID = {categoryId} AND ID NOT IN (SELECT VariantID FROM ProductVariants)", sqlConnection);
             SqlDataReader sqlDataReader = null;
             try
@@ -161,9 +169,12 @@ namespace E_Handel
                 {
                     categoryName = sqlDataReader["Name"].ToString();
                     categoryDescription = sqlDataReader["Description"].ToString();
+                    categoryExists = true;
                 }
                 sqlDataReader.Close();
                 sqlDataReader.Dispose();
+                if(!categoryExists)
+                    throw new HttpException(404, $"Result.aspx?categoryId={categoryId} doesn't exist.");
 
                 sqlDataReader = sqlGetProducts.ExecuteReader();
                 while (sqlDataReader.Read())
@@ -182,7 +193,7 @@ namespace E_Handel
             }
             catch (Exception)
             {
-                ResultTitle.InnerHtml = "Error when attempting to retrieve category products."; //Error when retrieving product from Products
+                throw; //Error when retrieving product from Products
             }
             finally
             {
@@ -215,7 +226,7 @@ namespace E_Handel
             {
                 Panel productPanel = new Panel { CssClass = "span3 result_product_container" };
 
-                HyperLink productLink = new HyperLink {NavigateUrl = $"Product.aspx?productId={product.Id}"};
+                HyperLink productLink = new HyperLink { NavigateUrl = $"Product.aspx?productId={product.Id}" };
                 Image productThumb = new Image
                 {
                     CssClass = "image_thumbnail",

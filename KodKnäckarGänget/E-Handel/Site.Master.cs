@@ -38,7 +38,7 @@ namespace E_Handel
             {
                 foreach (var cartProduct in cartList)
                 {
-                    BLProduct product = new BLProduct(connectionString, cartProduct.Id);
+                    BLProduct product = BLProduct.RetrieveFromDB(connectionString, cartProduct.Id);
 
                     HyperLink productLink = new HyperLink {NavigateUrl = $"Product.aspx?productId={product.Id}"};
                     Image productImage = new Image

@@ -40,12 +40,13 @@ namespace E_Handel.BL
             CartProducts = cartProducts;
             AccountId = accountId;
         }
-        public BLOrder(string databaseConnectionString, int id)
+        public static BLOrder RetrieveFromDB(string databaseConnectionString, int id)
         {
             SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
             SqlCommand sqlGetOrder = new SqlCommand($"SELECT AccountID, TotalPrice, Postage, Address, PostalCode, City, Country, Email, Telephone, PaymentOptions, DeliveryOptions, Name, Surname FROM Orders WHERE ID = {id}", sqlConnection);
             SqlCommand sqlGetOrderProducts = new SqlCommand($"SELECT ProductID, Quantity FROM OrderProducts WHERE OrderID = {id}", sqlConnection);
             SqlDataReader sqlReader = null;
+            BLOrder order = null;
             try
             {
                 sqlConnection.Open();
@@ -53,33 +54,29 @@ namespace E_Handel.BL
                 sqlReader = sqlGetOrder.ExecuteReader();
                 while (sqlReader.Read())
                 {
-                    AccountId = -1;
+                    order = new BLOrder(postage: double.Parse(sqlReader["Postage"].ToString()),
+                        totalPrice: double.Parse(sqlReader["TotalPrice"].ToString()),
+                        address: sqlReader["Address"].ToString(), postalCode: sqlReader["PostalCode"].ToString(),
+                        city: sqlReader["City"].ToString(), country: sqlReader["Country"].ToString(),
+                        email: sqlReader["Email"].ToString(), telephone: sqlReader["Telephone"].ToString(),
+                        paymentOptions: sqlReader["PaymentOptions"].ToString(),
+                        deliveryOptions: sqlReader["DeliveryOptions"].ToString(), name: sqlReader["Name"].ToString(),
+                        surname: sqlReader["Surname"].ToString(), cartProducts: new List<BLCartProduct>()) {Id = id};
                     int accountId;
                     if (int.TryParse(sqlReader["AccountID"].ToString(), out accountId))
-                        AccountId = accountId;
-                    Id = id;
-                    Postage = double.Parse(sqlReader["Postage"].ToString());
-                    TotalPrice = double.Parse(sqlReader["TotalPrice"].ToString());
-                    Address = sqlReader["Address"].ToString();
-                    PostalCode = sqlReader["PostalCode"].ToString();
-                    City = sqlReader["City"].ToString();
-                    Country = sqlReader["Country"].ToString();
-                    Email = sqlReader["Email"].ToString();
-                    Telephone = sqlReader["Telephone"].ToString();
-                    PaymentOptions = sqlReader["PaymentOptions"].ToString();
-                    DeliveryOptions = sqlReader["DeliveryOptions"].ToString();
-                    Name = sqlReader["Name"].ToString();
-                    Surname = sqlReader["Surname"].ToString();
+                        order.AccountId = accountId;
                 }
                 sqlReader.Close();
                 sqlReader.Dispose();
+                if (order == null)
+                    return null;
 
-                CartProducts = new List<BLCartProduct>();
                 sqlReader = sqlGetOrderProducts.ExecuteReader();
                 while (sqlReader.Read())
-                {
-                    CartProducts.Add(new BLCartProduct(id: int.Parse(sqlReader["ProductID"].ToString()), quantity: int.Parse(sqlReader["Quantity"].ToString())));
-                }
+                    order.CartProducts.Add(new BLCartProduct(id: int.Parse(sqlReader["ProductID"].ToString()),
+                        quantity: int.Parse(sqlReader["Quantity"].ToString())));
+
+                return order;
             }
             finally
             {

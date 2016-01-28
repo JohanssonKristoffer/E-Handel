@@ -30,16 +30,16 @@ namespace E_Handel
                     ShowVariants();
             }
             else
-            {
-                productTitle.InnerText = "Unable to retrieve product."; //Error parsing productId from url
-            }
+                throw new HttpException(404, $"Product.aspx?productId={Request.QueryString["productId"]} doesn't exist.");
         }
 
         private void LoadProduct(int productId)
         {
             try
             {
-                product = new BLProduct(connectionString, productId);
+                product = BLProduct.RetrieveFromDB(connectionString, productId);
+                if (product == null) 
+                    throw new HttpException(404, $"Product.aspx?productId={productId} doesn't exist.");
                 productImage.Src = $"ImgHandler.ashx?productId={productId}";
                 productTitle.InnerText = product.Name;
                 if (product.Discount > 0)
@@ -133,7 +133,7 @@ namespace E_Handel
                 DropDownVariants.Items.Add(selectedProduct);
                 foreach (int variantId in variantIdList)
                 {
-                    BLProduct variant = new BLProduct(connectionString, variantId);
+                    BLProduct variant = BLProduct.RetrieveFromDB(connectionString, variantId);
                     ListItem item = new ListItem(variant.Name, variantId.ToString());
                     DropDownVariants.Items.Add(item);
                 }

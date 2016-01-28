@@ -7,15 +7,6 @@
     <div class="row-fluid">
         <div class="span12">
             <asp:Table class="checkout_table" ID="checkout_product_table" runat="server">
-                <asp:TableHeaderRow>
-                    <asp:TableCell></asp:TableCell>
-                    <asp:TableCell>Title</asp:TableCell>
-                    <asp:TableCell>Price</asp:TableCell>
-                    <asp:TableCell>Quantity</asp:TableCell>
-                    <asp:TableCell>Stock status</asp:TableCell>
-                    <asp:TableCell>VAT</asp:TableCell>
-                    <asp:TableCell>Total</asp:TableCell>
-                </asp:TableHeaderRow>
             </asp:Table>
         </div>
         <div class="span12">
@@ -33,22 +24,20 @@
     </div>
 
     <div class="row-fluid">
-        <v class="span12">
-           <p class="ParagraphChekout"> Choose shipping method:</p>
+        <div class="span12">
+            <p class="ParagraphChekout">Choose shipping method:</p>
             <asp:DropDownList ID="shipping_dropdown" runat="server" AutoPostBack="True">
                 <asp:ListItem Value="1">Pickup at store</asp:ListItem>
                 <asp:ListItem Value="2">Standard Mail</asp:ListItem>
                 <asp:ListItem Value="3">DHL</asp:ListItem>
             </asp:DropDownList>
-
-           <p class="ParagraphChekout"> Choose payment method:</p>
+            <p class="ParagraphChekout">Choose payment method:</p>
             <asp:DropDownList ID="payment_dropdown" runat="server" AutoPostBack="True">
                 <asp:ListItem Value="1">Cash at pickup</asp:ListItem>
                 <asp:ListItem Value="2">Invoice</asp:ListItem>
                 <asp:ListItem Value="3">Debit card</asp:ListItem>
             </asp:DropDownList>
             <hr />
-            <div>
             <div id="NameTxtBox">
                 <%--<asp:Label ID="customer_name_label"  AssociatedControlID="customer_name" Text="Name" runat="server"></asp:Label>--%>
                 <asp:TextBox CssClass="Checkout_TextBox" ID="customer_name" placeholder="Name" runat="server"></asp:TextBox>
@@ -95,6 +84,6 @@
                 <asp:RegularExpressionValidator runat="server" CssClass="checkout_validator" ControlToValidate="customer_email" Display="Dynamic" EnableClientScript="False" ErrorMessage="Email must be [placeholder]." ValidationExpression="^\S[a-zA-Z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-z0-9A-Z!#$%&'*+=?^_`{|}~-]+)*@(?:[a-zA-Z-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-z0-9-]*[a-z0-9])?" />
             </div>
             <asp:Button ID="customer_submit_order" Style="margin: 20px" Text="Submit order" class="btn btn-primary" runat="server" OnClick="SubmitOrder_Click" />
-        <v>
+        </div>
     </div>
 </asp:Content>

@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="E_Handel.Home" %>
 
 <asp:Content ID="ContentHead" ContentPlaceHolderID="PlaceholderHead" runat="server">
-    <link href="Style/Home.css" rel="stylesheet" />
-    <script src="Scripts/parallax.js"></script>
+    <link href="/Style/Home.css" rel="stylesheet" />
+    <script src="/Scripts/parallax.js"></script>
 </asp:Content>
 <asp:Content ID="ContentMain" ContentPlaceHolderID="PlaceholderMain" runat="server">
     <div class="container">
