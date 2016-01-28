@@ -102,12 +102,13 @@ select {
     padding: 15px;
     overflow-y: scroll;
     overflow-x: hidden;
-    border: 0px solid #cccccc;
+    border: 1px solid #cccccc;
     z-index: 1; 
     position: absolute; 
     top: 50px;
     right: 80px;
     background-color: #ffffff;
+    border-radius: 15px;
 }
 
 .cartPanel th {
