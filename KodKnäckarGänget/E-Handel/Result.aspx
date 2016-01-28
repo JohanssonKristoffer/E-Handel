@@ -4,10 +4,10 @@
     <link href="Style/Result.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="ContentMain" ContentPlaceHolderID="PlaceholderMain" runat="server">
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span12">
-                <h1 id="ResultTitle" runat="server">Search result: </h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 id="ResultTitle" runat="server"></h1>
                 <img id="ResultImage" runat="server" />
                 <p id="ResultDescription" runat="server"></p>
                 <hr />

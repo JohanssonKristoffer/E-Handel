@@ -46,8 +46,14 @@ header nav ul li {
     /* position: fixed; */
     z-index: 10;
     width: 100%;
-    padding: 10px 0 10px;
-    margin-bottom: 60px;
+    padding: 10px 0 1px;
+}
+
+.navbar {*
+  position: relative;*
+  z-index: 2;
+  margin-bottom: 1px !important;
+  overflow: visible;
 }
 
 .caret {
@@ -85,8 +91,8 @@ select {
 }
 
 #CartPanel {
-    width: 600px;
     display: none;
+    padding: 20px;
 }
 
 .cartPanel {
