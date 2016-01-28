@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\BLCartProduct.cs" />
+    <Compile Include="BL\BLCategory.cs" />
     <Compile Include="BL\BLOrder.cs" />
     <Compile Include="BL\BLProduct.cs" />
     <Compile Include="ErrorPages\404.aspx.cs">

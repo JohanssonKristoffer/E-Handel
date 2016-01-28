@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data.SqlClient;
-using System.Data.Sql;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Web;
 
 namespace E_Handel
@@ -49,7 +44,6 @@ namespace E_Handel
 
             SqlCommand command = new SqlCommand($"SELECT {columnName} FROM {tableName} WHERE ID = {id}", connection);
             SqlDataReader reader = null;
-            byte[] buffer = null;
             try
             {
                 connection.Open();
@@ -57,7 +51,7 @@ namespace E_Handel
                 while (reader.Read())
                 {
                     string extensionName = "jpg";
-                    buffer = (byte[])reader[columnName];
+                    byte[] buffer = (byte[])reader[columnName];
                     context.Response.Clear();
                     context.Response.ContentType = "image/" + extensionName;
                     context.Response.BinaryWrite(buffer);
