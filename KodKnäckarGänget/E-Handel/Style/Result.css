@@ -1,4 +1,10 @@
-﻿.image_thumbnail {
+﻿body{
+    font-size:14px;
+    font-style:normal;
+    font-family: 'Lato', sans-serif;
+}
+
+.image_thumbnail {
     display: block;
     max-width: 140px;
 }
@@ -44,13 +50,6 @@
 
 .result_product_container {
     padding: 20px 20px 0 0;
-}
-
-body{
-    font-family:Georgia;
-    font-size:14px;
-    font-style:normal;
-
 }
 
 .caret {

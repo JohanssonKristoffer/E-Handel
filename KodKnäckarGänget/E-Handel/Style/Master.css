@@ -1,5 +1,8 @@
-﻿body {
-    background-color: ghostwhite;
+﻿body{
+    font-size:14px;
+    font-style:normal;
+    font-family: 'Lato', sans-serif;
+    background-color: #ffffff;
     color: #000000;
 }
 

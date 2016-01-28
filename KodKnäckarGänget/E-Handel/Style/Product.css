@@ -1,4 +1,11 @@
-﻿.price_tag {
+﻿body{
+    font-size:14px;
+    font-style:normal;
+    font-family: 'Lato', sans-serif;
+    background-color: #ffffff;
+}
+
+.price_tag {
     background-color: transparent;
     padding: 5px;
     width: 50px;
@@ -26,12 +33,6 @@ input[type="number"] {
 
 .image_placeholder img {
     width: 310px;
-}
-
-body{
-    font-family:Georgia;
-    font-size:14px;
-    font-style:normal;
 }
 
 .navbar-default {

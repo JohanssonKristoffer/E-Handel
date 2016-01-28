@@ -21,6 +21,7 @@
     <link href="/Content/bootstrap.css" rel="stylesheet" />
     <link href="/Style/Master.css" rel="stylesheet" />
     <link href="/Style/masterFooter.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" rel="stylesheet" />
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet" />
 

@@ -1,4 +1,7 @@
-﻿body {
+﻿body{
+    font-size:14px;
+    font-style:normal;
+    font-family: 'Lato', sans-serif;
     background-color: #ffffff;
 }
 
