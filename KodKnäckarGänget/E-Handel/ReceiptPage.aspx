@@ -31,11 +31,11 @@
                             <td id="postage"></td>
                         </tr>
                         <tr>
-                            <th>Adress: </th>
-                            <td id="adress"></td>
+                            <th>Address: </th>
+                            <td id="address"></td>
                         </tr>
                         <tr>
-                            <th>PostalCode: </th>
+                            <th>Postal Code: </th>
                             <td id="postalCode"></td>
                         </tr>
                         <tr>
@@ -51,7 +51,7 @@
                             <td id="email"></td>
                         </tr>
                         <tr>
-                            <th>PhoneNumber: </th>
+                            <th>Phonenumber: </th>
                             <td id="phoneNumber"></td>
                         </tr>
                         <tr>
@@ -65,11 +65,11 @@
                     </table>
                     <asp:Table ID="productTable" runat="server">
                         <asp:TableHeaderRow ID="tableHead">
-                            <asp:TableCell>Title:</asp:TableCell>
-                            <asp:TableCell>Amount: </asp:TableCell>
-                            <asp:TableCell>Price: </asp:TableCell>
-                            <asp:TableCell>Vat: </asp:TableCell>
-                            <asp:TableCell>Total Price: </asp:TableCell>
+                            <asp:TableCell>Title</asp:TableCell>
+                            <asp:TableCell>Price </asp:TableCell>
+                            <asp:TableCell>Amount </asp:TableCell>
+                            <asp:TableCell>VAT </asp:TableCell>
+                            <asp:TableCell>Sum </asp:TableCell>
                         </asp:TableHeaderRow>
                     </asp:Table>
                     <div id="receiptPageButtons">
