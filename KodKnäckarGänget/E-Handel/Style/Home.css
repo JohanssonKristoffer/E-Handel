@@ -6,10 +6,10 @@
     background-color: transparent;
     background-position: center center;
     background-repeat: no-repeat;
-    -webkit-filter: blur(50%); /* Chrome, Safari, Opera */
-    filter: blur(50%);
+    -webkit-filter: blur(100%); /* Chrome, Safari, Opera */
+    filter: blur(100%);
     padding: 20px;
-    min-height: 480px;
+    min-height: 520px;
 }
 
 .parallax-window h1 {
@@ -51,7 +51,7 @@
 }
 
 #ads img {
-    width: 110px;
+    width: 100px;
     display: block;
     margin: 0 auto;
 }
@@ -66,7 +66,7 @@
     padding: 0 5px;
     font-weight: bold;
     color: #FF0000;
-    margin-bottom: 10px;  
+    margin-bottom: 5px;  
 }
 
 .adOriginalPrice {
@@ -83,7 +83,7 @@
 
 .adImage button {
     display: block;
-    margin: 0 auto 10px;
+    margin: 0 auto 5px;
 }
 
 .hero-unit {
@@ -139,6 +139,7 @@ input[type="submit"] {
 .carousel-indicators {
     height: 20px;
     margin: 0 auto;
+    padding-top: 20px;
 }
 
 .carousel-control {
