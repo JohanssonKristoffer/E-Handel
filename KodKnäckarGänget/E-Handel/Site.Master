@@ -62,7 +62,7 @@
                                 <li><a href="/Home.aspx">Home</a></li>
                                 <li><a href="/Result.aspx?sales=view">Sales</a></li>
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown<span class="caret"></span></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="caret"></span></a>
                                     <ul class="dropdown-menu" id="categoryDropdownMenu" runat="server">
                                         <li role="separator" class="divider"></li>
                                     </ul>
@@ -75,15 +75,15 @@
 
                             <div class="nav navbar-nav navbar-right">
                                 <div id="CartLi" runat="server">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <asp:Button ID="openCart" runat="server" />
                                     </div>
                                     <div class="col-md-3">
                                         <asp:Label runat="server" ID="CartCountLabel"></asp:Label>
                                     </div>
                                 </div>
-                                <div class="col-md-6"></div>
-
+                                <div class="col-md-5"></div>
+                                <div class="row">
                                 <asp:Panel ID="CartPanel" runat="server" CssClass="cartPanel">
                                     <asp:Label ID="CartDropDownTableText" runat="server">No products in the cart</asp:Label>
                                     <asp:Table runat="server" ID="CartListTable">
@@ -97,6 +97,7 @@
                                     </asp:Table>
                                     <asp:Button runat="server" ID="CheckoutButton" Text="Proceed To Checkout" PostBackUrl="Checkout.aspx" />
                                 </asp:Panel>
+                                    </div>
                             </div>
                         </div>
                     </div>
