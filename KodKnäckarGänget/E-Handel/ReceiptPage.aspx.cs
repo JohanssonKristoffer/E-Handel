@@ -43,15 +43,18 @@ namespace E_Handel
             phoneNumber.InnerText = order.Telephone;
             paymentOptions.InnerText = order.PaymentOptions;
             deliveryOptions.InnerText = order.DeliveryOptions;
+            vatAmount.InnerText = "25%";
+            
             try
             {
                 foreach (var cartProduct in order.CartProducts)
                 {
                     BLProduct product = BLProduct.RetrieveFromDB(connectionString, cartProduct.Id);
                     Label nameAndQuantityLabel = new Label();
-                    nameAndQuantityLabel.Text = product.Name + "Amount: " + cartProduct.Quantity;
-                    ReceiptPanel.Controls.Add(nameAndQuantityLabel);
+                    nameAndQuantityLabel.Text = "<li>" + product.Name + " Amount: " + cartProduct.Quantity + "</li>";
+                    ulReceipt.InnerHtml += nameAndQuantityLabel.Text;
                 }
+
             }
             catch (Exception)
             {

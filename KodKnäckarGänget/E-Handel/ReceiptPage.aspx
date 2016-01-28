@@ -6,6 +6,10 @@
 <head runat="server">
     <title></title>
     <link href="Style/Receipt.css" rel="stylesheet" />
+    <script src="/Scripts/bootstrap.js"></script>
+    <script src="/Scripts/jquery-1.9.1.js"></script>
+    <script src="/Scripts/cartScript.js"></script>
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
     <form id="ReceiptForm" runat="server">
@@ -15,55 +19,60 @@
 
                     <table runat="server">
                         <tr>
-                            <th>OrderId</th>
+                            <th>OrderId: </th>
                             <td id="orderIdOutput"></td>
                         </tr>
                         <tr>
-                            <th>TotalPrice</th>
+                            <th>TotalPrice: </th>
                             <td id="totalPrice"></td>
                         </tr>
                         <tr>
-                            <th>Postage</th>
+                            <th>Postage: </th>
                             <td id="postage"></td>
                         </tr>
                         <tr>
-                            <th>Adress</th>
+                            <th>Adress: </th>
                             <td id="adress"></td>
                         </tr>
                         <tr>
-                            <th>PostalCode</th>
+                            <th>PostalCode: </th>
                             <td id="postalCode"></td>
                         </tr>
                         <tr>
-                            <th>City</th>
+                            <th>City: </th>
                             <td id="city"></td>
                         </tr>
                         <tr>
-                            <th>Country</th>
+                            <th>Country: </th>
                             <td id="country"></td>
                         </tr>
                         <tr>
-                            <th>Email</th>
+                            <th>Email: </th>
                             <td id="email"></td>
                         </tr>
                         <tr>
-                            <th>PhoneNumber</th>
+                            <th>PhoneNumber: </th>
                             <td id="phoneNumber"></td>
                         </tr>
                         <tr>
-                            <th>Payment Options</th>
+                            <th>Payment Options: </th>
                             <td id="paymentOptions"></td>
                         </tr>
                         <tr>
-                            <th>Delivery Option</th>
+                            <th>Delivery Option: </th>
                             <td id="deliveryOptions"></td>
                         </tr>
+                        <tr>
+                            <th>VAT: </th>
+                            <td id="vatAmount"></td>
+                        </tr>
                     </table>
-                    <asp:Panel ID="ReceiptPanel" runat="server">
-                    </asp:Panel>
+                    <ul id="ulReceipt" runat="server">
+
+                    </ul>
                     <div id="receiptPageButtons">
-                    <asp:Button ID="receiptHomeButton" runat="server" text="Return to shop" OnClick="receiptHomeButton_Click"/>     
-                    <asp:Button ID="receiptPrintButton" runat="server" text="Print Receipt" OnClick="receiptPrintButton_Click" />
+                    <asp:Button ID="receiptHomeButton" runat="server" class="btn btn-primary" text="Return to shop" OnClick="receiptHomeButton_Click"/>     
+                    <asp:Button ID="receiptPrintButton" runat="server" class="btn btn-primary" text="Print Receipt" OnClick="receiptPrintButton_Click" />
                     </div>
                 </div>
 
