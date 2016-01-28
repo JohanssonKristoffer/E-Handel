@@ -129,9 +129,9 @@
             <div class="col-md-4" id="socialMedia">
                 <h2>Latest News</h2>
                 <a href="https://www.facebook.com" target="_blank">
-                    <img src="Images/1453755185_social-facebook-square2.png" /></a>
+                    <img src="/Images/1453755185_social-facebook-square2.png" /></a>
                 <a href="https://www.twitter.com" target="_blank">
-                    <img src="Images/1453755419_twitter.png" /></a>
+                    <img src="/Images/1453755419_twitter.png" /></a>
             </div>
         </footer>
     </form>
