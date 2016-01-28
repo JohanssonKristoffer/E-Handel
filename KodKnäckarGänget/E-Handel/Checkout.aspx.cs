@@ -153,6 +153,7 @@ namespace E_Handel
                 ImageButton removeProductButton = new ImageButton()
                 {
                     ImageUrl = "/Images/removeProduct.png",
+                    CssClass = "removeProductButton",
                     CausesValidation = false,
                     ID = $"removeButton_{product.Id}"
                 };
