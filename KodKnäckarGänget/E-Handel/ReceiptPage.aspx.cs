@@ -19,18 +19,12 @@ namespace E_Handel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
-                order = BLOrder.RetrieveFromDB(connectionString, (int)Session["orderId"]);
-                ShowOrder();
-            }
-            catch (Exception)
-            {
-                throw; //Error retrieving order from Orders or OrderProducts
-            }
+            order = BLOrder.RetrieveFromDB(connectionString, (int)Session["orderId"]);
+            ShowOrderInfo();
+            ShowOrderProducts();
         }
 
-        private void ShowOrder()
+        private void ShowOrderInfo()
         {
             orderIdOutput.InnerText = order.Id.ToString();
             totalPrice.InnerText = "£" + order.TotalPrice;
@@ -43,22 +37,18 @@ namespace E_Handel
             phoneNumber.InnerText = order.Telephone;
             paymentOptions.InnerText = order.PaymentOptions;
             deliveryOptions.InnerText = order.DeliveryOptions;
-            vatAmount.InnerText = "25%";
-            
-            try
-            {
-                foreach (var cartProduct in order.CartProducts)
-                {
-                    BLProduct product = BLProduct.RetrieveFromDB(connectionString, cartProduct.Id);
-                    Label nameAndQuantityLabel = new Label();
-                    nameAndQuantityLabel.Text = "<li>" + product.Name + " Amount: " + cartProduct.Quantity + "</li>";
-                    ulReceipt.InnerHtml += nameAndQuantityLabel.Text;
-                }
+        }
 
-            }
-            catch (Exception)
+        private void ShowOrderProducts()
+        {
+            foreach (var cartProduct in order.CartProducts)
             {
-                throw; //Error retrieving product from Products
+                BLProduct product = BLProduct.RetrieveFromDB(connectionString, cartProduct.Id);
+                Label nameAndQuantityLabel = new Label
+                {
+                    Text = "<li>" + product.Name + " Amount: " + cartProduct.Quantity + "</li>"
+                };
+                ulReceipt.InnerHtml += nameAndQuantityLabel.Text;
             }
         }
 
