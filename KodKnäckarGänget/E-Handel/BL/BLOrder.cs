@@ -40,6 +40,7 @@ namespace E_Handel.BL
             CartProducts = cartProducts;
             AccountId = accountId;
         }
+
         public static BLOrder RetrieveFromDB(string databaseConnectionString, int id)
         {
             SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);

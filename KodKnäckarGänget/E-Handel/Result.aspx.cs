@@ -45,7 +45,7 @@ namespace E_Handel
         private void DisplayDiscountResults()
         {
             resultBLProducts = BLProduct.RetrieveDiscountedProductsFromDB(connectionString);
-            ResultTitle.InnerText = "Sales:";
+            ResultTitle.InnerText = "Sales";
             ResultDescription.InnerText = " Dont miss out of this great sale of among our great products with up to 30 % discount. This sale only applies to the products in our current stock. Dont miss out!! First come, first served!";
             DisplayProducts();
         }
