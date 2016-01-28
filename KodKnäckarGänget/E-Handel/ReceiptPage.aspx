@@ -16,7 +16,7 @@
         <div class="container-fluid">
             <div class="row-fluid">
                 <div id="ReceiptOutput">
-
+                    <h1>Thank you for shopping with us!</h1>
                     <table runat="server">
                         <tr>
                             <th>OrderId: </th>
