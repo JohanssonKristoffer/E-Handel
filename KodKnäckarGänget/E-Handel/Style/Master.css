@@ -112,7 +112,12 @@ select {
     top: 50px;
     right: 80px;
     background-color: rgba(255,255,255, 0.99);
-    border-radius: 15px;
+    -webkit-border-top-left-radius: 15px;
+    -webkit-border-bottom-left-radius: 15px;
+    -moz-border-radius-topleft: 15px;
+    -moz-border-radius-bottomleft: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
 .cartPanel th {

@@ -7,7 +7,7 @@
 </asp:Content>
 <asp:Content ID="ContentMain" ContentPlaceHolderID="PlaceholderMain" runat="server">
     <div class="container">
-        <div class="row-fluid">
+        <div class="row">
             <div class="col-md-4">
                 <div class="image_placeholder" runat="server">
                     <img alt="" runat="server" id="productImage" />
