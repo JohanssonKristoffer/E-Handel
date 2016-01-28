@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Checkout.aspx.cs" Inherits="E_Handel.Checkout" %>
 
 <asp:Content ID="ContentHead" ContentPlaceHolderID="PlaceholderHead" runat="server">
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
     <link href="Style/Checkout.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="ContentMain" ContentPlaceHolderID="PlaceholderMain" runat="server">
