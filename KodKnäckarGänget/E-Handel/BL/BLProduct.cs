@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace E_Handel.BL
@@ -29,6 +29,7 @@ namespace E_Handel.BL
             Discount = discount;
             TrailerUrl = trailerUrl;
         }
+
         public static BLProduct RetrieveFromDB(string databaseConnectionString, int id)
         {
             SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
@@ -62,6 +63,161 @@ namespace E_Handel.BL
                 sqlConnection.Close();
                 sqlConnection.Dispose();
                 sqlGetProduct.Dispose();
+            }
+        }
+        public static List<BLProduct> RetrieveListFromDB(string databaseConnectionString, string sqlConditionString)
+        {
+            List<BLProduct> products = new List<BLProduct>();
+            SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
+            SqlCommand sqlGetProducts = new SqlCommand($"SELECT ID, CategoryID, Name, Description, Price, Popularity, StockQuantity, VAT FROM Products WHERE {sqlConditionString}", sqlConnection);
+            SqlDataReader sqlReader = null;
+            try
+            {
+                sqlConnection.Open();
+
+                sqlReader = sqlGetProducts.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                    BLProduct product = new BLProduct(id: int.Parse(sqlReader["ID"].ToString()), categoryId: int.Parse(sqlReader["CategoryID"].ToString()),
+                        name: sqlReader["Name"].ToString(), description: sqlReader["Description"].ToString(),
+                        price: double.Parse(sqlReader["Price"].ToString()),
+                        popularity: int.Parse(sqlReader["Popularity"].ToString()),
+                        stockQuantity: int.Parse(sqlReader["StockQuantity"].ToString()),
+                        VAT: double.Parse(sqlReader["VAT"].ToString()));
+                    product.GetDiscountFromDB(databaseConnectionString);
+                    product.GetTrailerUrlFromDB(databaseConnectionString);
+                    products.Add(product);
+                }
+                return products;
+            }
+            finally
+            {
+                if (sqlReader != null)
+                {
+                    sqlReader.Close();
+                    sqlReader.Dispose();
+                }
+                sqlConnection.Close();
+                sqlConnection.Dispose();
+                sqlGetProducts.Dispose();
+            }
+        }
+        public static List<BLProduct> RetrieveDiscountedProductsFromDB(string databaseConnectionString)
+        {
+            List<BLProduct> products = new List<BLProduct>();
+            SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
+            SqlCommand sqlGetDiscounts = new SqlCommand("SELECT ProductID FROM DiscountedProducts", sqlConnection);
+            SqlDataReader sqlDiscountDataReader = null;
+            try
+            {
+                sqlConnection.Open();
+                sqlDiscountDataReader = sqlGetDiscounts.ExecuteReader();
+                while (sqlDiscountDataReader.Read())
+                    products.Add(RetrieveFromDB(databaseConnectionString,
+                        int.Parse(sqlDiscountDataReader["ProductID"].ToString())));
+                return products;
+            }
+            finally
+            {
+                if (sqlDiscountDataReader != null)
+                {
+                    sqlDiscountDataReader.Close();
+                    sqlDiscountDataReader.Dispose();
+                }
+                sqlConnection.Close();
+                sqlConnection.Dispose();
+                sqlGetDiscounts.Dispose();
+            }
+        }
+        public static List<BLProduct> RetrieveTopNPopularProductsFromDB(string databaseConnectionString,
+            int numberOfProducts)
+        {
+            List<BLProduct> products = new List<BLProduct>();
+            SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
+            SqlCommand sqlGetPopularProducts = new SqlCommand($"SELECT TOP {numberOfProducts} ID, CategoryID, Name, Description, Price, Popularity, StockQuantity, VAT FROM Products ORDER BY Popularity DESC", sqlConnection);
+            SqlDataReader sqlReader = null;
+            try
+            {
+                sqlConnection.Open();
+
+                sqlReader = sqlGetPopularProducts.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                    BLProduct product = new BLProduct(id: int.Parse(sqlReader["ID"].ToString()), categoryId: int.Parse(sqlReader["CategoryID"].ToString()),
+                        name: sqlReader["Name"].ToString(), description: sqlReader["Description"].ToString(),
+                        price: double.Parse(sqlReader["Price"].ToString()),
+                        popularity: int.Parse(sqlReader["Popularity"].ToString()),
+                        stockQuantity: int.Parse(sqlReader["StockQuantity"].ToString()),
+                        VAT: double.Parse(sqlReader["VAT"].ToString()));
+                    product.GetDiscountFromDB(databaseConnectionString);
+                    product.GetTrailerUrlFromDB(databaseConnectionString);
+                    products.Add(product);
+                }
+                return products;
+            }
+            finally
+            {
+                if (sqlReader != null)
+                {
+                    sqlReader.Close();
+                    sqlReader.Dispose();
+                }
+                sqlConnection.Close();
+                sqlConnection.Dispose();
+                sqlGetPopularProducts.Dispose();
+            }
+        }
+        public static List<BLProduct> RetrieveVariantsOfProductFromDB(string databaseConnectionString, int productId)
+        {
+            List<BLProduct> variants = new List<BLProduct>();
+            SqlConnection sqlConnection = new SqlConnection(databaseConnectionString);
+            SqlDataReader sqlReader = null;
+            try
+            {
+                sqlConnection.Open();
+
+                SqlCommand sqlCheckForVariants = new SqlCommand($"SELECT VariantID FROM ProductVariants WHERE ProductID = {productId}", sqlConnection);
+                sqlReader = sqlCheckForVariants.ExecuteReader();
+                while (sqlReader.Read())
+                    variants.Add(RetrieveFromDB(databaseConnectionString, int.Parse(sqlReader["VariantID"].ToString())));
+                sqlReader.Close();
+                sqlReader.Dispose();
+
+                SqlCommand sqlCheckForOriginal = new SqlCommand($"SELECT ProductID FROM ProductVariants WHERE VariantID = {productId}", sqlConnection);
+                bool isNotOriginal = false;
+                sqlReader = sqlCheckForOriginal.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                    variants.Add(RetrieveFromDB(databaseConnectionString, int.Parse(sqlReader["ProductID"].ToString())));
+                    isNotOriginal = true;
+                }
+                sqlReader.Close();
+                sqlReader.Dispose();
+
+                if (isNotOriginal)
+                {
+                    SqlCommand sqlCheckForOriginalVariants = new SqlCommand($"SELECT VariantID FROM ProductVariants WHERE ProductID = {variants[0].Id}", sqlConnection);
+                    sqlReader = sqlCheckForOriginalVariants.ExecuteReader();
+                    while (sqlReader.Read())
+                    {
+                        if (int.Parse(sqlReader["VariantID"].ToString()) != productId)
+                            variants.Add(RetrieveFromDB(databaseConnectionString, int.Parse(sqlReader["VariantID"].ToString())));
+                    }
+                    sqlCheckForOriginalVariants.Dispose();
+                }
+                sqlCheckForVariants.Dispose();
+                sqlCheckForOriginal.Dispose();
+                return variants;
+            }
+            finally
+            {
+                if (sqlReader != null)
+                {
+                    sqlReader.Close();
+                    sqlReader.Dispose();
+                }
+                sqlConnection.Close();
+                sqlConnection.Dispose();
             }
         }
        

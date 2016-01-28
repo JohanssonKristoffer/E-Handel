@@ -19,18 +19,12 @@ namespace E_Handel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
-                order = BLOrder.RetrieveFromDB(connectionString, (int)Session["orderId"]);
-                ShowOrder();
-            }
-            catch (Exception)
-            {
-                throw; //Error retrieving order from Orders or OrderProducts
-            }
+            order = BLOrder.RetrieveFromDB(connectionString, (int)Session["orderId"]);
+            ShowOrderInfo();
+            ShowOrderProducts();
         }
 
-        private void ShowOrder()
+        private void ShowOrderInfo()
         {
             orderIdOutput.InnerText = order.Id.ToString();
             totalPrice.InnerText = "£" + order.TotalPrice;
@@ -43,19 +37,28 @@ namespace E_Handel
             phoneNumber.InnerText = order.Telephone;
             paymentOptions.InnerText = order.PaymentOptions;
             deliveryOptions.InnerText = order.DeliveryOptions;
-            try
+        }
+
+        private void ShowOrderProducts()
+        {
+            foreach (var cartProduct in order.CartProducts)
             {
-                foreach (var cartProduct in order.CartProducts)
-                {
-                    BLProduct product = BLProduct.RetrieveFromDB(connectionString, cartProduct.Id);
-                    Label nameAndQuantityLabel = new Label();
-                    nameAndQuantityLabel.Text = product.Name + "Amount: " + cartProduct.Quantity;
-                    ReceiptPanel.Controls.Add(nameAndQuantityLabel);
-                }
-            }
-            catch (Exception)
-            {
-                throw; //Error retrieving product from Products
+                BLProduct product = BLProduct.RetrieveFromDB(connectionString, cartProduct.Id);
+
+                TableCell title = new TableCell { Text = product.Name };
+                TableCell amount = new TableCell { Text = cartProduct.Quantity.ToString() };
+                TableCell price = new TableCell { Text = "£" + product.Price.ToString() };
+                TableCell totalPrice = new TableCell { Text = "£" + (cartProduct.Quantity * product.Price).ToString() };
+                TableCell vat = new TableCell { Text = "£" + (cartProduct.Quantity * product.Price * 0.2).ToString() };
+                TableRow row = new TableRow();
+
+                row.Controls.Add(title);
+                row.Controls.Add(amount);
+                row.Controls.Add(price);
+                row.Controls.Add(vat);
+                row.Controls.Add(totalPrice);
+
+                productTable.Controls.Add(row);
             }
         }
 

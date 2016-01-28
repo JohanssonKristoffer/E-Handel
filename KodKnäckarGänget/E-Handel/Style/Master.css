@@ -3,6 +3,10 @@
     color: #000000;
 }
 
+.panel{
+        display:none;
+    }
+
 #SearchArea {
     margin: 0 auto;
     padding: 10px;
@@ -42,8 +46,14 @@ header nav ul li {
     /* position: fixed; */
     z-index: 10;
     width: 100%;
-    padding: 10px 0 10px;
-    margin-bottom: 60px;
+    padding: 10px 0 1px;
+}
+
+.navbar {*
+  position: relative;*
+  z-index: 2;
+  margin-bottom: 1px !important;
+  overflow: visible;
 }
 
 .caret {
@@ -65,6 +75,11 @@ select {
     padding: 5px 0 0;
 }
 
+#CheckoutButton {
+    width: 200px;
+    margin-right: 20px;    
+}
+
 #openCart {
     background-color: #ffffff;
     background-image: url('../images/cart_icon.png');
@@ -75,20 +90,42 @@ select {
     margin: 0 auto;
 }
 
-.cartPanel {
+#openCart:focus {
     display: none;
+}
+
+#CartPanel {
+    display: none;
+    padding: 20px;
+}
+
+.cartPanel {
+    width: 500px;
     text-align: right;
-    /*float: right;*/
-    width: 600px;
-    height: 200px;
+    height: 300px;
     padding: 15px;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     border: 1px solid #cccccc;
+    z-index: 1; 
+    position: absolute; 
+    top: 50px;
+    right: 80px;
+    background-color: rgba(255,255,255, 0.99);
+    -webkit-border-top-left-radius: 15px;
+    -webkit-border-bottom-left-radius: 15px;
+    -moz-border-radius-topleft: 15px;
+    -moz-border-radius-bottomleft: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
 .cartPanel th {
     text-align: left;
+    min-width: 80px;
+    vertical-align: top;
+    text-align: left;
+    padding: 5px;
 }
 
 #CartDropDownTableText {
@@ -101,13 +138,7 @@ select {
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     padding: 10px 15px;
-}
-
-.cartPanel .th {
-    min-width: 80px;
-    vertical-align: top;
-    text-align: left;
-    padding: 5px;
+    background-color: #f8f8f8;
 }
 
 .cartPanel .td {

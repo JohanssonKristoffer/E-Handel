@@ -78,9 +78,11 @@
     <Content Include="Images\1453755419_twitter.png" />
     <Content Include="Images\1453917211_print.png" />
     <Content Include="Images\404.jpg" />
+    <Content Include="Images\favion.png" />
     <Content Include="Images\media-pawn.png" />
     <Content Include="Images\removeProduct.png" />
     <Content Include="Images\sales2016.jpg" />
+    <Content Include="Images\sales2016promo.jpg" />
     <Content Include="Images\ShrekDisplay.jpg" />
     <Content Include="Images\updateCart.png" />
     <Content Include="packages.config" />
@@ -128,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\BLCartProduct.cs" />
+    <Compile Include="BL\BLCategory.cs" />
     <Compile Include="BL\BLOrder.cs" />
     <Compile Include="BL\BLProduct.cs" />
     <Compile Include="ErrorPages\404.aspx.cs">

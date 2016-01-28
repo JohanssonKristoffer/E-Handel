@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using E_Handel.BL;
 
@@ -16,6 +13,8 @@ namespace E_Handel
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            MoveFooter();
+            PopulateCategoryDropdown();
             HideCartOnCheckout();
             RetrieveCartCount();
             if (TryRetrieveCartList())
@@ -30,6 +29,19 @@ namespace E_Handel
             }
         }
 
+        private void PopulateCategoryDropdown()
+        {
+            List<BLCategory> categories = BLCategory.RetrieveListFromDB(connectionString);
+            foreach (BLCategory category in categories)
+            {
+                Label listItem = new Label
+                {
+                    Text = $"<li><a href='/Result.aspx?categoryId={category.Id}'>{category.Name}</a></li>"
+                };
+                categoryDropdownMenu.Controls.Add(listItem);
+            }
+        }
+
         private void GenerateCartContent()
         {
             try
@@ -38,7 +50,7 @@ namespace E_Handel
                 {
                     BLProduct product = BLProduct.RetrieveFromDB(connectionString, cartProduct.Id);
 
-                    HyperLink productLink = new HyperLink {NavigateUrl = $"Product.aspx?productId={product.Id}"};
+                    HyperLink productLink = new HyperLink { NavigateUrl = $"Product.aspx?productId={product.Id}" };
                     Image productImage = new Image
                     {
                         ImageUrl = $"ImgHandler.ashx?productIdThumb={product.Id}",
@@ -46,15 +58,15 @@ namespace E_Handel
                         CssClass = "productImage"
                     };
                     productLink.Controls.Add(productImage);
-                    TableCell cellImage = new TableCell {CssClass = "td"};
+                    TableCell cellImage = new TableCell { CssClass = "td" };
                     cellImage.Controls.Add(productLink);
 
-                    Label nameLabel = new Label {Text = product.Name};
-                    TableCell cellName = new TableCell {CssClass = "td"};
+                    Label nameLabel = new Label { Text = product.Name };
+                    TableCell cellName = new TableCell { CssClass = "td" };
                     cellName.Controls.Add(nameLabel);
 
-                    Label priceLabel = new Label {Text = "£" + (product.Price*(1 - product.Discount/100))};
-                    TableCell cellPrice = new TableCell {CssClass = "td"};
+                    Label priceLabel = new Label { Text = "£" + (product.Price * (1 - product.Discount / 100)) };
+                    TableCell cellPrice = new TableCell { CssClass = "td" };
                     cellPrice.Controls.Add(priceLabel);
 
                     Label quantityLabel = new Label
@@ -63,12 +75,12 @@ namespace E_Handel
                         ID = $"quantity{product.Id}",
                         Enabled = false
                     };
-                    TableCell cellQuantity = new TableCell {CssClass = "td"};
+                    TableCell cellQuantity = new TableCell { CssClass = "td" };
                     cellQuantity.Controls.Add(quantityLabel);
 
-                    double totalPriceSum = cartProduct.Quantity*product.Price*(1 - product.Discount/100);
-                    Label totalPriceLabel = new Label {Text = "£" + totalPriceSum};
-                    TableCell celltotalPrice = new TableCell {CssClass = "td"};
+                    double totalPriceSum = cartProduct.Quantity * product.Price * (1 - product.Discount / 100);
+                    Label totalPriceLabel = new Label { Text = "£" + totalPriceSum };
+                    TableCell celltotalPrice = new TableCell { CssClass = "td" };
                     celltotalPrice.Controls.Add(totalPriceLabel);
 
                     TableRow row = new TableRow();
@@ -88,7 +100,6 @@ namespace E_Handel
                 throw; //Error retrieving product from Products
             }
         }
-
 
         private bool TryRetrieveCartList()
         {
@@ -110,17 +121,22 @@ namespace E_Handel
         {
             if (Session["cartCount"] != null)
                 CartCountLabel.Text = ((int)Session["cartCount"]).ToString();
+            else
+                CartCountLabel.Visible = false;
+        }
+
+        private void MoveFooter()
+        {
+            if (Request.Url.ToString().Contains("/ErrorDefault.aspx") ||
+                Request.Url.ToString().Contains("/404.aspx"))
+            {
+                MainFooter.Style["bottom"] = "0px";
+            }
         }
 
         protected void SendSearch_Click(object sender, EventArgs e)
         {
             Response.Redirect($"/Result.aspx?search={SearchBox.Text}");
-        }
-
-        protected void SendCategoryChoice_SelectChange(object sender, EventArgs e)
-        {
-            if (DropDownCategories.SelectedValue != "0")
-                Response.Redirect($"/Result.aspx?categoryId={DropDownCategories.SelectedValue}");
         }
     }
 }

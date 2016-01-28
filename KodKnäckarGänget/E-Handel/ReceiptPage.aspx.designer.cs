@@ -121,13 +121,22 @@ namespace E_Handel {
         protected global::System.Web.UI.HtmlControls.HtmlTableCell deliveryOptions;
         
         /// <summary>
-        /// ReceiptPanel control.
+        /// productTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ReceiptPanel;
+        protected global::System.Web.UI.WebControls.Table productTable;
+        
+        /// <summary>
+        /// tableHead control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderRow tableHead;
         
         /// <summary>
         /// receiptHomeButton control.
