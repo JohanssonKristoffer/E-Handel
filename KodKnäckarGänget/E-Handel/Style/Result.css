@@ -1,9 +1,26 @@
 ﻿.image_thumbnail {
     display: block;
+    max-width: 140px;
 }
 
 .result_product_name {
     display: block;
+}
+
+#PlaceholderMain_ResultImage {
+    position: relative;
+    border-radius: 15px;
+}
+
+#PlaceholderMain_ResultDescription {
+    position: absolute;
+    top: 450px;
+    background: rgba(0,0,0,0.5);
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 1.5;
+    width: 1024px;
+    padding: 20px;
 }
 
 .result_product_price {
@@ -26,6 +43,7 @@
 .result_product_container {
     padding: 20px 20px 0 0;
 }
+
 body{
     font-family:Georgia;
     font-size:14px;

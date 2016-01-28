@@ -14,6 +14,10 @@
     width: 120px;
 }
 
+.removeProductButton {
+    height:25px;
+}
+
 td {
     width: 80px;
     vertical-align: top;
